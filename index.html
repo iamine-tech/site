@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Amine Benmansour · IAMINE TECH</title>
+<meta name="description" content="Architecte paiement et tech lead Java. Raccordement au paiement instantané, audits et relectures techniques de systèmes de paiement, à distance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: un relevé de compensation. Colonne de lecture étroite, une trace de virement en marge du titre, des sections séparées par des filets comme un journal d'opérations. */
+:root{
+  --paper:#f6f7f5; --ink:#14201f; --muted:#5b6866; --rule:#d5dbd8; --panel:#ffffff;
+  --rail:#0f5c55;      /* vert de règlement, accent */
+  --signal:#b8790c;    /* ambre des statuts */
+  --ok:#1e7a46;
+  --f-display:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --s-1:.8125rem; --s0:1rem; --s1:1.1875rem; --s2:1.5rem; --s3:2.125rem; --s4:clamp(2.1rem, 5.2vw, 3.6rem);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f1615; --ink:#e4ebe8; --muted:#97a6a2; --rule:#26332f; --panel:#151f1d;
+    --rail:#4fbfae; --signal:#e2a73c; --ok:#5ccf8c; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1615; --ink:#e4ebe8; --muted:#97a6a2; --rule:#26332f; --panel:#151f1d;
+  --rail:#4fbfae; --signal:#e2a73c; --ok:#5ccf8c; color-scheme:dark;
+}
+:root:not([data-l="en"]) .t-en{display:none!important}
+:root[data-l="en"] .t-fr{display:none!important}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:var(--s0);line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--paper)}
+a{color:var(--rail)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--rail);outline-offset:3px;border-radius:2px}
+.wrap{max-width:68rem;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.12;letter-spacing:-.01em}
+h2{font-size:var(--s3);font-weight:800}
+h3{font-size:var(--s1);font-weight:700}
+p{margin:0}
+.label{font-family:var(--f-display);font-size:var(--s-1);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* Barre */
+.bar{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--rule)}
+.bar .wrap{display:flex;align-items:center;gap:1rem;padding-block:.75rem;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-weight:800;font-size:var(--s0);letter-spacing:.02em;text-decoration:none;color:var(--ink);margin-right:auto}
+.brand span{color:var(--rail)}
+.nav{display:flex;gap:1.1rem;flex-wrap:wrap}
+.nav a{font-family:var(--f-display);font-size:var(--s-1);font-weight:500;color:var(--muted);text-decoration:none}
+.nav a:hover{color:var(--ink)}
+.lang{display:flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden}
+.lang button{font:600 var(--s-1)/1 var(--f-display);padding:.4rem .7rem;background:none;border:0;color:var(--muted);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+section{padding-block:clamp(2.5rem, 6vw, 4.5rem);border-bottom:1px solid var(--rule)}
+.head{display:grid;gap:.6rem;margin-bottom:2rem;max-width:44rem}
+.head p{color:var(--muted)}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:start;padding-block:clamp(2.5rem,6vw,4.5rem) 2.5rem}
+.hero h1{font-size:var(--s4);font-weight:800}
+.hero .lede{font-size:var(--s1);max-width:38rem;margin-top:1.25rem}
+.who{margin-top:1.25rem;color:var(--muted);max-width:38rem}
+.cta{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.75rem}
+.btn{font:700 var(--s0)/1 var(--f-display);padding:.85rem 1.2rem;border-radius:6px;text-decoration:none;border:1.5px solid var(--ink)}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.ghost{color:var(--ink)}
+.trace{margin:0;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:1.1rem 1.1rem 1rem;font-family:var(--f-mono);font-size:.78rem;line-height:1.55;min-width:0}
+.trace .label{font-size:.68rem;margin-bottom:.7rem}
+.trace ol{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.trace li{display:grid;grid-template-columns:4.2rem 4.8rem minmax(0,1fr);gap:.5rem;align-items:baseline}
+.trace .t{color:var(--muted)}
+.trace .m{font-weight:600;color:var(--rail)}
+.trace .st{color:var(--ok);font-weight:600}
+.meter{margin-top:1rem;border-top:1px dashed var(--rule);padding-top:.8rem}
+.meter .track{height:6px;background:var(--rule);border-radius:3px;overflow:hidden;margin-top:.45rem}
+.meter .fill{height:100%;width:16.2%;background:var(--rail)}
+.meter .cap{display:flex;justify-content:space-between;color:var(--muted);font-size:.7rem;margin-top:.3rem}
+
+/* Échéances */
+.dues{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--rule);border-radius:8px;margin-top:2.5rem;background:var(--panel)}
+.due{padding:1.1rem 1.2rem;display:grid;gap:.35rem;min-width:0}
+.due + .due{border-left:1px solid var(--rule)}
+.due .d{font-family:var(--f-mono);font-weight:600;font-size:var(--s2);color:var(--signal);font-variant-numeric:tabular-nums}
+.due p{font-size:.95rem}
+.due small{color:var(--muted);font-size:var(--s-1)}
+
+/* Offres */
+.offers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.offer{background:var(--panel);padding:1.4rem 1.3rem;display:grid;gap:.7rem;align-content:start;min-width:0}
+.offer .for{font-family:var(--f-display);font-size:var(--s-1);color:var(--rail);font-weight:700}
+.offer ul{margin:0;padding-left:1.1rem;display:grid;gap:.3rem}
+.offer .out{font-size:.92rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:.7rem}
+
+/* Contrôles */
+.checks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem 2rem;counter-reset:c}
+.check{display:grid;gap:.4rem;padding-top:.9rem;border-top:2px solid var(--ink);min-width:0}
+.check .k{font-family:var(--f-mono);font-size:var(--s-1);color:var(--muted)}
+.check p{font-size:.95rem;color:var(--muted)}
+
+/* Domaines */
+.domains{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.dom{background:var(--panel);padding:1.1rem 1.1rem 1.2rem;display:grid;gap:.4rem;align-content:start;min-width:0}
+.dom .where{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.dom p{font-size:.93rem}
+@media (max-width: 860px){ .domains{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width: 600px){ .domains{grid-template-columns:minmax(0,1fr)} }
+
+/* Cas */
+.cases{display:grid;gap:1.25rem}
+.case{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:1.5rem;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:1.4rem 1.3rem}
+.case aside{display:grid;gap:.35rem;align-content:start}
+.case aside .org{font-family:var(--f-display);font-weight:800;font-size:var(--s1)}
+.case aside .yr{font-family:var(--f-mono);font-size:var(--s-1);color:var(--muted)}
+.tag{display:inline-block;justify-self:start;font:700 .7rem/1 var(--f-display);letter-spacing:.06em;text-transform:uppercase;padding:.35rem .5rem;border-radius:4px;border:1px solid var(--signal);color:var(--signal)}
+.case .body{display:grid;gap:.75rem;min-width:0}
+.case ul{margin:0;padding-left:1.1rem;display:grid;gap:.35rem}
+.stack{font-family:var(--f-mono);font-size:.74rem;color:var(--muted);line-height:1.7}
+
+/* Parcours */
+.path{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:2.5rem}
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{display:grid;grid-template-columns:7.2rem minmax(0,1fr);gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--rule)}
+.tl .when{font-family:var(--f-mono);font-size:var(--s-1);color:var(--muted);font-variant-numeric:tabular-nums}
+.tl b{font-family:var(--f-display);font-weight:700}
+.tl span.r{display:block;color:var(--muted);font-size:.93rem}
+.skills{display:grid;gap:1rem}
+.skills dl{margin:0;display:grid;gap:.9rem}
+.skills dt{font-family:var(--f-display);font-weight:700;font-size:var(--s-1);letter-spacing:.06em;text-transform:uppercase;color:var(--rail)}
+.skills dd{margin:.2rem 0 0;font-size:.95rem}
+
+/* Conditions + contact */
+.terms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.terms div{background:var(--panel);padding:1rem 1.1rem;display:grid;gap:.25rem}
+.terms b{font-family:var(--f-display)}
+.terms span{color:var(--muted);font-size:.93rem}
+.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2rem;align-items:start}
+.mail{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem}
+.mail code{font-family:var(--f-mono);font-size:var(--s0);user-select:all;word-break:break-all}
+.mail button{font:700 var(--s-1)/1 var(--f-display);padding:.55rem .8rem;border-radius:6px;border:1.5px solid var(--ink);background:none;color:var(--ink);cursor:pointer}
+.ask ol{margin:.6rem 0 0;padding-left:1.2rem;display:grid;gap:.3rem}
+footer{padding-block:1.5rem 2.5rem;color:var(--muted);font-size:var(--s-1);font-family:var(--f-display)}
+footer .wrap{display:flex;gap:1rem;flex-wrap:wrap;justify-content:space-between}
+
+@media (max-width: 860px){
+  .hero,.path,.contact{grid-template-columns:minmax(0,1fr)}
+  .checks{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .case{grid-template-columns:minmax(0,1fr);gap:1rem}
+}
+@media (max-width: 600px){
+  .offers,.dues,.terms,.checks{grid-template-columns:minmax(0,1fr)}
+  .due + .due{border-left:0;border-top:1px solid var(--rule)}
+  .nav{display:none}
+  .tl li{grid-template-columns:minmax(0,1fr);gap:.15rem}
+  .trace li{grid-template-columns:4.4rem 4.6rem minmax(0,1fr);gap:.4rem}
+}
+@media (prefers-reduced-motion: no-preference){
+  .meter .fill{animation:fill 1.4s ease-out both}
+  @keyframes fill{from{width:0}to{width:16.2%}}
+}
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">IAMINE <span>TECH</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#offres"><span class="t-fr">Offres</span><span class="t-en">Services</span></a>
+      <a href="#domaines"><span class="t-fr">Métiers</span><span class="t-en">Domains</span></a>
+      <a href="#cas"><span class="t-fr">Cas</span><span class="t-en">Case studies</span></a>
+      <a href="#parcours"><span class="t-fr">Parcours</span><span class="t-en">Background</span></a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button type="button" id="l-fr" data-set="fr" aria-pressed="true">FR</button>
+      <button type="button" id="l-en" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+  <div class="hero">
+    <div>
+      <p class="label"><span class="t-fr">Paiement instantané · systèmes bancaires</span><span class="t-en">Instant payments · banking systems</span></p>
+      <h1 style="margin-top:.8rem">
+        <span class="t-fr">Raccordé au paiement instantané, sans virement perdu ni payé deux fois.</span>
+        <span class="t-en">Connected to instant payments, with no transfer lost and none paid twice.</span>
+      </h1>
+      <p class="lede">
+        <span class="t-fr">J'aide les établissements de paiement, les microfinances et les fintechs à brancher leurs systèmes sur les rails de paiement instantané, puis à les garder justes : chaque ordre exécuté une seule fois, rapproché, traçable.</span>
+        <span class="t-en">I help payment institutions, microfinance institutions and fintechs plug their systems into instant-payment rails and keep them correct: every order executed once, reconciled and traceable.</span>
+      </p>
+      <p class="who">
+        <span class="t-fr">Amine Benmansour, architecte paiement et tech lead Java. 14 ans dans les systèmes de grandes banques françaises : cartes et tokenisation, KYC, cloud privé, gestion documentaire. J'interviens à distance, au forfait, en français ou en anglais.</span>
+        <span class="t-en">Amine Benmansour, payments architect and Java tech lead. 14 years inside the systems of major French banks: cards and tokenisation, KYC, private cloud, document management. Remote, fixed-scope engagements, in French or English.</span>
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#contact"><span class="t-fr">Demander un diagnostic</span><span class="t-en">Request an assessment</span></a>
+        <a class="btn ghost" href="#cas"><span class="t-fr">Voir les cas</span><span class="t-en">See case studies</span></a>
+      </div>
+    </div>
+
+    <figure class="trace" aria-label="Exemple de trace d'un virement instantané">
+      <p class="label"><span class="t-fr">Exemple · virement instantané SEPA</span><span class="t-en">Example · SEPA instant credit transfer</span></p>
+      <ol>
+        <li><span class="t">00.000 s</span><span class="m">VoP</span><span><span class="t-fr">nom du bénéficiaire vérifié</span><span class="t-en">payee name verified</span></span></li>
+        <li><span class="t">00.210 s</span><span class="m">pacs.008</span><span><span class="t-fr">émis · EndToEndId unique</span><span class="t-en">sent · unique EndToEndId</span></span></li>
+        <li><span class="t">00.950 s</span><span class="m">pacs.008</span><span><span class="t-fr">reçu par la banque du bénéficiaire</span><span class="t-en">received by payee's bank</span></span></li>
+        <li><span class="t">01.620 s</span><span class="m">pacs.002</span><span class="st">ACSC · <span class="t-fr">réglé</span><span class="t-en">settled</span></span></li>
+        <li><span class="t">J+0</span><span class="m">camt.053</span><span><span class="t-fr">rapproché, écart nul</span><span class="t-en">reconciled, zero difference</span></span></li>
+      </ol>
+      <div class="meter">
+        <span><span class="t-fr">1,62 s sur les 10 s autorisées par le schéma</span><span class="t-en">1.62 s out of the 10 s the scheme allows</span></span>
+        <div class="track"><div class="fill"></div></div>
+        <div class="cap"><span>0 s</span><span>10 s</span></div>
+      </div>
+    </figure>
+  </div>
+
+  <div class="dues" aria-label="Échéances">
+    <div class="due">
+      <span class="d">30/06/2027</span>
+      <p><span class="t-fr">UEMOA : les systèmes financiers décentralisés doivent être raccordés au système de paiement instantané régional PI-SPI.</span><span class="t-en">WAEMU: decentralised financial institutions must be connected to the regional instant payment system PI-SPI.</span></p>
+      <small><span class="t-fr">Source : BCEAO, communiqué de juin 2026</span><span class="t-en">Source: BCEAO, June 2026 notice</span></small>
+    </div>
+    <div class="due">
+      <span class="d">09/04/2027</span>
+      <p><span class="t-fr">Zone euro : les établissements de paiement et de monnaie électronique doivent envoyer et recevoir des virements instantanés, avec contrôle du bénéficiaire.</span><span class="t-en">Euro area: payment and e-money institutions must send and receive instant transfers, with verification of payee.</span></p>
+      <small><span class="t-fr">Source : règlement (UE) 2024/886</span><span class="t-en">Source: Regulation (EU) 2024/886</span></small>
+    </div>
+  </div>
+
+  <section id="offres" style="margin-top:1rem">
+    <div class="head">
+      <p class="label"><span class="t-fr">Offres</span><span class="t-en">Services</span></p>
+      <h2><span class="t-fr">Quatre interventions, un périmètre écrit avant de commencer</span><span class="t-en">Four engagements, scope agreed in writing before work starts</span></h2>
+      <p><span class="t-fr">Chaque mission est un forfait : livrables, critères d'acceptation et date de restitution sont fixés dans le devis.</span><span class="t-en">Every engagement is fixed-scope: deliverables, acceptance criteria and review date are set in the quote.</span></p>
+    </div>
+    <div class="offers">
+      <article class="offer">
+        <span class="for"><span class="t-fr">Microfinances, établissements de paiement, éditeurs de core banking</span><span class="t-en">Microfinance institutions, payment institutions, core-banking vendors</span></span>
+        <h3><span class="t-fr">Diagnostic de raccordement au paiement instantané</span><span class="t-en">Instant-payment connection assessment</span></h3>
+        <ul>
+          <li><span class="t-fr">État des lieux du système d'information et des flux existants</span><span class="t-en">Review of the current information system and payment flows</span></li>
+          <li><span class="t-fr">Écarts avec les règles du schéma (PI-SPI ou SCT Inst)</span><span class="t-en">Gaps against the scheme rules (PI-SPI or SCT Inst)</span></li>
+          <li><span class="t-fr">Risques classés : doublons, délais dépassés, rapprochement</span><span class="t-en">Ranked risks: duplicates, timeouts, reconciliation</span></li>
+        </ul>
+        <p class="out"><span class="t-fr">Livrable : rapport et plan de raccordement priorisé, restitution en visio.</span><span class="t-en">Deliverable: report and prioritised connection plan, presented by video call.</span></p>
+      </article>
+      <article class="offer">
+        <span class="for"><span class="t-fr">Établissements de paiement et de monnaie électronique, zone euro</span><span class="t-en">Payment and e-money institutions, euro area</span></span>
+        <h3><span class="t-fr">Audit avant mise en production</span><span class="t-en">Pre-launch audit</span></h3>
+        <ul>
+          <li><span class="t-fr">Contrôle du bénéficiaire (VoP) et parcours d'erreur</span><span class="t-en">Verification of payee (VoP) and error paths</span></li>
+          <li><span class="t-fr">Scénarios de fraude sur virement instantané</span><span class="t-en">Fraud scenarios on instant transfers</span></li>
+          <li><span class="t-fr">Rejeu, reprise après incident, piste d'audit</span><span class="t-en">Replay, incident recovery, audit trail</span></li>
+        </ul>
+        <p class="out"><span class="t-fr">Livrable : constats classés par gravité, correctifs proposés, revue des correctifs.</span><span class="t-en">Deliverable: findings ranked by severity, proposed fixes, review of the fixes.</span></p>
+      </article>
+      <article class="offer">
+        <span class="for"><span class="t-fr">Bailleurs de fonds et programmes de paiement nationaux</span><span class="t-en">Donors and national payment programmes</span></span>
+        <h3><span class="t-fr">Relecture technique indépendante</span><span class="t-en">Independent technical review</span></h3>
+        <ul>
+          <li><span class="t-fr">Revue d'architecture, de spécifications et de code</span><span class="t-en">Architecture, specification and code review</span></li>
+          <li><span class="t-fr">Avis écrit pour le financeur, à chaque jalon du projet</span><span class="t-en">Written opinion for the funder at each project milestone</span></li>
+          <li><span class="t-fr">À distance, quelques jours par mois</span><span class="t-en">Remote, a few days a month</span></li>
+        </ul>
+        <p class="out"><span class="t-fr">Livrable : note de revue par jalon, avec recommandations suivies.</span><span class="t-en">Deliverable: review note per milestone, with tracked recommendations.</span></p>
+      </article>
+      <article class="offer">
+        <span class="for"><span class="t-fr">Fintechs</span><span class="t-en">Fintechs</span></span>
+        <h3><span class="t-fr">Revue de fiabilité des paiements</span><span class="t-en">Payment reliability review</span></h3>
+        <ul>
+          <li><span class="t-fr">Idempotence, webhooks, états intermédiaires</span><span class="t-en">Idempotency, webhooks, intermediate states</span></li>
+          <li><span class="t-fr">Rapprochement avec le prestataire de paiement</span><span class="t-en">Reconciliation with the payment provider</span></li>
+          <li><span class="t-fr">Code Java ou Python, files Kafka</span><span class="t-en">Java or Python code, Kafka queues</span></li>
+        </ul>
+        <p class="out"><span class="t-fr">Livrable : rapport écrit avec correctifs classés, en asynchrone.</span><span class="t-en">Deliverable: written report with ranked fixes, fully asynchronous.</span></p>
+      </article>
+    </div>
+  </section>
+
+  <section id="controles">
+    <div class="head">
+      <p class="label"><span class="t-fr">Ce que je vérifie</span><span class="t-en">What I check</span></p>
+      <h2><span class="t-fr">Six propriétés qu'un système de paiement doit tenir</span><span class="t-en">Six properties a payment system must hold</span></h2>
+    </div>
+    <div class="checks">
+      <div class="check"><span class="k">idempotence</span><h3><span class="t-fr">Un ordre ne part jamais deux fois</span><span class="t-en">An order is never sent twice</span></h3><p><span class="t-fr">Clé unique par opération, consommateurs idempotents, relances sans effet de bord.</span><span class="t-en">One key per operation, idempotent consumers, retries without side effects.</span></p></div>
+      <div class="check"><span class="k">timeouts</span><h3><span class="t-fr">Aucun virement en état inconnu</span><span class="t-en">No transfer left in an unknown state</span></h3><p><span class="t-fr">Délais du schéma respectés, statuts intermédiaires suivis, interrogation de statut en cas de doute.</span><span class="t-en">Scheme deadlines met, intermediate statuses tracked, status inquiry when in doubt.</span></p></div>
+      <div class="check"><span class="k">reconciliation</span><h3><span class="t-fr">Le rapprochement tombe juste</span><span class="t-en">Reconciliation balances</span></h3><p><span class="t-fr">Écritures, relevés et compensation recoupés chaque jour, écarts expliqués.</span><span class="t-en">Ledger entries, statements and settlement matched daily, differences explained.</span></p></div>
+      <div class="check"><span class="k">replay</span><h3><span class="t-fr">Tout se rejoue sans doublon</span><span class="t-en">Everything can be replayed without duplicates</span></h3><p><span class="t-fr">Journal d'événements, reprise après panne, partitionnement par compte.</span><span class="t-en">Event log, recovery after failure, partitioning by account.</span></p></div>
+      <div class="check"><span class="k">audit</span><h3><span class="t-fr">Chaque opération laisse une preuve</span><span class="t-en">Every operation leaves evidence</span></h3><p><span class="t-fr">Piste d'audit horodatée et chaînée, données immuables une fois validées.</span><span class="t-en">Timestamped, hash-chained audit trail; data immutable once validated.</span></p></div>
+      <div class="check"><span class="k">payee</span><h3><span class="t-fr">Le bénéficiaire est contrôlé avant l'envoi</span><span class="t-en">The payee is checked before sending</span></h3><p><span class="t-fr">Contrôle nom et IBAN, messages clairs pour le client, traces conservées.</span><span class="t-en">Name and IBAN check, clear messages for the customer, records kept.</span></p></div>
+    </div>
+  </section>
+
+  <section id="domaines">
+    <div class="head">
+      <p class="label"><span class="t-fr">Domaines métier</span><span class="t-en">Business domains</span></p>
+      <h2><span class="t-fr">Huit métiers où j'ai livré en production</span><span class="t-en">Eight domains where I have shipped to production</span></h2>
+      <p><span class="t-fr">Je connais les règles du métier avant d'écrire le code : c'est ce qui évite les allers-retours.</span><span class="t-en">I know the business rules before writing the code, which is what saves the back-and-forth.</span></p>
+    </div>
+    <div class="domains">
+      <div class="dom"><h3><span class="t-fr">Monétique et cartes</span><span class="t-en">Card payments</span></h3><p><span class="t-fr">Émission, activation, blocage, code PIN, tokenisation Apple Pay et Google Pay, contraintes des réseaux de cartes.</span><span class="t-en">Issuance, activation, blocking, PIN, Apple Pay and Google Pay tokenisation, card-network constraints.</span></p><span class="where">BforBank</span></div>
+      <div class="dom"><h3><span class="t-fr">Fraude aux paiements par carte</span><span class="t-en">Card-payment fraud</span></h3><p><span class="t-fr">Traitements par lots et échanges de fichiers sécurisés au service de la lutte contre la fraude.</span><span class="t-en">Batch processing and secure file exchanges supporting fraud prevention.</span></p><span class="where">LCL</span></div>
+      <div class="dom"><h3><span class="t-fr">Banque privée et conformité</span><span class="t-en">Private banking and compliance</span></h3><p><span class="t-fr">Connaissance client (KYC), scoring de risque pour le régulateur, fédération d'identité, souscription d'assurance-vie.</span><span class="t-en">Know-your-customer (KYC), risk scoring for the regulator, identity federation, life-insurance subscription.</span></p><span class="where">Natixis Wealth Management</span></div>
+      <div class="dom"><h3><span class="t-fr">Financement des entreprises</span><span class="t-en">Business financing</span></h3><p><span class="t-fr">Souscription de garanties de prêts par les banques partenaires, portail client.</span><span class="t-en">Loan-guarantee subscription by partner banks, customer portal.</span></p><span class="where">Bpifrance</span></div>
+      <div class="dom"><h3><span class="t-fr">Banque de détail</span><span class="t-en">Retail banking</span></h3><p><span class="t-fr">API de gestion documentaire des clients, temps de réponse mesurés et réduits.</span><span class="t-en">Customer document-management APIs, response times measured and reduced.</span></p><span class="where">Société Générale</span></div>
+      <div class="dom"><h3><span class="t-fr">Infrastructure bancaire</span><span class="t-en">Banking infrastructure</span></h3><p><span class="t-fr">Cloud privé d'un groupe, provisionnement, contrôle d'accès, refacturation des coûts.</span><span class="t-en">A group's private cloud, provisioning, access control, cost chargeback.</span></p><span class="where">BPCE-IT</span></div>
+      <div class="dom"><h3><span class="t-fr">Comptabilité et fiscalité</span><span class="t-en">Accounting and tax</span></h3><p><span class="t-fr">Partie double, rapprochement bancaire, clôture d'exercice, facture électronique.</span><span class="t-en">Double entry, bank reconciliation, year-end closing, e-invoicing.</span></p><span class="where">IAMINE Compta</span></div>
+      <div class="dom"><h3><span class="t-fr">Santé et transport</span><span class="t-en">Healthcare and transport</span></h3><p><span class="t-fr">Gestion de cabinet médical et ordonnances ; information voyageurs en temps réel.</span><span class="t-en">Medical practice management and prescriptions; real-time passenger information.</span></p><span class="where">Liam Medical · RATP</span></div>
+    </div>
+  </section>
+
+  <section id="cas">
+    <div class="head">
+      <p class="label"><span class="t-fr">Cas</span><span class="t-en">Case studies</span></p>
+      <h2><span class="t-fr">Ce que j'ai construit</span><span class="t-en">What I have built</span></h2>
+      <p><span class="t-fr">Aucune donnée client, aucun code, aucun chiffre interne n'est publié ici.</span><span class="t-en">No client data, code or internal figures are published here.</span></p>
+    </div>
+    <div class="cases">
+      <article class="case">
+        <aside><span class="org">BforBank</span><span class="yr">2023 – 2025</span><span class="tag"><span class="t-fr">Lead dev</span><span class="t-en">Lead developer</span></span></aside>
+        <div class="body">
+          <h3><span class="t-fr">Plateforme cartes et tokenisation Apple Pay / Google Pay</span><span class="t-en">Card platform and Apple Pay / Google Pay tokenisation</span></h3>
+          <ul>
+            <li><span class="t-fr">Microservices du cycle de vie de la carte : émission, activation, blocage, code PIN, et tokenisation des wallets.</span><span class="t-en">Card lifecycle microservices: issuance, activation, blocking, PIN, and wallet tokenisation.</span></li>
+            <li><span class="t-fr">Arbitrage entre appels synchrones et Kafka pour tenir les délais imposés par VISA.</span><span class="t-en">Trade-off between synchronous calls and Kafka to meet VISA timing constraints.</span></li>
+            <li><span class="t-fr">Intégration du processeur carte Monext et du core banking Temenos T24 par contrats d'API.</span><span class="t-en">Integration of the Monext card processor and the Temenos T24 core banking through API contracts.</span></li>
+            <li><span class="t-fr">Migration Spring Boot 2.7 vers 3.1, GraalVM ; résolution d'un incident de latence en production entre cloud privé et site.</span><span class="t-en">Spring Boot 2.7 to 3.1 migration, GraalVM; resolved a production latency incident between private cloud and on-premise.</span></li>
+          </ul>
+          <p class="stack">Java 21 · Spring Boot 3 · Kafka · GCP / GKE · ArgoCD · GitLab CI · PostgreSQL · Datadog · Dynatrace</p>
+        </div>
+      </article>
+      <article class="case">
+        <aside><span class="org">Natixis Wealth Management</span><span class="yr">2015 – 2018</span><span class="tag">Team lead</span></aside>
+        <div class="body">
+          <h3><span class="t-fr">KYC, scoring réglementaire et fédération d'identité</span><span class="t-en">KYC, regulatory scoring and identity federation</span></h3>
+          <ul>
+            <li><span class="t-fr">Applications de la banque privée en architecture hexagonale : scoring ACPR, complétude des dossiers KYC, portail client mobile.</span><span class="t-en">Private-bank applications in hexagonal architecture: ACPR risk scoring, KYC file completeness, mobile customer portal.</span></li>
+            <li><span class="t-fr">Conception d'un fournisseur d'identité SAML pour la fédération d'identité.</span><span class="t-en">Design of a SAML identity provider for identity federation.</span></li>
+          </ul>
+          <p class="stack">Java · Spring Boot · OpenSAML · SQL Server · Jenkins</p>
+        </div>
+      </article>
+      <article class="case">
+        <aside><span class="org">BPCE-IT</span><span class="yr">2019 – 2021</span><span class="tag">Tech lead</span></aside>
+        <div class="body">
+          <h3><span class="t-fr">Portail de cloud privé du groupe BPCE</span><span class="t-en">Private-cloud portal of the BPCE group</span></h3>
+          <ul>
+            <li><span class="t-fr">Architecture Event Sourcing / CQRS et machine à états du portail.</span><span class="t-en">Event Sourcing / CQRS architecture and state machine of the portal.</span></li>
+            <li><span class="t-fr">Provisionnement automatisé, gestion multi-fournisseurs (dont AWS et Azure), contrôle d'accès par attributs, facturation des coûts.</span><span class="t-en">Automated provisioning, multi-provider management (including AWS and Azure), attribute-based access control, cost billing.</span></li>
+          </ul>
+          <p class="stack">Java · Spring Boot · Event Sourcing / CQRS · RabbitMQ · MongoDB · PostgreSQL · Jenkins</p>
+        </div>
+      </article>
+      <article class="case">
+        <aside><span class="org">IAMINE Compta</span><span class="yr">2026</span><span class="tag"><span class="t-fr">Projet personnel</span><span class="t-en">Personal project</span></span></aside>
+        <div class="body">
+          <h3><span class="t-fr">Comptabilité en partie double branchée sur une API bancaire</span><span class="t-en">Double-entry accounting on top of a banking API</span></h3>
+          <ul>
+            <li><span class="t-fr">Grand livre PostgreSQL : équilibre imposé par la base, numérotation séquentielle, chaînage SHA-256, écritures immuables une fois validées.</span><span class="t-en">PostgreSQL ledger: balance enforced by the database, sequential numbering, SHA-256 hash chaining, entries immutable once validated.</span></li>
+            <li><span class="t-fr">Ingestion bancaire par un service natif publiant dans Kafka, une partition par compte, une empreinte d'idempotence par transaction.</span><span class="t-en">Bank ingestion through a native service publishing to Kafka, one partition per account, one idempotency hash per transaction.</span></li>
+            <li><span class="t-fr">Un exercice complet rejoué : compte de résultat identique au centime à celui du cabinet comptable. Tourne désormais en parallèle comme contrôle indépendant.</span><span class="t-en">A full fiscal year replayed: income statement identical to the cent to the accounting firm's. Now runs alongside it as an independent check.</span></li>
+            <li><span class="t-fr">401 tests backend, construit de bout en bout avec des agents de code.</span><span class="t-en">401 backend tests, built end to end with coding agents.</span></li>
+          </ul>
+          <p class="stack">Java 21 · Spring Boot 3 · Quarkus / GraalVM · Kafka · PostgreSQL · Flyway · Kubernetes · Claude Code · MCP</p>
+        </div>
+      </article>
+      <article class="case">
+        <aside><span class="org">Liam Medical</span><span class="yr">2025 – 2026</span><span class="tag"><span class="t-fr">En test</span><span class="t-en">In pilot</span></span></aside>
+        <div class="body">
+          <h3><span class="t-fr">Logiciel de gestion de cabinet médical, conçu et livré seul</span><span class="t-en">Medical practice software, designed and delivered solo</span></h3>
+          <ul>
+            <li><span class="t-fr">Gestion du cabinet (patients, consultations, ordonnances), en phase de test dans un cabinet médical en Algérie ; reprise de 26 ans d'historique depuis l'ancien logiciel.</span><span class="t-en">Practice management (patients, consultations, prescriptions), in pilot at a medical practice in Algeria; 26 years of history migrated from the previous software.</span></li>
+            <li><span class="t-fr">Ordonnances PDF générées entièrement en Java, modèles versionnés avec éditeur et aperçu en direct, versions publiées immuables.</span><span class="t-en">Prescription PDFs generated entirely in Java, versioned templates with an editor and live preview, published versions immutable.</span></li>
+            <li><span class="t-fr">Assistance par IA exécutée en local, sans envoi des données patient à un fournisseur d'IA externe.</span><span class="t-en">AI assistance run locally, with no patient data sent to an external AI provider.</span></li>
+          </ul>
+          <p class="stack">Java 21 · Spring Boot 3 · PostgreSQL · Flyway · Thymeleaf · openhtmltopdf</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="parcours">
+    <div class="head">
+      <p class="label"><span class="t-fr">Parcours</span><span class="t-en">Background</span></p>
+      <h2><span class="t-fr">14 ans dans les systèmes bancaires français</span><span class="t-en">14 years in French banking systems</span></h2>
+    </div>
+    <div class="path">
+      <ol class="tl">
+        <li><span class="when">2025 – …</span><span><b><span class="t-fr">Mission en cours</span><span class="t-en">Current engagement</span></b><span class="r"><span class="t-fr">LCL · lutte contre la fraude aux paiements (carte, virement, chèque)</span><span class="t-en">LCL · payment fraud prevention (card, transfer, cheque)</span></span></span></li>
+        <li><span class="when">2023 – 2025</span><span><b>BforBank</b><span class="r"><span class="t-fr">Lead dev, plateforme cartes et tokenisation</span><span class="t-en">Lead developer, card and tokenisation platform</span></span></span></li>
+        <li><span class="when">2021 – 2022</span><span><b>Société Générale</b><span class="r"><span class="t-fr">Team lead et développeur Java, API de gestion documentaire de la banque de détail</span><span class="t-en">Team lead and Java developer, retail-bank document management APIs</span></span></span></li>
+        <li><span class="when">2019 – 2021</span><span><b>BPCE-IT</b><span class="r"><span class="t-fr">Tech lead aux côtés de l'architecte, cloud privé du groupe</span><span class="t-en">Tech lead alongside the architect, group private cloud</span></span></span></li>
+        <li><span class="when">2018 – 2019</span><span><b>Bpifrance</b><span class="r"><span class="t-fr">Team lead dans une équipe de 13, extranet de garantie de prêts (projet BEL)</span><span class="t-en">Team lead within a 13-person team, loan-guarantee extranet (BEL project)</span></span></span></li>
+        <li><span class="when">2015 – 2018</span><span><b>Natixis Wealth Management</b><span class="r"><span class="t-fr">Développeur Java et team lead (équipe de 4), KYC et scoring réglementaire</span><span class="t-en">Java developer and team lead (team of 4), KYC and regulatory scoring</span></span></span></li>
+        <li><span class="when">2012 – 2015</span><span><b>RATP, Île-de-France Mobilités</b><span class="r"><span class="t-fr">Développeur Java, information voyageurs temps réel</span><span class="t-en">Java developer, real-time passenger information</span></span></span></li>
+        <li><span class="when">2012</span><span><b><span class="t-fr">Master MIAGE</span><span class="t-en">MIAGE Master's degree</span></b><span class="r"><span class="t-fr">Université Nice Sophia Antipolis</span><span class="t-en">University of Nice Sophia Antipolis</span></span></span></li>
+      </ol>
+      <div class="skills">
+        <dl>
+          <div><dt><span class="t-fr">Paiement et banque</span><span class="t-en">Payments and banking</span></dt><dd><span class="t-fr">Cartes, tokenisation Apple Pay / Google Pay, virements, processeurs et core banking, KYC, fraude</span><span class="t-en">Cards, Apple Pay / Google Pay tokenisation, transfers, processors and core banking, KYC, fraud</span></dd></div>
+          <div><dt><span class="t-fr">Environnements réglementés</span><span class="t-en">Regulated environments</span></dt><dd>PCI DSS · DORA · KYC · <span class="t-fr">exigences ACPR</span><span class="t-en">ACPR requirements</span></dd></div>
+          <div><dt>Backend</dt><dd>Java 8 → 21 · Spring Boot · Quarkus / GraalVM · <span class="t-fr">architecture hexagonale</span><span class="t-en">hexagonal architecture</span> · DDD · TDD</dd></div>
+          <div><dt><span class="t-fr">Données et événements</span><span class="t-en">Data and events</span></dt><dd>Kafka · RabbitMQ · IBM MQ · Event Sourcing / CQRS · PostgreSQL · Oracle · MongoDB</dd></div>
+          <div><dt><span class="t-fr">Plateforme</span><span class="t-en">Platform</span></dt><dd>Kubernetes (GKE, OpenShift) · GCP · AWS · Azure · Terraform · GitLab CI · ArgoCD · Jenkins</dd></div>
+          <div><dt><span class="t-fr">Observabilité</span><span class="t-en">Observability</span></dt><dd>Datadog · Dynatrace · Prometheus / Grafana · Elasticsearch / Kibana</dd></div>
+          <div><dt><span class="t-fr">IA appliquée</span><span class="t-en">Applied AI</span></dt><dd><span class="t-fr">Agents de code, serveurs MCP, intégration des API Anthropic, OpenAI et Vertex AI</span><span class="t-en">Coding agents, MCP servers, Anthropic, OpenAI and Vertex AI API integration</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="conditions">
+    <div class="head">
+      <p class="label"><span class="t-fr">Conditions</span><span class="t-en">Terms</span></p>
+      <h2><span class="t-fr">Comment je travaille</span><span class="t-en">How I work</span></h2>
+    </div>
+    <div class="terms">
+      <div><b><span class="t-fr">À distance</span><span class="t-en">Remote</span></b><span><span class="t-fr">Fuseau CET, échanges écrits et visio planifiées</span><span class="t-en">CET time zone, written updates and scheduled calls</span></span></div>
+      <div><b><span class="t-fr">Langues</span><span class="t-en">Languages</span></b><span><span class="t-fr">Français, anglais, arabe</span><span class="t-en">French, English, Arabic</span></span></div>
+      <div><b><span class="t-fr">Au forfait</span><span class="t-en">Fixed scope</span></b><span><span class="t-fr">Périmètre et critères d'acceptation écrits avant de commencer</span><span class="t-en">Scope and acceptance criteria written before starting</span></span></div>
+      <div><b><span class="t-fr">Devis nets</span><span class="t-en">Net quotes</span></b><span><span class="t-fr">Montants nets de retenue à la source</span><span class="t-en">Amounts net of withholding tax</span></span></div>
+      <div><b><span class="t-fr">Facturation</span><span class="t-en">Invoicing</span></b><span><span class="t-fr">Par IAMINE TECH, société française</span><span class="t-en">By IAMINE TECH, a French company</span></span></div>
+      <div><b><span class="t-fr">Confidentialité</span><span class="t-en">Confidentiality</span></b><span><span class="t-fr">Accord de confidentialité signé sur demande</span><span class="t-en">NDA signed on request</span></span></div>
+    </div>
+  </section>
+
+  <section id="contact" style="border-bottom:0">
+    <div class="contact">
+      <div class="head" style="margin-bottom:0">
+        <p class="label">Contact</p>
+        <h2><span class="t-fr">Parlons de votre échéance</span><span class="t-en">Let's talk about your deadline</span></h2>
+        <p><span class="t-fr">Un premier échange écrit suffit pour savoir si je peux vous aider.</span><span class="t-en">A first written exchange is enough to know whether I can help.</span></p>
+      </div>
+      <div style="display:grid;gap:1.25rem">
+        <div class="mail">
+          <code id="addr">contact@iaminetech.com</code>
+          <button type="button" id="copy"><span class="t-fr">Copier</span><span class="t-en">Copy</span></button>
+          <span id="copied" class="label" hidden><span class="t-fr">Copié</span><span class="t-en">Copied</span></span>
+        </div>
+        <div class="ask">
+          <p><b><span class="t-fr">Pour aller vite, indiquez :</span><span class="t-en">To speed things up, include:</span></b></p>
+          <ol>
+            <li><span class="t-fr">votre établissement et votre pays</span><span class="t-en">your institution and country</span></li>
+            <li><span class="t-fr">l'échéance qui vous concerne</span><span class="t-en">the deadline that applies to you</span></li>
+            <li><span class="t-fr">votre système actuel (core banking, éditeur, interne)</span><span class="t-en">your current system (core banking, vendor, in-house)</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>IAMINE TECH · SARL à associé unique · SIREN 953 165 784 · France</span>
+    <span>© 2026 Amine Benmansour</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  function setLang(l){
+    root.setAttribute('data-l', l);
+    root.setAttribute('lang', l);
+    document.getElementById('l-fr').setAttribute('aria-pressed', String(l === 'fr'));
+    document.getElementById('l-en').setAttribute('aria-pressed', String(l === 'en'));
+    try { localStorage.setItem('vitrine-lang', l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('vitrine-lang'); } catch (e) {}
+  var nav = (navigator.language || 'fr').toLowerCase();
+  setLang(saved === 'fr' || saved === 'en' ? saved : (nav.indexOf('fr') === 0 ? 'fr' : 'en'));
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-set')); });
+  });
+
+  var btn = document.getElementById('copy'), ok = document.getElementById('copied'), addr = document.getElementById('addr');
+  btn.addEventListener('click', function(){
+    var text = addr.textContent.trim();
+    function selectIt(){ var r = document.createRange(); r.selectNodeContents(addr); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+    function done(){ ok.hidden = false; setTimeout(function(){ ok.hidden = true; }, 2000); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function(){ selectIt(); });
+    } else { selectIt(); }
+  });
+})();
+</script>
+
+</html>
