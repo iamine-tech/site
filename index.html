@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Amine Benmansour, architecte technique et applicatif</title>
-<meta name="description" id="meta-desc" content="Architecte technique et applicatif : microservices, architecture événementielle avec Kafka, intégration de l'existant. Banque et paiement en spécialité, aussi santé, transport et finance d'entreprise.">
+<meta name="description" id="meta-desc" content="Architecture applicative et flux Kafka pour les plateformes bancaires et de paiement, branchées sur l'existant. Aussi santé, transport et finance d'entreprise.">
 <link rel="canonical" href="https://www.iaminetech.com/">
 <link rel="alternate" hreflang="fr" href="https://www.iaminetech.com/?lang=fr">
 <link rel="alternate" hreflang="en" href="https://www.iaminetech.com/?lang=en">
@@ -12,24 +12,28 @@
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://www.iaminetech.com/">
 <meta property="og:title" content="Amine Benmansour, architecte technique et applicatif">
-<meta property="og:description" content="Microservices, architecture événementielle avec Kafka, intégration de l'existant. Du grand groupe bancaire au cabinet médical.">
+<meta property="og:description" content="Architecture applicative et flux Kafka pour les plateformes bancaires et de paiement, branchées sur l'existant, mainframe compris.">
 <meta property="og:image" content="https://www.iaminetech.com/photo.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" id="theme-color" content="#F7F8F9">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315191F'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' fill='%23F7F8F9' text-anchor='middle'%3EAB%3C/text%3E%3C/svg%3E">
 <script>(function(){var r=document.documentElement,l=null,t=null;try{l=localStorage.getItem('vitrine-lang');t=localStorage.getItem('vitrine-theme')}catch(e){}var q=(location.search.match(/[?&]lang=(fr|en)/)||[])[1];l=q||(l==='fr'||l==='en'?l:null)||((navigator.language||'fr').toLowerCase().indexOf('fr')===0?'fr':'en');r.classList.add('js');r.setAttribute('data-l',l);r.setAttribute('lang',l);if(t==='light'||t==='dark')r.setAttribute('data-theme',t)})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/instrument-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/newsreader-wght.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Layout: one reading column, wide breakouts for the hero, the decision table and the event diagram. */
+/* Polices auto-hébergées (SIL Open Font License 1.1), aucun appel à un tiers. */
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:200 800;font-display:swap;src:url(fonts/newsreader-wght.woff2) format("woff2")}
+@font-face{font-family:"Newsreader";font-style:italic;font-weight:200 800;font-display:swap;src:url(fonts/newsreader-wght-italic.woff2) format("woff2")}
+@font-face{font-family:"Instrument Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/instrument-sans-400.woff2) format("woff2")}
+@font-face{font-family:"Instrument Sans";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/instrument-sans-500.woff2) format("woff2")}
+@font-face{font-family:"Instrument Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/instrument-sans-600.woff2) format("woff2")}
 :root{
-  --bg:#F7F8F9; --surface:#FFFFFF; --ink:#15191F; --soft:#4B5463; --faint:#687281;
+  --bg:#F7F8F9; --surface:#FFFFFF; --ink:#15191F; --soft:#4B5463; --faint:#5F6978;
   --line:#DDE1E6; --accent:#0B7A5E; --accent-wash:#E3F2EC; --focus:#1F5FBF;
   --crit-bg:#FBE4E1; --crit:#9B2C1F; --high-bg:#FCEFD6; --high:#7A5200;
   --serif:"Newsreader",Georgia,"Times New Roman",serif;
   --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --wrap:1120px;
+  --wrap:1120px; --r:12px; --ease:cubic-bezier(.2,.75,.2,1);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -52,173 +56,238 @@ a{color:inherit}
 a,button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 :focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
 h1,h2,h3{text-wrap:balance}
+h3{font:600 1.1rem/1.35 var(--sans);margin:0}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
 @media (max-width:600px){.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
-.skip{position:absolute;left:-999px;top:8px;background:var(--surface);padding:8px 12px;z-index:10}
+.skip{position:absolute;left:-999px;top:8px;background:var(--surface);padding:8px 12px;z-index:40}
 .skip:focus{left:8px}
+[id]{scroll-margin-top:76px}
+@media (max-width:960px){[id]{scroll-margin-top:104px}}
+svg text{font-family:var(--sans)}
 
-/* header */
-header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:18px}
+/* ---------- top bar ---------- */
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 94%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid transparent;transition:border-color .3s,transform .35s var(--ease)}
+.topbar.scrolled{border-bottom-color:var(--line)}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px;transition:height .3s var(--ease)}
+.topbar.scrolled header.top{height:56px}
 .who{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
-.who img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none}
-.who b{font-weight:600;font-size:1rem;display:block;line-height:1.2}
-.who .sub{color:var(--soft);font-size:.875rem;line-height:1.2}
-nav.main{display:flex;align-items:center;gap:20px;font-size:.95rem}
-nav.main a.lnk{text-decoration:none;color:var(--soft)}
-nav.main a.lnk:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
-nav.main a.cta-s{text-decoration:none;font-weight:600;padding:8px 14px;border-radius:8px;background:var(--ink);color:var(--bg)}
+.who img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none;transition:width .3s,height .3s}
+.topbar.scrolled .who img{width:30px;height:30px}
+.who b{font-weight:600;font-size:1rem;display:block;line-height:1.2;white-space:nowrap}
+.who .sub{color:var(--soft);font-size:.85rem;line-height:1.2;display:block;transition:opacity .2s}
+.topbar.scrolled .who .sub{display:none}
+nav.main{display:flex;align-items:center;gap:14px;font-size:.95rem}
+nav.main .links{display:flex;gap:18px;margin-right:6px}
+nav.main a.lnk{position:relative;text-decoration:none;color:var(--soft);padding:6px 0;transition:color .2s}
+nav.main a.lnk::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+nav.main a.lnk:hover,nav.main a.lnk[aria-current="true"]{color:var(--ink)}
+nav.main a.lnk:hover::after,nav.main a.lnk[aria-current="true"]::after{transform:scaleX(1)}
+nav.main a.cta-s{text-decoration:none;font-weight:600;padding:8px 14px;border-radius:8px;background:var(--ink);color:var(--bg);white-space:nowrap}
+nav.main a.cta-s[aria-current="true"]{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
 .lang{display:flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px}
-.lang button{all:unset;cursor:pointer;padding:5px 11px;border-radius:999px;font-size:.8rem;font-weight:500;color:var(--soft)}
+.lang button{all:unset;cursor:pointer;padding:6px 11px;line-height:1.3;border-radius:999px;font-size:.8rem;font-weight:500;color:var(--soft)}
 .lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 .lang button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-@media (max-width:860px){nav.main a.lnk{display:none}}
-@media (max-width:420px){nav.main a.cta-s{display:none}}
+.theme{all:unset;cursor:pointer;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:var(--soft);border:1px solid var(--line)}
+.theme:hover{color:var(--ink);border-color:var(--soft)}
+.theme:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.theme svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.theme .moon{display:none}
+:root[data-theme="dark"] .theme .sun{display:none}:root[data-theme="dark"] .theme .moon{display:block}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .theme .sun{display:none}:root:not([data-theme="light"]) .theme .moon{display:block}}
+.toc-btn{all:unset;cursor:pointer;display:none;align-items:center;gap:8px;font-size:.9rem;font-weight:600;padding:0 12px;height:38px;border:1px solid var(--line);border-radius:8px}
+.toc-btn i{width:14px;height:2px;background:currentColor;position:relative;border-radius:1px;transition:background .2s}
+.toc-btn i::before,.toc-btn i::after{content:"";position:absolute;left:0;width:14px;height:2px;background:currentColor;border-radius:1px;transition:transform .3s}
+.toc-btn i::before{top:-5px}.toc-btn i::after{top:5px}
+.toc-btn[aria-expanded="true"] i{background:transparent}
+.toc-btn[aria-expanded="true"] i::before{transform:translateY(5px) rotate(45deg)}
+.toc-btn[aria-expanded="true"] i::after{transform:translateY(-5px) rotate(-45deg)}
+.toc-btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.rail{display:none;height:40px;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;border-top:1px solid var(--line);padding:0 16px;scroll-padding:0 16px}
+.rail::-webkit-scrollbar{display:none}
+.rail a{flex:none;text-decoration:none;font-size:.84rem;font-weight:500;padding:5px 11px;border-radius:999px;color:var(--soft);border:1px solid transparent;transition:background .25s,color .25s}
+.rail a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.rail a.c{background:var(--accent);color:#fff;font-weight:600}
+.sheet{border-top:1px solid var(--line);background:var(--bg)}
+.sheet ul{list-style:none;margin:0;padding:6px 0 10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.sheet a{display:block;padding:12px 0;text-decoration:none;font:400 1.25rem/1.2 var(--serif);border-bottom:1px solid var(--line)}
+.sheet a[aria-current="true"]{color:var(--accent)}
+.sheet .row{display:flex;align-items:center;gap:12px;padding:12px 0 14px}
+@media (max-width:960px){
+  nav.main .links{display:none}.toc-btn{display:inline-flex}
+  .topbar.rail-on .rail{display:flex}
+  .topbar.rail-on.hide-top{transform:translateY(-56px)}
+  header.top,.topbar.scrolled header.top{height:56px}
+  .who .sub{display:none}
+}
+@media (max-width:520px){nav.main>.lang,nav.main>.theme{display:none}}
+@media (max-width:400px){nav.main a.cta-s{display:none}}
+@media (min-width:961px){.sheet,.rail{display:none!important}}
 
-/* hero */
-.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:64px;align-items:center;padding-block:44px 60px}
-@media (max-width:900px){.hero{grid-template-columns:1fr;gap:28px;padding-block:20px 48px}}
-.hero>*,.explain>*,.pay>*,.diag>*{min-width:0}
-.kicker{color:var(--accent);font-weight:500;margin:0 0 16px}
-h1{font:400 clamp(2.3rem,4.8vw,3.9rem)/1.05 var(--serif);letter-spacing:-.015em;margin:0 0 22px;max-width:17ch}
-.lede{font-size:1.18rem;line-height:1.55;margin:0 0 14px;max-width:38rem}
-.lede-2{color:var(--soft);margin:0 0 28px;max-width:38rem}
+/* ---------- hero ---------- */
+.hero-zone{position:relative;isolation:isolate}
+.hero-zone::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(circle,var(--line) 1px,transparent 1.3px);background-size:24px 24px;-webkit-mask-image:radial-gradient(60% 75% at 78% 42%,#000 0%,transparent 72%);mask-image:radial-gradient(60% 75% at 78% 42%,#000 0%,transparent 72%)}
+.hero-zone::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(520px 420px at 80% 40%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%)}
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:64px;align-items:start;padding-block:40px 48px}
+.portrait{padding-top:10px}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:28px;padding-block:16px 36px}}
+.hero>*,.explain>*,.pay>*,.diag>*,.case>*,.strata>*{min-width:0}
+.kicker{color:var(--accent);font-weight:500;margin:0 0 14px}
+h1{font:400 clamp(2.2rem,4.4vw,3.5rem)/1.06 var(--serif);letter-spacing:-.015em;margin:0 0 20px;max-width:19ch}
+h1 em{font-style:italic;color:var(--accent)}
+.lede{font-size:1.15rem;line-height:1.55;margin:0 0 12px;max-width:38rem}
+.role{color:var(--soft);margin:0 0 26px;max-width:38rem;font-size:1rem}
 .ctas{display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-block;padding:13px 22px;border-radius:8px;font-weight:600;font-size:1rem;text-decoration:none;border:1px solid var(--ink)}
+.btn{display:inline-block;padding:12px 20px;border-radius:8px;font-weight:600;font-size:1rem;text-decoration:none;border:1px solid var(--ink);transition:transform .25s var(--ease),background-color .25s,border-color .25s}
 .btn.primary{background:var(--ink);color:var(--bg)}
 .btn.primary:hover{background:var(--soft);border-color:var(--soft)}
 .btn.ghost:hover{background:var(--surface)}
-.cvline{margin:18px 0 0;font-weight:500}
-.cvline a{color:var(--accent);text-underline-offset:4px}
-.avail{display:flex;align-items:center;gap:10px;margin:22px 0 0;color:var(--soft);font-size:.95rem}
-.avail::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--accent);flex:none}
+@media (hover:hover){.btn:hover{transform:translateY(-1px)}}
+.cvline{margin:16px 0 0;font-weight:500}
+.cvline a{color:var(--accent);text-underline-offset:4px;display:inline-block;padding:4px 0}
+.router{list-style:none;margin:30px 0 0;padding:0;border-top:1px solid var(--line);max-width:40rem}
+.router a{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line);text-decoration:none;font-size:.98rem}
+.router a:hover b{text-decoration:underline;text-underline-offset:4px}
+.router b{font-weight:500}
+.router .go{color:var(--accent);font-weight:600;font-size:.88rem;white-space:nowrap}
+.router .go::after{content:"→";display:inline-block;margin-left:5px;transition:transform .3s var(--ease)}
+.router a:hover .go::after{transform:translateX(4px)}
 .portrait{margin:0}
 .portrait img{display:block;width:100%;height:auto;max-width:340px;aspect-ratio:4/5;object-fit:cover;border-radius:18px}
 @media (max-width:900px){.portrait img{display:none}}
-.facts{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px;max-width:340px}
-@media (max-width:900px){.facts{margin-top:0;max-width:none;grid-template-columns:repeat(3,minmax(0,1fr))}.facts li{grid-template-columns:1fr!important;gap:4px!important}}
-.facts li{display:grid;grid-template-columns:86px 1fr;gap:12px;align-items:baseline;border-top:1px solid var(--line);padding-top:10px}
-.facts b{font:500 1.5rem/1 var(--serif);font-variant-numeric:tabular-nums;white-space:nowrap}
+.facts{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px;max-width:340px}
+@media (max-width:900px){.facts{margin-top:0;max-width:none;grid-template-columns:repeat(3,minmax(0,1fr))}.facts li{grid-template-columns:1fr!important;gap:2px!important}}
+.facts li{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:baseline;border-top:1px solid var(--line);padding-top:10px}
+.facts b{font:500 1.6rem/1 var(--serif);font-variant-numeric:tabular-nums;white-space:nowrap}
+.facts b small{font:500 .78rem/1 var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--soft);margin-left:4px}
 .facts span{color:var(--soft);font-size:.92rem;line-height:1.4}
 
 /* proof strip */
 .worked{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.worked .wrap{display:flex;flex-wrap:wrap;gap:10px 34px;align-items:baseline;padding-block:20px}
+.worked .wrap{display:flex;flex-wrap:wrap;gap:10px 34px;align-items:baseline;padding-block:18px}
 .worked p{margin:0;color:var(--soft);font-size:.9rem}
-.worked ul{display:flex;flex-wrap:wrap;gap:8px 30px;list-style:none;margin:0;padding:0}
-.worked li{font:500 1.15rem/1.3 var(--serif)}
+.worked ul{display:flex;flex-wrap:wrap;gap:8px 28px;list-style:none;margin:0;padding:0}
+.worked li{font:500 1.12rem/1.3 var(--serif)}
 
 /* sections */
-section.block{padding-top:92px}
-@media (max-width:600px){section.block{padding-top:64px}}
-h2.h{font:400 clamp(1.9rem,3.4vw,2.6rem)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 14px;max-width:26ch}
-.intro{color:var(--soft);max-width:42rem;margin:0 0 36px;font-size:1.075rem}
+section.block{padding-top:84px}
+@media (max-width:600px){section.block{padding-top:60px}}
+h2.h{font:400 clamp(1.85rem,3.3vw,2.5rem)/1.12 var(--serif);letter-spacing:-.01em;margin:0 0 12px;max-width:26ch}
+.intro{color:var(--soft);max-width:42rem;margin:0 0 32px;font-size:1.05rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.callout{border-left:3px solid var(--accent);padding:4px 0 4px 16px}
+.callout b{display:block;margin-bottom:2px}
+.callout p{margin:0;color:var(--soft)}
+.callout small{color:var(--faint);font-size:.82rem}
+.result{background:var(--accent-wash);border-radius:8px;padding:9px 14px;display:inline-block;font-size:.95rem}
 
-/* router */
-.router{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;list-style:none;margin:0;padding:0}
-@media (max-width:760px){.router{grid-template-columns:1fr}}
-.router a{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:18px 0;border-top:1px solid var(--line);text-decoration:none}
-.router a:hover b{text-decoration:underline;text-underline-offset:4px}
-.router b{font:500 1.2rem/1.35 var(--serif)}
-.router span.go{color:var(--accent);font-weight:600;font-size:.92rem;white-space:nowrap}
-
-/* pillars */
-.sectors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;list-style:none;margin:0;padding:0}
-@media (max-width:980px){.sectors{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.sectors{grid-template-columns:1fr}}
-.sectors li{border-top:2px solid var(--accent);padding-top:16px;display:grid;gap:6px;align-content:start}
-.sectors b{font:500 1.35rem/1.25 var(--serif)}
-.sectors .who-s{color:var(--accent);font-size:.88rem;font-weight:600}
-.sectors li>span:last-child{color:var(--soft);font-size:.97rem}
-.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
-@media (max-width:900px){.pillars{grid-template-columns:1fr;gap:28px}}
-.pillar{border-top:2px solid var(--ink);padding-top:18px}
-.pillar h3{font:500 1.45rem/1.25 var(--serif);margin:0 0 8px}
-.pillar .plain{margin:0 0 14px}
-.pillar .concrete{color:var(--soft);font-size:.95rem;margin:0}
-.pillar .concrete b{color:var(--ink);font-weight:600}
-.special{margin-top:40px;background:var(--accent-wash);border-radius:14px;padding:20px 24px;display:grid;grid-template-columns:auto 1fr;gap:6px 22px;align-items:baseline}
-@media (max-width:700px){.special{grid-template-columns:1fr}}
-.special h3{font:600 1.05rem/1.3 var(--sans);margin:0;color:var(--accent)}
-.special p{margin:0}
+/* strata diagram */
+.strata{display:grid;grid-template-columns:200px minmax(0,1fr);gap:0 28px;border-top:1px solid var(--line)}
+@media (max-width:760px){.strata{grid-template-columns:1fr;gap:0}}
+.strata .lab{padding:16px 0;border-bottom:1px solid var(--line)}
+.strata .lab h3{margin:0 0 4px}
+.strata .lab p{margin:0;color:var(--soft);font-size:.9rem}
+.strata .lay{padding:16px 0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+@media (max-width:760px){.strata .lab{border-bottom:0;padding-bottom:6px}.strata .lay{padding-top:0}.strata .lay.evt{flex-direction:column;flex-wrap:nowrap;align-items:stretch}.strata .lay.evt .tpc{flex:none;height:42px}.strata .lay.evt .note-s{flex-basis:auto}.strata .lay.svc .bx,.strata .lay.inf .bx{flex:1 1 40%;text-align:center}.strata .bx{text-align:center}.strata .arr{transform:rotate(90deg);align-self:center}.strata .lnk-dash,.strata .lnk-solid{display:none}.note-s{text-align:center}}
+.bx{font-size:.88rem;font-weight:500;padding:9px 12px;border:1px solid var(--soft);border-radius:8px;background:var(--surface);white-space:nowrap}
+.bx.gray{color:var(--soft);border-style:dashed}
+.bx.acc{border-color:var(--accent);color:var(--accent);background:var(--accent-wash)}
+.lnk-dash{flex:1 1 18px;min-width:12px;height:0;border-top:1.5px dashed var(--faint);position:relative;top:0}
+.lnk-solid{flex:1 1 60px;min-width:60px;height:0;border-top:2px solid var(--ink);position:relative;text-align:center}
+.lnk-solid>span{position:absolute;left:0;right:0;top:-22px;font-size:.78rem;color:var(--soft);font-style:normal}
+.note-s{flex-basis:100%;min-width:0;color:var(--faint);font-size:.85rem}
+.lnk-dash.short,.lnk-solid.short{flex:0 0 22px}
+.tpc{flex:1 1 220px;min-width:160px;height:42px;border:1.5px solid var(--ink);border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;gap:8px;font-size:.88rem;font-weight:600;position:relative}
+.tpc i{display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--accent)}
+.arr{color:var(--accent);font-size:1.2rem;line-height:1;flex:none}
+.strata .legend{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:18px;color:var(--soft);font-size:.92rem}
+@media (max-width:760px){.strata .legend{grid-template-columns:1fr;gap:12px}}
+.strata .legend b{color:var(--ink);font-weight:600}
 
 /* decisions table */
 .ctx{width:100%;border-collapse:collapse}
 .ctx th{text-align:left;font-weight:600;font-size:.9rem;color:var(--soft);padding:0 16px 12px 0;border-bottom:2px solid var(--ink)}
-.ctx td{padding:18px 16px 18px 0;border-bottom:1px solid var(--line);vertical-align:top}
-.ctx td:first-child{width:42%}
-.ctx td:nth-child(2){width:40%;font-weight:500}
-.ctx td:last-child{font:500 1.05rem/1.4 var(--serif);white-space:nowrap}
+.ctx td{padding:16px 16px 16px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.ctx td:first-child{width:40%}
+.ctx td:nth-child(2){width:38%;font-weight:500}
+.ctx td:last-child{font:500 1.02rem/1.4 var(--serif);white-space:nowrap}
+.ctx td:last-child small{display:block;font:400 .85rem/1.3 var(--sans);color:var(--faint);white-space:normal}
 @media (max-width:760px){
   .ctx thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-  .ctx tr{display:block;padding:16px 0;border-bottom:1px solid var(--line)}
+  .ctx tr{display:block;padding:14px 0;border-bottom:1px solid var(--line)}
   .ctx td{display:block;width:auto!important;border:0;padding:2px 0}
   .ctx td:nth-child(2)::before{content:"→ " / "";color:var(--accent)}
   .ctx td:last-child{color:var(--soft);font-size:.95rem;margin-top:4px}
 }
-.after{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:30px}
-.after p{margin:0;color:var(--soft)}
+.after{margin-top:28px}
 
 /* cases */
-.case{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;padding-block:32px;border-top:1px solid var(--line)}
-@media (max-width:760px){.case{grid-template-columns:1fr;gap:10px;padding-block:24px}}
-.case .org{font:500 1.35rem/1.25 var(--serif);margin:0}
+.case{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;padding-block:30px;border-top:1px solid var(--line)}
+.case.with-fig{grid-template-columns:200px minmax(0,1fr) minmax(340px,480px)}
+@media (max-width:1000px){.case.with-fig{grid-template-columns:200px minmax(0,1fr)}.case.with-fig figure{grid-column:1/-1}}
+@media (max-width:760px){.case,.case.with-fig{grid-template-columns:1fr;gap:10px;padding-block:22px}}
+.case .org{font:500 1.3rem/1.25 var(--serif);margin:0}
 .case .meta{color:var(--soft);font-size:.92rem;margin:4px 0 0}
-.case h3{font:600 1.15rem/1.35 var(--sans);margin:0 0 10px;max-width:44rem}
+.case h3{margin:0 0 8px;max-width:44rem}
 .case p{margin:0 0 10px;max-width:44rem}
 .case .k{font-weight:600}
-.case .stack{color:var(--faint);font-size:.88rem;margin-top:12px}
-.case .result{background:var(--accent-wash);border-radius:8px;padding:9px 14px;display:inline-block;font-size:.95rem;margin-top:4px}
-.side{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 48px;border-top:1px solid var(--line);padding-top:28px}
-@media (max-width:760px){.side{grid-template-columns:1fr}}
-.side h3{font:600 1rem/1.3 var(--sans);margin:0 0 2px}
-.side .meta{color:var(--faint);font-size:.88rem;margin:0 0 8px}
-.side p{margin:0;color:var(--soft);font-size:.97rem}
-.side-t{font:500 1.2rem/1.3 var(--serif);margin:44px 0 6px}
-
-/* explainer */
-.explain{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:48px;align-items:start}
-@media (max-width:960px){.explain{grid-template-columns:1fr;gap:28px}}
-.diagram{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 12px}
-.diagram .scroll{overflow-x:auto}
-.diagram svg{display:block;width:100%;min-width:560px;height:auto}
-.diagram .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:6px}
-.diagram .bar p{margin:0;color:var(--faint);font-size:.85rem}
-.replay{all:unset;cursor:pointer;font-size:.9rem;font-weight:500;padding:7px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
-.replay:hover{border-color:var(--soft)}
-.replay:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.case .stack{color:var(--faint);font-size:.88rem;margin-top:10px}
+.case figure{margin:0;padding:14px;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.case figure svg{display:block;width:100%;height:auto}
+.case figcaption{color:var(--faint);font-size:.82rem;margin-top:6px}
+.mini{display:block;width:100%;max-width:360px;height:auto;margin-top:10px}
 svg .box{fill:var(--surface);stroke:var(--faint);stroke-width:1.2}
+svg .box.ink{stroke:var(--ink);stroke-width:1.4}
+svg .box.acc{fill:var(--accent-wash);stroke:var(--accent)}
 svg .topic{fill:var(--bg);stroke:var(--ink);stroke-width:1.5}
-svg .slot{fill:none;stroke:var(--faint);stroke-width:1.2}
+svg .slot{fill:none;stroke:var(--faint);stroke-width:1.2;transition:fill .35s,stroke .35s}
 svg .slot.on{fill:var(--accent);stroke:var(--accent)}
 svg .wire{fill:none;stroke:var(--faint);stroke-width:1.4;stroke-dasharray:4 4}
-svg .t1{fill:var(--ink);font:600 15px var(--sans)}
-svg .t2{fill:var(--soft);font:400 13px var(--sans)}
-svg .count{fill:var(--accent);font:600 13px var(--sans)}
+svg .solid{fill:none;stroke:var(--ink);stroke-width:2.2}
+svg .t1{fill:var(--ink);font-size:14px;font-weight:600}
+svg .t2{fill:var(--soft);font-size:13.5px}
+svg .t3{fill:var(--accent);font-size:12.5px;font-weight:600}
+svg .count{fill:var(--accent);font-size:13px;font-weight:600}
 svg .ev{fill:var(--accent)}
+svg .draw{stroke-dasharray:1200;stroke-dashoffset:0}
+.side{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 48px;border-top:1px solid var(--line);padding-top:26px}
+@media (max-width:760px){.side{grid-template-columns:1fr}}
+.side h3{margin:0 0 2px}
+.side .meta{color:var(--faint);font-size:.88rem;margin:0 0 8px}
+.side p{margin:0;color:var(--soft);font-size:.97rem}
+.side-t{font:500 1.15rem/1.3 var(--serif);margin:40px 0 4px}
+
+/* explainer */
+.explain{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:40px;align-items:start}
+@media (max-width:960px){.explain{grid-template-columns:1fr;gap:24px}}
+.diagram{margin:0;padding:16px 16px 10px}
+.diagram svg{display:block;width:100%;height:auto}
+.diagram .m{display:none}
+@media (max-width:600px){.diagram .d{display:none}.diagram .m{display:block}}
+.diagram .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:6px}
+.diagram .bar p{margin:0;color:var(--faint);font-size:.85rem}
+.replay{all:unset;cursor:pointer;font-size:.88rem;font-weight:500;padding:6px 13px;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
+.replay:hover{border-color:var(--soft)}
+.replay:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .steps-plain{list-style:none;margin:0;padding:0;counter-reset:s}
-.steps-plain li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:10px;padding:14px 0;border-top:1px solid var(--line)}
+.steps-plain li{counter-increment:s;display:grid;grid-template-columns:32px 1fr;gap:10px;padding:12px 0;border-top:1px solid var(--line)}
 .steps-plain li::before{content:counter(s);font:500 1.3rem/1.2 var(--serif);color:var(--accent)}
-.when{margin-top:18px;padding:16px 18px;border-left:3px solid var(--ink);background:var(--surface);border-radius:0 10px 10px 0}
-.when b{display:block;margin-bottom:4px}
-.when p{margin:0;color:var(--soft)}
+.when{margin-top:16px}
 
 /* payments */
-.pay{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
-@media (max-width:900px){.pay{grid-template-columns:1fr;gap:36px}}
-.pay ul.areas{list-style:none;margin:0 0 24px;padding:0}
-.pay ul.areas li{padding:14px 0;border-top:1px solid var(--line)}
+.pay{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+@media (max-width:900px){.pay{grid-template-columns:1fr;gap:32px}}
+.pay ul.areas{list-style:none;margin:0 0 22px;padding:0}
+.pay ul.areas li{padding:13px 0;border-top:1px solid var(--line)}
 .pay ul.areas b{display:block;font-weight:600}
 .pay ul.areas span{color:var(--soft)}
-.tag{font-style:normal;font-size:.75rem;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--accent-wash);color:var(--accent);margin-left:6px;vertical-align:2px}
+.tag{font-style:normal;font-size:.74rem;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--accent-wash);color:var(--accent);margin-left:6px;vertical-align:2px}
 .tag.alt{background:var(--line);color:var(--soft)}
-.deadline{border-left:3px solid var(--accent);padding:2px 0 2px 16px}
-.deadline .d8{font:500 1.35rem/1.2 var(--serif);font-variant-numeric:tabular-nums}
-.deadline p{margin:4px 0 2px}
-.deadline small{color:var(--faint);font-size:.82rem}
-.trace{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 24px 20px}
-.trace h3{font:600 1rem/1.3 var(--sans);margin:0 0 4px}
-.trace .sub{color:var(--faint);font-size:.875rem;margin:0 0 18px}
+.deadline .d8{font:500 1.35rem/1.2 var(--serif);font-variant-numeric:tabular-nums;display:block}
+.trace{margin:0;padding:22px 22px 18px}
+.trace h3{margin:0 0 2px}
+.trace .sub{color:var(--faint);font-size:.875rem;margin:0 0 16px}
 .trace ol{list-style:none;margin:0;padding:0;position:relative}
 .trace ol::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--line)}
 .trace li{position:relative;display:grid;grid-template-columns:22px 64px 1fr;gap:10px;align-items:baseline;padding:7px 0}
@@ -227,150 +296,111 @@ svg .ev{fill:var(--accent)}
 .trace .what{font-size:.95rem}
 .trace .what small{display:block;color:var(--faint);font-size:.8rem}
 .trace li.done .what{color:var(--accent);font-weight:600}
-.budget{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.budget{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 .budget p{margin:0 0 8px;font-size:.9rem;color:var(--soft)}
 .budget strong{color:var(--ink);font-weight:600}
 .meter{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
 .meter i{display:block;height:100%;width:16.2%;background:var(--accent)}
+.trace li:nth-child(1){--n:0}.trace li:nth-child(2){--n:1}.trace li:nth-child(3){--n:2}.trace li:nth-child(4){--n:3}.trace li:nth-child(5){--n:4}
 
 /* offers */
-.lead-offer{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 32px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:28px 48px;align-items:center}
-@media (max-width:860px){.lead-offer{grid-template-columns:1fr;padding:24px 20px}}
-.lead-offer h3{font:500 1.75rem/1.2 var(--serif);margin:0 0 10px}
-.lead-offer p{margin:0 0 10px}
+.lead-offer{padding:28px 30px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:24px 44px;align-items:center}
+@media (max-width:860px){.lead-offer{grid-template-columns:1fr;padding:22px 18px}}
+.lead-offer h3{font:400 1.5rem/1.2 var(--serif);margin:0 0 8px}
+.lead-offer p{margin:0 0 8px}
 .lead-offer .note{color:var(--soft);font-size:.95rem}
-.lead-offer .act{display:grid;gap:12px;justify-items:start}
-.lead-offer .act .cvl{font-weight:600;color:var(--accent);text-underline-offset:4px}
+.lead-offer .act{display:grid;gap:10px;justify-items:start}
+.lead-offer .act .cvl{font-weight:600;color:var(--accent);text-underline-offset:4px;display:inline-block;padding:4px 0}
 .lead-offer .act small{color:var(--soft);font-size:.9rem}
-.diag{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;margin-top:56px}
-@media (max-width:900px){.diag{grid-template-columns:1fr;gap:32px}}
-.diag h3{font:500 1.6rem/1.2 var(--serif);margin:0 0 6px}
-.diag .terms{color:var(--accent);font-weight:500;margin:0 0 16px}
-.diag .scope{margin:0 0 18px;color:var(--soft)}
-.diag .proof{margin:0 0 20px;padding:12px 14px;background:var(--accent-wash);border-radius:8px;font-size:.95rem}
-.weeks{list-style:none;margin:0 0 22px;padding:0}
-.weeks li{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:13px 0;border-top:1px solid var(--line)}
+.diag{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;margin-top:52px;align-items:start}
+@media (max-width:900px){.diag{grid-template-columns:1fr;gap:28px}}
+.diag h3,.custom h3{font:400 1.5rem/1.2 var(--serif);margin:0 0 6px}
+.diag .terms{color:var(--soft);margin:0 0 14px}
+.diag .scope{margin:0 0 16px}
+.weeks{list-style:none;margin:0 0 18px;padding:0}
+.weeks li{display:grid;grid-template-columns:92px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
 .weeks li:last-child{border-bottom:1px solid var(--line)}
 .weeks b{font-weight:600;font-size:.95rem}
 .weeks span{color:var(--soft)}
-.sample{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
+.diag .proof{margin:0 0 20px}
+.sample{padding:20px}
 .sample h4{font:600 1rem/1.3 var(--sans);margin:0 0 2px}
-.sample .fict{color:var(--faint);font-size:.85rem;margin:0 0 14px}
-.finding{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:13px 0;border-top:1px solid var(--line)}
+.sample .fict{color:var(--faint);font-size:.85rem;margin:0 0 12px}
+.finding{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:12px 0;border-top:1px solid var(--line)}
 .sev{font-size:.78rem;font-weight:600;padding:3px 9px;border-radius:999px;align-self:start;white-space:nowrap}
 .sev.c{background:var(--crit-bg);color:var(--crit)}.sev.h{background:var(--high-bg);color:var(--high)}.sev.m{background:var(--accent-wash);color:var(--accent)}
 .finding p{margin:0;font-size:.95rem}
 .finding .fix{grid-column:2;color:var(--soft);font-size:.9rem}
-.funders{margin-top:48px;border-top:1px solid var(--line);padding-top:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 48px}
-@media (max-width:760px){.funders{grid-template-columns:1fr}}
-.funders h3{font:500 1.35rem/1.25 var(--serif);margin:0 0 6px}
-.funders p{margin:0 0 8px;color:var(--soft)}
-
-/* process */
-.process{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;counter-reset:p}
-@media (max-width:760px){.process{grid-template-columns:1fr;gap:20px}}
-.process li{counter-increment:p}
-.process li::before{content:counter(p);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--ink);font:500 1.1rem/1 var(--serif);margin-bottom:12px}
-.process b{display:block;font-weight:600;margin-bottom:4px}
-.process span{color:var(--soft)}
+.custom{margin-top:52px;border-top:1px solid var(--line);padding-top:28px;max-width:46rem}
+@media (max-width:860px){.custom{grid-template-columns:1fr}}
+.custom p{margin:0 0 10px}
+.custom .soft{color:var(--soft)}
+.custom .ex{padding:18px 20px}
+.custom .ex h4{font:600 1rem/1.3 var(--sans);margin:0 0 2px}
+.custom .ex .meta{color:var(--faint);font-size:.85rem;margin:0 0 8px}
+.custom .ex p{color:var(--soft);font-size:.95rem;margin:0}
 
 /* path */
+.tl{list-style:none;margin:0 0 6px;padding:0;display:flex;gap:3px;height:22px}
+.tl li{position:relative;border-radius:4px;background:var(--line)}
+.tl li.bank{background:var(--ink)}.tl li.health{background:var(--accent)}.tl li.now{background:var(--accent)}
+.tl li span{position:absolute;left:0;top:-22px;font-size:.78rem;font-weight:500;white-space:nowrap;color:var(--soft)}
+.tl li.now span{color:var(--accent);font-weight:600}
+.tl-years{position:relative;height:18px;color:var(--faint);font-size:.8rem;margin:0 0 30px;font-variant-numeric:tabular-nums}
+.tl-years>span{position:absolute;top:0}
+.tl-leg{margin:-18px 0 26px;color:var(--faint);font-size:.8rem;display:flex;gap:14px;align-items:center}
+.tl-leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px;background:var(--line)}.tl-leg i.bank{background:var(--ink)}.tl-leg i.now{background:var(--accent)}
+.tl-wrap{margin-top:36px}
+.tl li.s span{display:none}
+@media (max-width:700px){.tl li span{font-size:.72rem}}
 .path{list-style:none;margin:0;padding:0}
-.path li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding-block:15px;border-top:1px solid var(--line)}
+.path li{display:grid;grid-template-columns:140px minmax(0,1fr);gap:20px;padding-block:10px;border-top:1px solid var(--line)}
 .path li:last-child{border-bottom:1px solid var(--line)}
 @media (max-width:600px){.path li{grid-template-columns:1fr;gap:2px}}
 .path .yr{color:var(--soft);font-variant-numeric:tabular-nums;font-size:.95rem}
 .path b{font-weight:600}
-.path .d{display:block;color:var(--soft)}
+.path .d{display:block;color:var(--soft);font-size:.97rem}
 .path li.now .yr{color:var(--accent);font-weight:600}
-.tools{margin-top:26px;color:var(--soft);font-size:.95rem;max-width:52rem}
+.tools{margin-top:24px;color:var(--soft);font-size:.95rem;max-width:52rem}
 .tools b{color:var(--ink);font-weight:600}
 
 /* contact */
-.contact{padding-block:100px 80px}
-.contact h2{font:400 clamp(2.2rem,4.6vw,3.6rem)/1.06 var(--serif);letter-spacing:-.015em;margin:0 0 18px;max-width:18ch}
-.contact .intro{margin-bottom:26px}
-.contact .ctas{margin-bottom:22px}
+.contact{padding-block:92px 72px}
+.contact h2{font:400 clamp(2.1rem,4.4vw,3.4rem)/1.06 var(--serif);letter-spacing:-.015em;margin:0 0 16px;max-width:18ch}
+.contact .intro{margin-bottom:24px}
+.contact .ctas{margin-bottom:20px}
 .mail{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
-.mail a.addr{font:500 clamp(1.25rem,3vw,1.8rem)/1.2 var(--sans);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;overflow-wrap:anywhere}
+.mail a.addr{font:500 clamp(1.25rem,3vw,1.75rem)/1.2 var(--sans);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;overflow-wrap:anywhere}
 .mail a.addr:hover{color:var(--accent)}
 .copy{all:unset;cursor:pointer;font-size:.9rem;padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--soft)}
 .copy:hover{color:var(--ink);border-color:var(--soft)}
 .copy:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .copied{color:var(--accent);font-size:.9rem;min-height:1em}
-.practical{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:48px;padding-top:24px;border-top:1px solid var(--line)}
+.process{list-style:none;margin:36px 0 0;padding:22px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;counter-reset:p}
+@media (max-width:700px){.process{grid-template-columns:1fr;gap:12px}}
+.process li{counter-increment:p;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.process li::before{content:counter(p);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ink);font:500 1rem/1 var(--serif)}
+.process b{display:block;font-weight:600}
+.process span{color:var(--soft);font-size:.95rem}
+.practical{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:36px;padding-top:22px;border-top:1px solid var(--line)}
 @media (max-width:860px){.practical{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:460px){.practical{grid-template-columns:1fr}}
 .practical b{display:block;font-weight:600;font-size:.95rem}
 .practical span{color:var(--soft);font-size:.92rem}
-
 footer{border-top:1px solid var(--line);color:var(--faint);font-size:.85rem}
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-block:24px 40px}
-.theme{all:unset;cursor:pointer;color:var(--soft);text-decoration:underline;text-underline-offset:3px;margin-left:14px;padding-block:4px}
-.theme:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-block:22px 36px}
 
-/* ---------- v7 motion layer ---------- */
-[id]{scroll-margin-top:88px}
-.progress{position:fixed;top:0;left:0;right:0;height:2px;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);z-index:30;pointer-events:none}
-@supports (animation-timeline: scroll()){
-  .progress{animation:prog linear both;animation-timeline:scroll(root)}
-  @keyframes prog{to{transform:scaleX(1)}}
-}
-.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 80%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
-.topbar.scrolled{border-bottom-color:var(--line)}
-header.top{transition:padding .35s cubic-bezier(.2,.75,.2,1)}
-.topbar.scrolled header.top{padding-block:10px}
-.who img{transition:width .35s,height .35s}
-.topbar.scrolled .who img{width:36px;height:36px}
-nav.main a.lnk{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;padding-bottom:2px;transition:background-size .35s cubic-bezier(.2,.75,.2,1),color .2s}
-nav.main a.lnk:hover{text-decoration:none;background-size:100% 1px}
-
-.hero-zone{position:relative;isolation:isolate}
-.hero-zone::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(circle,var(--line) 1px,transparent 1.3px);background-size:24px 24px;-webkit-mask-image:radial-gradient(60% 75% at 78% 42%,#000 0%,transparent 72%);mask-image:radial-gradient(60% 75% at 78% 42%,#000 0%,transparent 72%)}
-.hero-zone::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(520px 420px at 80% 40%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 70%)}
-.hero{padding-block:44px 24px}
-@media (max-width:900px){.hero{padding-block:20px 16px}}
-h1 em{font-style:italic;color:var(--accent)}
-.rise-h .w{display:inline-block;overflow:hidden;vertical-align:top;padding:.06em 0 .16em;margin:-.06em 0 -.16em}
-
-.flux{height:118px}
-.flux canvas{display:block;width:100%;height:100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
-@media (max-width:600px){.flux{height:84px}}
-@media (max-width:600px){.topbar.scrolled .who .sub{display:none}}
-.worked{border-top:0}
-
-.btn{transition:transform .25s cubic-bezier(.2,.75,.2,1),background-color .25s,border-color .25s,box-shadow .25s}
-@media (hover:hover){
-  .btn:hover{transform:translateY(-2px)}
-  .btn.primary:hover{box-shadow:0 12px 26px -14px color-mix(in srgb,var(--ink) 70%,transparent)}
-}
-.btn:active{transform:scale(.98)}
-.router a{position:relative}
-.router a::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.75,.2,1)}
-.router a:hover::before,.router a:focus-visible::before{transform:scaleX(1)}
-.router span.go::after{content:"→";content:"→" / "";display:inline-block;margin-left:6px;transition:transform .3s cubic-bezier(.2,.75,.2,1)}
-.router a:hover span.go::after{transform:translateX(5px)}
-
-.spot{position:relative;isolation:isolate;transition:border-color .3s}
-.spot::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 10%,transparent),transparent 65%);opacity:0;transition:opacity .35s}
-.spot:hover::after{opacity:1}
-.spot:hover{border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
-
-svg .slot{transition:fill .35s,stroke .35s}
-svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
-.trace li:nth-child(1){--n:0}.trace li:nth-child(2){--n:1}.trace li:nth-child(3){--n:2}.trace li:nth-child(4){--n:3}.trace li:nth-child(5){--n:4}
-
+/* ---------- motion ---------- */
 @media (prefers-reduced-motion: no-preference){
-  .rise{animation:rise .9s cubic-bezier(.2,.75,.2,1) both;animation-delay:var(--d,0ms)}
-  .rise-p img{animation:portrait 1.3s cubic-bezier(.2,.75,.2,1) .2s both}
-  .rise-p .facts li{animation:rise .8s cubic-bezier(.2,.75,.2,1) both}
-  .rise-p .facts li:nth-child(1){animation-delay:.7s}
-  .rise-p .facts li:nth-child(2){animation-delay:.8s}
-  .rise-p .facts li:nth-child(3){animation-delay:.9s}
-  .rise-h.split .w>span{display:inline-block;animation:wordup 1s cubic-bezier(.2,.75,.2,1) both;animation-delay:calc(80ms + var(--i)*40ms)}
-  [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.75,.2,1),transform .8s cubic-bezier(.2,.75,.2,1);transition-delay:calc(var(--i,0)*80ms)}
+  .rise{animation:rise .6s var(--ease) both;animation-delay:calc(var(--d,0ms) * .6)}
+  .rise-p img{animation:portrait 1.2s var(--ease) .15s both}
+  .rise-p .facts li{animation:rise .8s var(--ease) both}
+  .rise-p .facts li:nth-child(1){animation-delay:.55s}.rise-p .facts li:nth-child(2){animation-delay:.65s}.rise-p .facts li:nth-child(3){animation-delay:.75s}
+  [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i,0)*70ms)}
   [data-reveal].in{opacity:1;transform:none}
-  #evsvg.playing .wire{animation:wire .5s linear infinite}
+  svg .draw{stroke-dashoffset:1200;transition:stroke-dashoffset 1.6s cubic-bezier(.3,.6,.2,1)}
+  .in svg .draw,.drawn svg .draw{stroke-dashoffset:0}
+  #evsvg.playing .wire,#evsvgm.playing .wire{animation:wire .5s linear infinite}
   .trace.armed ol::before{transform:scaleY(0);transform-origin:top}
   .trace.armed li{opacity:0;transform:translateX(-10px)}
   .trace.armed .meter i{width:0}
@@ -378,72 +408,104 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
   .trace.play li{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease;transition-delay:calc(var(--n)*330ms + 120ms)}
   .trace.play .meter i{width:16.2%;transition:width 1.4s cubic-bezier(.3,.6,.2,1) 1.5s}
   .trace.play li.done::before{animation:pulse 1.3s ease-out 1.3s 2}
-  ::view-transition-old(root),::view-transition-new(root){animation-duration:.3s}
-  html.vt-circle::view-transition-old(root){animation:none}
-  html.vt-circle::view-transition-new(root){animation:vtc .75s cubic-bezier(.65,0,.35,1)}
+  .tl.armed li{transform:scaleX(0);transform-origin:left}
+  .tl.play li{transform:none;transition:transform .7s var(--ease);transition-delay:calc(var(--k)*90ms)}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
 }
-@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@keyframes portrait{from{opacity:0;clip-path:inset(10% 10% 10% 10% round 18px);transform:scale(1.06)}to{opacity:1;clip-path:inset(0 round 18px);transform:none}}
-@keyframes wordup{from{transform:translateY(108%)}to{transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes portrait{from{opacity:0;clip-path:inset(8% 8% 8% 8% round 18px);transform:scale(1.05)}to{opacity:1;clip-path:inset(0 round 18px);transform:none}}
 @keyframes wire{to{stroke-dashoffset:-8}}
 @keyframes pulse{from{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}to{box-shadow:0 0 0 12px transparent}}
-@keyframes vtc{from{clip-path:circle(0 at var(--vx,50%) var(--vy,50%))}to{clip-path:circle(150vmax at var(--vx,50%) var(--vy,50%))}}
-@media print{.topbar{position:static}.progress,.flux{display:none}[data-reveal],.trace.armed li{opacity:1!important;transform:none!important}}
+@media print{:root,:root[data-theme="dark"]{--bg:#fff;--surface:#fff;--ink:#15191F;--soft:#4B5463;--faint:#5F6978;--line:#DDE1E6;--accent:#0B7A5E;--accent-wash:#E3F2EC;color-scheme:light}.hero-zone::before,.hero-zone::after{display:none}.topbar{position:static}.rail,.sheet,.replay{display:none!important}[data-reveal],.trace.armed li,.tl.armed li{opacity:1!important;transform:none!important}svg .draw{stroke-dashoffset:0!important}}
 </style>
 </head>
 <body>
 <a class="skip" href="#main"><span class="t-fr">Aller au contenu</span><span class="t-en">Skip to content</span></a>
 
-<div class="progress" aria-hidden="true"></div>
-<div class="topbar" id="topbar"><div class="wrap">
+<div class="topbar" id="topbar">
+<div class="wrap">
   <header class="top">
-    <a class="who" href="#" aria-label="Amine Benmansour">
-      <img src="photo.jpg" alt="" width="44" height="44">
+    <a class="who" href="#main" aria-label="Amine Benmansour">
+      <img src="photo.jpg" alt="" width="40" height="40">
       <span><b>Amine Benmansour</b><span class="sub"><span class="t-fr">Architecte technique et applicatif</span><span class="t-en">Technical and application architect</span></span></span>
     </a>
     <nav class="main" aria-label="Navigation">
-      <a class="lnk" href="#expertise">Expertise</a>
-      <a class="lnk" href="#decisions"><span class="t-fr">Décisions</span><span class="t-en">Decisions</span></a>
-      <a class="lnk" href="#offres"><span class="t-fr">Offres</span><span class="t-en">Services</span></a>
-      <a class="lnk" href="#parcours"><span class="t-fr">Parcours</span><span class="t-en">Background</span></a>
-      <a class="cta-s" href="#contact">Contact</a>
-      <div class="lang" role="group" aria-label="Langue / Language">
-        <button type="button" id="l-fr" data-set="fr" lang="fr" aria-label="Français" aria-pressed="true">FR</button>
-        <button type="button" id="l-en" data-set="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+      <div class="links">
+        <a class="lnk" href="#expertise" data-sec="expertise">Expertise</a>
+        <a class="lnk" href="#decisions" data-sec="decisions"><span class="t-fr">Décisions</span><span class="t-en">Decisions</span></a>
+        <a class="lnk" href="#realisations" data-sec="realisations"><span class="t-fr">Réalisations</span><span class="t-en">Work</span></a>
+        <a class="lnk" href="#paiement" data-sec="paiement"><span class="t-fr">Paiement</span><span class="t-en">Payments</span></a>
+        <a class="lnk" href="#offres" data-sec="offres"><span class="t-fr">Offres</span><span class="t-en">Services</span></a>
+        <a class="lnk" href="#parcours" data-sec="parcours"><span class="t-fr">Parcours</span><span class="t-en">Background</span></a>
       </div>
+      <a class="cta-s" href="#contact" data-sec="contact">Contact</a>
+      <div class="lang" role="group" aria-label="Langue / Language">
+        <button type="button" data-set="fr" lang="fr" aria-label="Français" aria-pressed="true">FR</button>
+        <button type="button" data-set="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+      </div>
+      <button class="theme" type="button" data-theme-btn aria-pressed="false"><span class="vh"><span class="t-fr">Thème sombre</span><span class="t-en">Dark theme</span></span><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></button>
+      <button class="toc-btn" id="tocbtn" type="button" aria-expanded="false" aria-controls="sheet"><span class="t-fr">Sommaire</span><span class="t-en">Contents</span><i aria-hidden="true"></i></button>
     </nav>
   </header>
-</div></div>
+</div>
+<div class="sheet" id="sheet" hidden><nav class="wrap" aria-label="Sommaire">
+  <ul role="list">
+    <li><a href="#expertise" data-sec="expertise">Expertise</a></li>
+    <li><a href="#decisions" data-sec="decisions"><span class="t-fr">Décisions</span><span class="t-en">Decisions</span></a></li>
+    <li><a href="#realisations" data-sec="realisations"><span class="t-fr">Réalisations</span><span class="t-en">Work</span></a></li>
+    <li><a href="#paiement" data-sec="paiement"><span class="t-fr">Paiement</span><span class="t-en">Payments</span></a></li>
+    <li><a href="#offres" data-sec="offres"><span class="t-fr">Offres</span><span class="t-en">Services</span></a></li>
+    <li><a href="#parcours" data-sec="parcours"><span class="t-fr">Parcours</span><span class="t-en">Background</span></a></li>
+    <li><a href="#contact" data-sec="contact">Contact</a></li>
+  </ul>
+  <div class="row">
+    <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-set="fr" lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" data-set="en" lang="en" aria-label="English" aria-pressed="false">EN</button></div>
+    <button class="theme" type="button" data-theme-btn aria-pressed="false"><span class="vh"><span class="t-fr">Thème sombre</span><span class="t-en">Dark theme</span></span><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></button>
+  </div>
+</nav></div>
+<nav class="rail" id="rail" aria-label="Rubriques">
+  <a href="#expertise" data-sec="expertise">Expertise</a>
+  <a href="#decisions" data-sec="decisions"><span class="t-fr">Décisions</span><span class="t-en">Decisions</span></a>
+  <a href="#realisations" data-sec="realisations"><span class="t-fr">Réalisations</span><span class="t-en">Work</span></a>
+  <a href="#paiement" data-sec="paiement"><span class="t-fr">Paiement</span><span class="t-en">Payments</span></a>
+  <a href="#offres" data-sec="offres"><span class="t-fr">Offres</span><span class="t-en">Services</span></a>
+  <a href="#parcours" data-sec="parcours"><span class="t-fr">Parcours</span><span class="t-en">Background</span></a>
+  <a class="c" href="#contact" data-sec="contact">Contact</a>
+</nav>
+</div>
 
 <main id="main">
 <div class="hero-zone">
 <div class="wrap">
   <section class="hero">
     <div>
-      <p class="kicker rise" style="--d:0ms"><span class="t-fr">Indépendant, pour les grands groupes, les fintechs et les PME</span><span class="t-en">Independent, for large groups, fintechs and small businesses</span></p>
-      <h1 class="rise-h" id="h1"><span class="t-fr">Architecte technique et applicatif, <em>du grand groupe bancaire au cabinet médical.</em></span><span class="t-en">Technical and application architect, <em>from major banks to a medical practice.</em></span></h1>
-      <script>(function(){var r=document.documentElement;if(!r.classList.contains('js')||matchMedia('(prefers-reduced-motion: reduce)').matches)return;var h=document.getElementById('h1');[].slice.call(h.querySelectorAll('.t-fr,.t-en')).forEach(function(s){var i=0,w=document.createTreeWalker(s,NodeFilter.SHOW_TEXT),ns=[],n;while((n=w.nextNode()))ns.push(n);ns.forEach(function(t){var f=document.createDocumentFragment();t.nodeValue.split(/( +)/).forEach(function(p){if(!p)return;if(/^ +$/.test(p)){f.appendChild(document.createTextNode(p));return}var o=document.createElement('span');o.className='w';var k=document.createElement('span');k.style.setProperty('--i',i++);k.textContent=p;o.appendChild(k);f.appendChild(o)});t.parentNode.replaceChild(f,t)})});h.classList.add('split')})();</script>
-      <p class="lede rise" style="--d:440ms"><span class="t-fr">Je conçois des systèmes qui tiennent en production : des microservices qui échangent par événements avec Kafka, branchés sur l’existant, mainframe compris. Ma spécialité est la banque et le paiement ; j’ai aussi livré dans la santé, le transport et la finance d’entreprise.</span><span class="t-en">I design systems that hold up in production: microservices exchanging events through Kafka, connected to what already exists, mainframe included. My specialty is banking and payments; I have also delivered in healthcare, transport and business finance.</span></p>
-      <p class="lede-2 rise" style="--d:520ms"><span class="t-fr">14 ans d’expérience : LCL, BforBank, Société Générale, BPCE, Bpifrance, Natixis, RATP, et un logiciel de cabinet médical conçu et livré seul. Sur chaque mission, j’ai porté l’architecture applicative et l’architecture des flux.</span><span class="t-en">14 years of experience: LCL, BforBank, Société Générale, BPCE, Bpifrance, Natixis, RATP, and medical practice software designed and delivered alone. On every engagement, I owned the application architecture and the flow architecture.</span></p>
-      <div class="ctas rise" style="--d:600ms">
-        <a class="btn primary mailto" data-subject-fr="Votre projet" data-subject-en="Your project" href="mailto:contact@iaminetech.com"><span class="t-fr">Me décrire votre projet</span><span class="t-en">Describe your project</span></a>
+      <p class="kicker rise" style="--d:0ms"><span class="t-fr">Indépendant · 14 ans · banque, paiement, santé</span><span class="t-en">Independent · 14 years · banking, payments, healthcare</span></p>
+      <h1 class="rise" style="--d:80ms"><span class="t-fr">Architecture applicative et flux Kafka, <em>pour les plateformes bancaires et de paiement.</em></span><span class="t-en">Application architecture and Kafka flows, <em>for banking and payment platforms.</em></span></h1>
+      <p class="lede rise" style="--d:200ms"><span class="t-fr">Je conçois des systèmes qui tiennent en production : des microservices qui échangent par événements avec Kafka, branchés sur l’existant, mainframe compris. J’ai aussi travaillé dans la santé, le transport et la finance d’entreprise.</span><span class="t-en">I design systems that hold up in production: microservices exchanging events through Kafka, connected to what already exists, mainframe included. I have also worked in healthcare, transport and business finance.</span></p>
+      <p class="role rise" style="--d:280ms"><span class="t-fr">Architecture applicative et flux portés sur chaque mission, sous des intitulés de développeur, lead dev ou tech lead.</span><span class="t-en">Application architecture and integration flows owned on every engagement, under developer, lead developer or tech lead titles.</span></p>
+      <div class="ctas rise" style="--d:360ms">
+        <a class="btn primary mailto" data-subject-fr="Votre projet" data-subject-en="Your project" href="mailto:contact@iaminetech.com"><span class="t-fr">Décrivez-moi votre projet</span><span class="t-en">Describe your project</span></a>
         <a class="btn ghost" href="#decisions"><span class="t-fr">Voir mes décisions d’architecture</span><span class="t-en">See my architecture decisions</span></a>
       </div>
-      <p class="cvline rise" style="--d:660ms"><a href="cv-amine-benmansour-fr.pdf" class="t-fr">Télécharger mon CV (PDF, 2 pages)</a><a href="cv-amine-benmansour-en.pdf" class="t-en">Download my CV (PDF, 2 pages)</a></p>
+      <p class="cvline rise" style="--d:420ms"><a href="cv-amine-benmansour-fr.pdf" class="t-fr">Télécharger mon CV (PDF, 2 pages)</a><a href="cv-amine-benmansour-en.pdf" class="t-en">Download my CV (PDF, 2 pages)</a></p>
+      <ul class="router rise" role="list" style="--d:480ms">
+        <li><a href="#decisions"><b><span class="t-fr">Vous faites évoluer un SI bancaire vers l’événementiel, avec Kafka</span><span class="t-en">You are moving a banking system to event-driven, with Kafka</span></b><span class="go"><span class="t-fr">Mes choix</span><span class="t-en">My choices</span></span></a></li>
+        <li><a href="#offres"><b><span class="t-fr">Vous cherchez un architecte ou un tech lead pour une mission</span><span class="t-en">You need an architect or tech lead for an assignment</span></b><span class="go"><span class="t-fr">La mission</span><span class="t-en">The engagement</span></span></a></li>
+        <li><a href="#diagnostic"><b><span class="t-fr">Des paiements en double, un rapprochement qui ne tombe pas juste</span><span class="t-en">Duplicate payments, reconciliation that does not balance</span></b><span class="go"><span class="t-fr">Le diagnostic</span><span class="t-en">The assessment</span></span></a></li>
+        <li><a href="#logiciel"><b><span class="t-fr">Vous dirigez un cabinet ou une PME et votre logiciel ne suit plus</span><span class="t-en">You run a practice or a small business and your software no longer keeps up</span></b><span class="go"><span class="t-fr">Sur mesure</span><span class="t-en">Custom software</span></span></a></li>
+      </ul>
     </div>
     <figure class="portrait rise-p">
       <img src="photo.jpg" alt="Amine Benmansour" width="640" height="800">
       <ul class="facts" role="list">
-        <li><b><span class="num" data-to="14">14</span> <span class="t-fr">ans</span><span class="t-en">yrs</span></b><span><span class="t-fr">du développement à l’architecture</span><span class="t-en">from development to architecture</span></span></li>
-        <li><b><span class="num" data-to="6">6</span></b><span><span class="t-fr">banques, de la banque privée à la néobanque</span><span class="t-en">banks, from private banking to a neobank</span></span></li>
-        <li><b><span class="num" data-to="4">4</span></b><span><span class="t-fr">secteurs : banque, santé, transport, finance d’entreprise</span><span class="t-en">sectors: banking, healthcare, transport, business finance</span></span></li>
+        <li><b>14<small><span class="t-fr">ans</span><span class="t-en">yrs</span></small></b><span><span class="t-fr">du développement à l’architecture</span><span class="t-en">from development to architecture</span></span></li>
+        <li><b>6<small><span class="t-fr">banques</span><span class="t-en">banks</span></small></b><span><span class="t-fr">de la banque privée à la néobanque</span><span class="t-en">from private banking to a neobank</span></span></li>
+        <li><b>4<small><span class="t-fr">secteurs</span><span class="t-en">sectors</span></small></b><span><span class="t-fr">banque, santé, transport, finance d’entreprise</span><span class="t-en">banking, healthcare, transport, business finance</span></span></li>
       </ul>
     </figure>
   </section>
 </div>
 </div>
-
-<div class="flux" aria-hidden="true"><canvas id="stream"></canvas></div>
 
 <div class="worked">
   <div class="wrap">
@@ -453,72 +515,40 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
 </div>
 
 <div class="wrap">
-  <section class="block" aria-labelledby="route-t">
-    <h2 class="h" id="route-t"><span class="t-fr">Qu’est-ce qui vous amène ?</span><span class="t-en">What brings you here?</span></h2>
-    <ul class="router" role="list">
-      <li><a href="#decisions"><b><span class="t-fr">Vous faites évoluer un SI bancaire vers l’événementiel, avec Kafka</span><span class="t-en">You are moving a banking system to event-driven, with Kafka</span></b><span class="go"><span class="t-fr">Mes choix</span><span class="t-en">My choices</span></span></a></li>
-      <li><a href="#offres"><b><span class="t-fr">Vous cherchez un architecte ou un tech lead pour une mission</span><span class="t-en">You need an architect or tech lead for an assignment</span></b><span class="go"><span class="t-fr">La mission</span><span class="t-en">The engagement</span></span></a></li>
-      <li><a href="#diagnostic"><b><span class="t-fr">Des paiements en double ou un rapprochement qui ne tombe pas juste</span><span class="t-en">Duplicate payments or reconciliation that does not balance</span></b><span class="go"><span class="t-fr">Le diagnostic</span><span class="t-en">The assessment</span></span></a></li>
-      <li><a href="#paiement"><b><span class="t-fr">Une échéance paiement approche : virement instantané, contrôle du bénéficiaire</span><span class="t-en">A payments deadline is coming: instant transfers, verification of payee</span></b><span class="go"><span class="t-fr">Le paiement</span><span class="t-en">Payments</span></span></a></li>
-      <li><a href="#secteurs"><b><span class="t-fr">Un logiciel métier à concevoir ou moderniser : santé, PME, cabinet</span><span class="t-en">Business software to design or modernise: healthcare, small business, practice</span></b><span class="go"><span class="t-fr">Les secteurs</span><span class="t-en">Sectors</span></span></a></li>
-      <li><a href="#decisions"><b><span class="t-fr">Des données sensibles qui ne doivent pas sortir de chez vous</span><span class="t-en">Sensitive data that must not leave your premises</span></b><span class="go"><span class="t-fr">Mes choix</span><span class="t-en">My choices</span></span></a></li>
-    </ul>
-  </section>
-
-  <section class="block" id="secteurs" aria-labelledby="sec-t">
-    <h2 class="h" id="sec-t"><span class="t-fr">La banque en spécialité, d’autres métiers en preuve</span><span class="t-en">Banking as a specialty, other sectors as proof</span></h2>
-    <p class="intro"><span class="t-fr">Les mêmes problèmes reviennent partout : des données qui doivent rester justes, des systèmes qui doivent se parler, des règles métier à respecter. Du grand groupe à la TPE, j’adapte l’architecture à votre taille et à vos contraintes.</span><span class="t-en">The same problems come back everywhere: data that must stay correct, systems that must talk to each other, business rules to respect. From large groups to very small businesses, I fit the architecture to your size and constraints.</span></p>
-    <ul class="sectors" role="list">
-      <li><b><span class="t-fr">Banque et paiement</span><span class="t-en">Banking and payments</span></b><span class="who-s"><span class="t-fr">Grands groupes, banque publique, néobanque</span><span class="t-en">Large groups, public bank, neobank</span></span><span><span class="t-fr">Cartes et tokenisation, fraude, KYC, garanties de prêts, cloud privé : LCL, BforBank, Société Générale, BPCE, Bpifrance, Natixis.</span><span class="t-en">Cards and tokenisation, fraud, KYC, loan guarantees, private cloud: LCL, BforBank, Société Générale, BPCE, Bpifrance, Natixis.</span></span></li>
-      <li><b><span class="t-fr">Santé</span><span class="t-en">Healthcare</span></b><span class="who-s"><span class="t-fr">Cabinet médical</span><span class="t-en">Medical practice</span></span><span><span class="t-fr">Logiciel de gestion du cabinet conçu et livré seul : patients, consultations, ordonnances, 26 ans d’historique repris, IA exécutée en local.</span><span class="t-en">Practice-management software designed and delivered alone: patients, consultations, prescriptions, 26 years of history migrated, AI running locally.</span></span></li>
-      <li><b><span class="t-fr">Transport et temps réel</span><span class="t-en">Transport and real time</span></b><span class="who-s"><span class="t-fr">Opérateur public</span><span class="t-en">Public operator</span></span><span><span class="t-fr">Flux d’information voyageurs en temps réel pour la RATP et Île-de-France Mobilités.</span><span class="t-en">Real-time passenger-information flows for RATP and Île-de-France Mobilités.</span></span></li>
-      <li><b><span class="t-fr">Finance d’entreprise</span><span class="t-en">Business finance</span></b><span class="who-s"><span class="t-fr">PME</span><span class="t-en">Small business</span></span><span><span class="t-fr">Comptabilité en partie double branchée sur une API bancaire, rapprochée au centime avec le cabinet comptable.</span><span class="t-en">Double-entry accounting on top of a banking API, reconciled to the cent with the accounting firm.</span></span></li>
-    </ul>
-  </section>
-
   <section class="block" id="expertise" aria-labelledby="exp-t">
     <h2 class="h" id="exp-t"><span class="t-fr">Ce que je fais pour vos équipes</span><span class="t-en">What I do for your teams</span></h2>
-    <p class="intro"><span class="t-fr">Selon votre besoin, j’interviens sur un de ces volets ou sur les trois.</span><span class="t-en">Depending on your need, I work on one of these areas or on all three.</span></p>
-    <div class="pillars">
-      <div class="pillar">
-        <h3><span class="t-fr">Architecture applicative</span><span class="t-en">Application architecture</span></h3>
-        <p class="plain"><span class="t-fr">Découper le système en services clairs, qui évoluent sans tout casser.</span><span class="t-en">Splitting the system into clear services that can change without breaking everything.</span></p>
-        <p class="concrete"><span class="t-fr"><b>Concrètement :</b> architecture hexagonale, DDD, microservices, contrats d’API, montées de version (Spring Boot 2.7 vers 3.1, Java 21, GraalVM).</span><span class="t-en"><b>In practice:</b> hexagonal architecture, DDD, microservices, API contracts, version upgrades (Spring Boot 2.7 to 3.1, Java 21, GraalVM).</span></p>
+    <p class="intro"><span class="t-fr">Un système se tient en trois strates. Selon votre besoin, j’interviens sur l’une ou sur les trois.</span><span class="t-en">A system holds together in three layers. Depending on your need, I work on one of them or on all three.</span></p>
+    <div class="strata" id="strata">
+      <div class="lab"><h3><span class="t-fr">Architecture applicative</span><span class="t-en">Application architecture</span></h3><p><span class="t-fr">Des services clairs, qui évoluent sans tout casser.</span><span class="t-en">Clear services that can change without breaking everything.</span></p></div>
+      <div class="lay svc" aria-hidden="true"><span class="bx"><span class="t-fr">Cartes</span><span class="t-en">Cards</span></span><i class="lnk-dash"></i><span class="bx"><span class="t-fr">Fraude</span><span class="t-en">Fraud</span></span><i class="lnk-dash"></i><span class="bx"><span class="t-fr">Comptes</span><span class="t-en">Accounts</span></span><i class="lnk-dash"></i><span class="bx"><span class="t-fr">Notifications</span><span class="t-en">Notifications</span></span><span class="note-s"><span class="t-fr">contrats d’API entre services</span><span class="t-en">API contracts between services</span></span></div>
+      <div class="lab"><h3><span class="t-fr">Architecture événementielle</span><span class="t-en">Event-driven architecture</span></h3><p><span class="t-fr">L’information circule en temps réel, sans dépendances entre services.</span><span class="t-en">Information moves in real time, with no dependencies between services.</span></p></div>
+      <div class="lay evt" aria-hidden="true"><span class="bx acc"><span class="t-fr">publie</span><span class="t-en">publishes</span></span><span class="arr">→</span><span class="tpc"><i></i><i></i><i></i><span class="t-fr">topic Kafka</span><span class="t-en">Kafka topic</span></span><span class="arr">→</span><span class="bx acc"><span class="t-fr">consomme à son rythme</span><span class="t-en">consumes at its own pace</span></span><span class="note-s"><span class="t-fr">relance, file de rejet rejouable</span><span class="t-en">retry, replayable dead-letter queue</span></span></div>
+      <div class="lab"><h3><span class="t-fr">Technique et intégration</span><span class="t-en">Technical architecture and integration</span></h3><p><span class="t-fr">Tout tourne en production, branché sur l’existant.</span><span class="t-en">Everything runs in production, connected to what already exists.</span></p></div>
+      <div class="lay inf" aria-hidden="true"><span class="bx">Kubernetes</span><span class="bx">GCP · AWS · Azure</span><i class="lnk-solid"><span class="t-fr">intégration</span><span class="t-en">integration</span></i><span class="bx gray">Mainframe</span><span class="bx gray">Core banking</span><span class="bx gray"><span class="t-fr">Processeur carte</span><span class="t-en">Card processor</span></span></div>
+      <div class="legend">
+        <p><span class="t-fr"><b>Concrètement :</b> architecture hexagonale, DDD, microservices, contrats d’API, montées de version (Spring Boot 2 vers 3, Java 21, GraalVM).</span><span class="t-en"><b>In practice:</b> hexagonal architecture, DDD, microservices, API contracts, version upgrades (Spring Boot 2 to 3, Java 21, GraalVM).</span></p>
+        <p><span class="t-fr"><b>Concrètement :</b> Kafka (Confluent, schema registry, contrats Avro), RabbitMQ, IBM MQ, Event Sourcing et CQRS, traitements idempotents, relances, reprise après panne.</span><span class="t-en"><b>In practice:</b> Kafka (Confluent, schema registry, Avro contracts), RabbitMQ, IBM MQ, Event Sourcing and CQRS, idempotent processing, retries, crash recovery.</span></p>
+        <p><span class="t-fr"><b>Concrètement :</b> Kubernetes (GKE, OpenShift), GCP, AWS, Azure, Datadog, Dynatrace ; intégration d’un core banking, d’un processeur carte, d’un mainframe, reprise de données d’un ancien logiciel.</span><span class="t-en"><b>In practice:</b> Kubernetes (GKE, OpenShift), GCP, AWS, Azure, Datadog, Dynatrace; integration of a core banking system, a card processor, a mainframe, data migration from legacy software.</span></p>
       </div>
-      <div class="pillar">
-        <h3><span class="t-fr">Architecture événementielle</span><span class="t-en">Event-driven architecture</span></h3>
-        <p class="plain"><span class="t-fr">Faire circuler l’information en temps réel entre les systèmes, sans les rendre dépendants les uns des autres.</span><span class="t-en">Moving information between systems in real time without making them depend on each other.</span></p>
-        <p class="concrete"><span class="t-fr"><b>Concrètement :</b> Kafka, RabbitMQ, IBM MQ, Event Sourcing et CQRS, traitements idempotents, relances, reprise après panne.</span><span class="t-en"><b>In practice:</b> Kafka, RabbitMQ, IBM MQ, Event Sourcing and CQRS, idempotent processing, retries, crash recovery.</span></p>
-      </div>
-      <div class="pillar">
-        <h3><span class="t-fr">Architecture technique et intégration</span><span class="t-en">Technical architecture and integration</span></h3>
-        <p class="plain"><span class="t-fr">Faire tourner l’ensemble en production et le brancher sur l’existant.</span><span class="t-en">Running it all in production and connecting it to what already exists.</span></p>
-        <p class="concrete"><span class="t-fr"><b>Concrètement :</b> Kubernetes (GKE, OpenShift), GCP, AWS, Azure, Datadog, Dynatrace ; intégration d’un core banking, d’un processeur carte, d’un mainframe, reprise de données d’un ancien logiciel.</span><span class="t-en"><b>In practice:</b> Kubernetes (GKE, OpenShift), GCP, AWS, Azure, Datadog, Dynatrace; integration of a core banking system, a card processor, a mainframe, data migration from legacy software.</span></p>
-      </div>
-    </div>
-    <div class="special">
-      <h3><span class="t-fr">Spécialité paiement</span><span class="t-en">Payments specialty</span></h3>
-      <p><span class="t-fr">Cartes et tokenisation Apple Pay et Google Pay chez BforBank, lutte contre la fraude par carte, virement et chèque chez LCL.</span><span class="t-en">Cards and Apple Pay / Google Pay tokenisation at BforBank, card, transfer and cheque fraud prevention at LCL.</span></p>
     </div>
   </section>
 
   <section class="block" id="decisions" aria-labelledby="ctx-t">
-    <h2 class="h" id="ctx-t"><span class="t-fr">Sept décisions d’architecture, dans leur contexte</span><span class="t-en">Seven architecture decisions, in context</span></h2>
-    <p class="intro"><span class="t-fr">Sept situations réelles, la contrainte, et le choix retenu. C’est ce qui vous dira le mieux comment je travaille.</span><span class="t-en">Seven real situations, the constraint, and the choice made. This shows best how I work.</span></p>
+    <h2 class="h" id="ctx-t"><span class="t-fr">Six décisions d’architecture, dans leur contexte</span><span class="t-en">Six architecture decisions, in context</span></h2>
+    <p class="intro"><span class="t-fr">La situation, la contrainte, le choix retenu et le rôle que j’avais. C’est ce qui vous dira le mieux comment je travaille.</span><span class="t-en">The situation, the constraint, the choice made and the role I held. This shows best how I work.</span></p>
     <table class="ctx">
-      <thead><tr><th scope="col"><span class="t-fr">La situation</span><span class="t-en">The situation</span></th><th scope="col"><span class="t-fr">Le choix</span><span class="t-en">The choice</span></th><th scope="col"><span class="t-fr">Où</span><span class="t-en">Where</span></th></tr></thead>
+      <thead><tr><th scope="col"><span class="t-fr">La situation</span><span class="t-en">The situation</span></th><th scope="col"><span class="t-fr">Le choix</span><span class="t-en">The choice</span></th><th scope="col"><span class="t-fr">Où, et mon rôle</span><span class="t-en">Where, and my role</span></th></tr></thead>
       <tbody>
-        <tr><td><span class="t-fr">Le réseau de cartes impose un délai de réponse.</span><span class="t-en">The card network imposes a response time.</span></td><td><span class="t-fr">Appel synchrone quand la réponse est attendue, Kafka pour le reste.</span><span class="t-en">Synchronous calls where an answer is awaited, Kafka for the rest.</span></td><td>BforBank</td></tr>
-        <tr><td><span class="t-fr">Le client confirme par SMS une opération jugée suspecte : carte, virement, chèque.</span><span class="t-en">The customer confirms a suspicious operation by text message: card, transfer, cheque.</span></td><td><span class="t-fr">Flux Kafka à contrats Avro, échanges avec le mainframe, mécanisme de relance.</span><span class="t-en">Kafka flows with Avro contracts, mainframe exchanges, a retry mechanism.</span></td><td>LCL</td></tr>
-        <tr><td><span class="t-fr">Un appel externe ne doit jamais être exécuté deux fois, par exemple l’opposition d’une carte.</span><span class="t-en">An external call must never run twice, for example blocking a card.</span></td><td><span class="t-fr">Relances Kafka, file de rejet rejouable, idempotence de chaque appel externe.</span><span class="t-en">Kafka retries, replayable dead-letter queue, idempotency of every external call.</span></td><td>LCL</td></tr>
-        <tr><td><span class="t-fr">Un portail pilote des ressources chez plusieurs fournisseurs de cloud.</span><span class="t-en">A portal drives resources across several cloud providers.</span></td><td><span class="t-fr">Event Sourcing, CQRS et une machine à états.</span><span class="t-en">Event Sourcing, CQRS and a state machine.</span></td><td>BPCE-IT</td></tr>
-        <tr><td><span class="t-fr">Une banque privée doit noter le risque de ses clients pour le régulateur.</span><span class="t-en">A private bank must score its clients’ risk for the regulator.</span></td><td><span class="t-fr">Architecture hexagonale, pour isoler les règles métier.</span><span class="t-en">Hexagonal architecture, to isolate the business rules.</span></td><td>Natixis</td></tr>
-        <tr><td><span class="t-fr">Une API de gestion documentaire doit répondre plus vite.</span><span class="t-en">A document management API has to respond faster.</span></td><td><span class="t-fr">Mesure des temps de réponse, puis optimisation ciblée.</span><span class="t-en">Measuring response times, then targeted optimisation.</span></td><td>Société Générale</td></tr>
-        <tr><td><span class="t-fr">Les données patient ne doivent pas quitter le cabinet médical.</span><span class="t-en">Patient data must not leave the medical practice.</span></td><td><span class="t-fr">Assistance par IA exécutée en local, sans fournisseur externe.</span><span class="t-en">AI assistance running locally, with no outside provider.</span></td><td>Liam Medical</td></tr>
+        <tr><td><span class="t-fr">Le réseau de cartes impose un délai de réponse.</span><span class="t-en">The card network imposes a response time.</span></td><td><span class="t-fr">Appel synchrone quand la réponse est attendue, Kafka pour le reste.</span><span class="t-en">Synchronous calls where an answer is awaited, Kafka for the rest.</span></td><td>BforBank<small><span class="t-fr">lead dev</span><span class="t-en">lead developer</span></small></td></tr>
+        <tr><td><span class="t-fr">Le client confirme par SMS une opération jugée suspecte : carte, virement, chèque.</span><span class="t-en">The customer confirms a suspicious transaction by text message: card, transfer, cheque.</span></td><td><span class="t-fr">Flux Kafka à contrats Avro, échanges avec le mainframe, mécanisme de relance.</span><span class="t-en">Kafka flows with Avro contracts, mainframe exchanges, a retry mechanism.</span></td><td>LCL<small><span class="t-fr">ingénieur senior, squad fraude</span><span class="t-en">senior engineer, fraud squad</span></small></td></tr>
+        <tr><td><span class="t-fr">Un appel externe ne doit jamais être exécuté deux fois, par exemple l’opposition d’une carte.</span><span class="t-en">An external call must never run twice, for example blocking a card.</span></td><td><span class="t-fr">Relances Kafka, file de rejet rejouable, idempotence de chaque appel externe.</span><span class="t-en">Kafka retries, replayable dead-letter queue, idempotency of every external call.</span></td><td>LCL<small><span class="t-fr">ingénieur senior, squad fraude</span><span class="t-en">senior engineer, fraud squad</span></small></td></tr>
+        <tr><td><span class="t-fr">Un portail pilote des ressources chez plusieurs fournisseurs de cloud.</span><span class="t-en">A portal drives resources across several cloud providers.</span></td><td><span class="t-fr">Event Sourcing, CQRS et une machine à états.</span><span class="t-en">Event Sourcing, CQRS and a state machine.</span></td><td>BPCE-IT<small><span class="t-fr">tech lead, aux côtés de l’architecte</span><span class="t-en">tech lead, alongside the architect</span></small></td></tr>
+        <tr><td><span class="t-fr">Une banque privée doit noter le risque de ses clients pour le régulateur.</span><span class="t-en">A private bank must score its clients’ risk for the regulator.</span></td><td><span class="t-fr">Architecture hexagonale, pour isoler les règles métier.</span><span class="t-en">Hexagonal architecture, to isolate the business rules.</span></td><td>Natixis<small><span class="t-fr">développeur et team lead</span><span class="t-en">developer and team lead</span></small></td></tr>
+        <tr><td><span class="t-fr">Les données patient ne doivent pas quitter le cabinet médical.</span><span class="t-en">Patient data must not leave the medical practice.</span></td><td><span class="t-fr">Assistance par IA exécutée en local, sans fournisseur externe.</span><span class="t-en">AI assistance running locally, with no outside provider.</span></td><td>Liam Medical<small><span class="t-fr">architecte et développeur unique</span><span class="t-en">architect and sole developer</span></small></td></tr>
       </tbody>
     </table>
     <div class="after">
-      <a class="btn primary mailto" data-subject-fr="Architecture" data-subject-en="Architecture" href="mailto:contact@iaminetech.com"><span class="t-fr">Me parler de votre contexte</span><span class="t-en">Tell me about your context</span></a>
+      <a class="btn primary mailto" data-subject-fr="Architecture" data-subject-en="Architecture" href="mailto:contact@iaminetech.com"><span class="t-fr">Parlez-moi de votre contexte</span><span class="t-en">Tell me about your context</span></a>
     </div>
   </section>
 
@@ -526,49 +556,69 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
     <h2 class="h" id="cas-t"><span class="t-fr">Quelques réalisations</span><span class="t-en">Selected work</span></h2>
     <p class="intro"><span class="t-fr">Par confidentialité, les projets clients sont décrits sans données internes.</span><span class="t-en">For confidentiality, client projects are described without internal data.</span></p>
 
-    <article class="case">
+    <article class="case with-fig">
       <div><p class="org">BforBank</p><p class="meta"><span class="t-fr">2023 – 2025<br>lead dev</span><span class="t-en">2023 – 2025<br>lead developer</span></p></div>
       <div>
         <h3><span class="t-fr">Plateforme cartes et tokenisation Apple Pay et Google Pay</span><span class="t-en">Card platform and Apple Pay / Google Pay tokenisation</span></h3>
-        <p><span class="t-fr">Microservices du cycle de vie de la carte : émission, activation, blocage, code PIN, tokenisation des wallets. Intégration du processeur Monext et du core banking Temenos T24 par contrats d’API.</span><span class="t-en">Card lifecycle microservices: issuing, activation, blocking, PIN, wallet tokenisation. Integration with the Monext processor and the Temenos T24 core banking system through API contracts.</span></p>
+        <p><span class="t-fr">Microservices du cycle de vie de la carte : émission, activation, blocage, code PIN. Tokenisation Apple Pay et Google Pay, dont j’ai amélioré les performances. Intégration du processeur Monext et du core banking Temenos T24 par contrats d’API ; diagnostic du contrôle de solde entre BforBank, Monext et VISA.</span><span class="t-en">Card lifecycle microservices: issuing, activation, blocking, PIN. Apple Pay and Google Pay tokenisation, whose performance I improved. Integration with the Monext processor and the Temenos T24 core banking system through API contracts; diagnosis of the balance check between BforBank, Monext and VISA.</span></p>
         <p><span class="t-fr"><span class="k">La décision clé :</span> l’arbitrage entre appels synchrones et Kafka pour tenir les délais imposés par VISA.</span><span class="t-en"><span class="k">The key decision:</span> trading off synchronous calls against Kafka to meet the response times VISA imposes.</span></p>
-        <p class="result"><span class="t-fr">Migration Spring Boot 2.7 vers 3.1 et GraalVM ; incident de latence en production résolu entre cloud privé et site.</span><span class="t-en">Spring Boot 2.7 to 3.1 and GraalVM migration; a production latency incident between private cloud and site resolved.</span></p>
-        <p class="stack">Java 21, Spring Boot 3, Kafka, GCP / GKE, ArgoCD, PostgreSQL, Datadog</p>
+        <p class="result"><span class="t-fr">Migration Spring Boot 2 vers 3 et GraalVM ; incident de latence en production résolu entre cloud privé et site.</span><span class="t-en">Spring Boot 2 to 3 and GraalVM migration; a production latency incident between private cloud and site resolved.</span></p>
+        <p class="stack">Java 21, Spring Boot 3, Kafka Confluent et schema registry, GCP / GKE et on-prem, ArgoCD, PostgreSQL, Datadog</p>
       </div>
+      <figure class="card">
+        <svg viewBox="0 0 470 250" role="img" aria-labelledby="bfb-t"><title id="bfb-t">Synchrone vers le processeur carte, Kafka vers le reste</title>
+          <rect class="box" x="8" y="102" width="92" height="48" rx="8"/><text class="t1" x="20" y="123"><tspan class="t-fr">App client</tspan><tspan class="t-en">Client app</tspan></text><text class="t2" x="20" y="141"><tspan class="t-fr">demande</tspan><tspan class="t-en">request</tspan></text>
+          <path class="solid draw" d="M100 126 H136"/>
+          <rect class="box ink" x="136" y="98" width="112" height="56" rx="8"/><text class="t1" x="150" y="121"><tspan class="t-fr">Service cartes</tspan><tspan class="t-en">Card service</tspan></text><text class="t2" x="150" y="140"><tspan class="t-fr">choisit la voie</tspan><tspan class="t-en">picks the path</tspan></text>
+          <path class="solid draw" d="M248 112 C300 112 290 42 330 42"/>
+          <rect class="box" x="330" y="18" width="132" height="48" rx="8"/><text class="t1" x="342" y="39">Monext</text><text class="t2" x="342" y="57"><tspan class="t-fr">processeur carte</tspan><tspan class="t-en">card processor</tspan></text>
+          <circle cx="124" cy="26" r="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/><path d="M124 22v4h3" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+          <text class="t3" x="136" y="30"><tspan class="t-fr">synchrone, délai VISA</tspan><tspan class="t-en">synchronous, VISA deadline</tspan></text>
+          <path class="wire" d="M248 140 C280 140 270 178 300 178"/>
+          <rect class="topic" x="300" y="162" width="76" height="32" rx="7"/><text class="t1" x="313" y="183" font-size="13">Kafka</text>
+          <path class="wire" d="M376 178 C390 178 386 152 400 152"/>
+          <rect class="box" x="400" y="139" width="50" height="26" rx="6"/><text class="t2" x="410" y="156">T24</text>
+          <path class="wire" d="M376 178 C390 178 386 212 400 212"/>
+          <rect class="box" x="382" y="199" width="84" height="26" rx="6"/><text class="t2" x="390" y="216" font-size="11.5"><tspan class="t-fr">notifications</tspan><tspan class="t-en">notifications</tspan></text>
+          <text class="t2" x="300" y="226"><tspan class="t-fr">asynchrone</tspan><tspan class="t-en">asynchronous</tspan></text>
+        </svg>
+        <figcaption><span class="t-fr">La décision clé, en un schéma : la réponse attendue par VISA passe en synchrone, le reste par Kafka.</span><span class="t-en">The key decision in one picture: what VISA waits for goes synchronous, the rest through Kafka.</span></figcaption>
+      </figure>
     </article>
 
     <article class="case">
       <div><p class="org">BPCE-IT</p><p class="meta">2019 – 2021<br>tech lead</p></div>
       <div>
         <h3><span class="t-fr">Portail de cloud privé du groupe BPCE</span><span class="t-en">BPCE group private cloud portal</span></h3>
-        <p><span class="t-fr">Aux côtés de l’architecte : provisionnement automatisé, plusieurs fournisseurs dont AWS et Azure, contrôle d’accès par attributs, refacturation des coûts.</span><span class="t-en">Alongside the architect: automated provisioning, several providers including AWS and Azure, attribute-based access control, cost chargeback.</span></p>
-        <p><span class="t-fr">Architecture Event Sourcing / CQRS et machine à états du portail.</span><span class="t-en">Event Sourcing / CQRS architecture and the portal’s state machine.</span></p>
+        <p><span class="t-fr">Aux côtés de l’architecte : provisionnement automatisé chez plusieurs fournisseurs dont AWS et Azure, contrôle d’accès par attributs, refacturation des coûts. Event Sourcing, CQRS et machine à états du portail.</span><span class="t-en">Alongside the architect: automated provisioning across several providers including AWS and Azure, attribute-based access control, cost chargeback. Event Sourcing, CQRS and the portal’s state machine.</span></p>
+        <svg class="mini" viewBox="0 0 360 44" aria-hidden="true"><rect class="box ink" x="2" y="8" width="92" height="28" rx="14"/><text class="t2" x="48" y="26" text-anchor="middle"><tspan class="t-fr">demandé</tspan><tspan class="t-en">requested</tspan></text><path class="solid draw" d="M94 22 H126"/><rect class="box ink" x="126" y="8" width="104" height="28" rx="14"/><text class="t2" x="178" y="26" text-anchor="middle"><tspan class="t-fr">provisionné</tspan><tspan class="t-en">provisioned</tspan></text><path class="solid draw" d="M230 22 H262"/><rect class="box acc" x="262" y="8" width="92" height="28" rx="14"/><text class="t3" x="308" y="26" text-anchor="middle"><tspan class="t-fr">facturé</tspan><tspan class="t-en">billed</tspan></text></svg>
         <p class="stack">Java, Spring Boot, Event Sourcing / CQRS, RabbitMQ, MongoDB, PostgreSQL</p>
       </div>
     </article>
 
-    <p class="side-t"><span class="t-fr">Hors banque : santé et finance d’entreprise</span><span class="t-en">Beyond banking: healthcare and business finance</span></p>
+    <p class="side-t"><span class="t-fr">Deux produits personnels, hors banque</span><span class="t-en">Two personal products, beyond banking</span></p>
     <div class="side">
+      <div>
+        <h3><span class="t-fr">Liam Medical : logiciel de cabinet médical</span><span class="t-en">Liam Medical: medical practice software</span></h3>
+        <p class="meta"><span class="t-fr">2025 – 2026, conçu seul, en test dans un cabinet</span><span class="t-en">2025 – 2026, designed alone, piloting in a practice</span></p>
+        <p><span class="t-fr">Patients, consultations et ordonnances. 26 ans d’historique repris depuis l’ancien logiciel. Assistance par IA exécutée en local : aucune donnée patient ne sort du cabinet.</span><span class="t-en">Patients, consultations and prescriptions. 26 years of history migrated from the previous software. AI assistance runs locally: no patient data leaves the practice.</span></p>
+        <svg class="mini" viewBox="0 0 380 70" aria-hidden="true"><rect class="box ink" x="4" y="6" width="236" height="58" rx="8"/><text class="t2" x="16" y="24"><tspan class="t-fr">cabinet</tspan><tspan class="t-en">practice</tspan></text><rect class="box" x="16" y="34" width="104" height="22" rx="5"/><text class="t2" x="24" y="49" font-size="11.5"><tspan class="t-fr">données patient</tspan><tspan class="t-en">patient data</tspan></text><rect class="box acc" x="130" y="34" width="98" height="22" rx="5"/><text class="t3" x="140" y="49" font-size="11.5"><tspan class="t-fr">IA en local</tspan><tspan class="t-en">local AI</tspan></text><path class="wire" d="M240 36 H268"/><circle cx="282" cy="36" r="9" fill="none" stroke="var(--crit)" stroke-width="2"/><path d="M276 30 L288 42" stroke="var(--crit)" stroke-width="2"/><text class="t2" x="298" y="40"><tspan class="t-fr">rien ne sort</tspan><tspan class="t-en">nothing leaves</tspan></text></svg>
+      </div>
       <div>
         <h3><span class="t-fr">IAMINE Compta : une comptabilité branchée sur une API bancaire</span><span class="t-en">IAMINE Compta: accounting on top of a banking API</span></h3>
         <p class="meta"><span class="t-fr">2026, produit personnel</span><span class="t-en">2026, own product</span></p>
-        <p><span class="t-fr">Grand livre en partie double sur PostgreSQL, écritures chaînées et immuables, ingestion bancaire dans Kafka avec une empreinte d’idempotence par transaction. Un exercice complet rejoué : compte de résultat identique au centime à celui du cabinet comptable. 401 tests.</span><span class="t-en">Double-entry ledger on PostgreSQL, hash-chained immutable entries, bank ingestion into Kafka with one idempotency hash per transaction. A full fiscal year replayed: income statement identical to the cent to the accounting firm’s. 401 tests.</span></p>
-      </div>
-      <div>
-        <h3><span class="t-fr">Liam Medical : logiciel de cabinet médical, conçu et livré seul</span><span class="t-en">Liam Medical: medical practice software, built alone</span></h3>
-        <p class="meta"><span class="t-fr">2025 – 2026, en test</span><span class="t-en">2025 – 2026, in pilot</span></p>
-        <p><span class="t-fr">Patients, consultations et ordonnances, en test dans un cabinet en Algérie. 26 ans d’historique repris depuis l’ancien logiciel. Assistance par IA exécutée en local, sans envoi des données patient à l’extérieur.</span><span class="t-en">Patients, consultations and prescriptions, piloting in a practice in Algeria. 26 years of history migrated from the previous software. AI assistance runs locally, with no patient data sent outside.</span></p>
+        <p><span class="t-fr">Grand livre en partie double sur PostgreSQL, écritures chaînées et immuables, ingestion bancaire dans Kafka avec une empreinte d’idempotence par transaction. Un exercice complet rejoué : compte de résultat identique au centime à celui du cabinet comptable.</span><span class="t-en">Double-entry ledger on PostgreSQL, hash-chained immutable entries, bank ingestion into Kafka with one idempotency hash per transaction. A full financial year replayed: income statement identical to the cent to the accounting firm’s.</span></p>
+        <svg class="mini" viewBox="0 0 380 50" aria-hidden="true"><rect class="box" x="4" y="10" width="76" height="30" rx="6"/><text class="t2" x="42" y="30" text-anchor="middle" font-size="12.5"><tspan class="t-fr">écriture 1</tspan><tspan class="t-en">entry 1</tspan></text><path class="solid draw" d="M80 25 H104"/><rect class="box" x="104" y="10" width="76" height="30" rx="6"/><text class="t2" x="142" y="30" text-anchor="middle" font-size="12.5"><tspan class="t-fr">écriture 2</tspan><tspan class="t-en">entry 2</tspan></text><path class="solid draw" d="M180 25 H204"/><rect class="box" x="204" y="10" width="76" height="30" rx="6"/><text class="t2" x="242" y="30" text-anchor="middle" font-size="12.5"><tspan class="t-fr">écriture 3</tspan><tspan class="t-en">entry 3</tspan></text><text class="t1" x="294" y="24">= 0,00 €</text><text class="t2" x="294" y="42" font-size="11.5"><tspan class="t-fr">écart avec le cabinet</tspan><tspan class="t-en">vs the firm</tspan></text></svg>
       </div>
     </div>
   </section>
 
-  <section class="block" aria-labelledby="ev-t">
+  <section class="block" id="evenementiel" aria-labelledby="ev-t">
     <h2 class="h" id="ev-t"><span class="t-fr">L’architecture événementielle, expliquée en une minute</span><span class="t-en">Event-driven architecture, explained in one minute</span></h2>
-    <p class="intro"><span class="t-fr">Pour les équipes métier et les financeurs : voici ce qui se passe quand un paiement est accepté.</span><span class="t-en">For business teams and funders: here is what happens when a payment is accepted.</span></p>
+    <p class="intro"><span class="t-fr">Voici ce qui se passe quand un paiement est accepté.</span><span class="t-en">Here is what happens when a payment is accepted.</span></p>
     <div class="explain">
-      <figure class="diagram">
-        <div class="scroll" tabindex="0" role="region" aria-labelledby="svg-t">
-        <svg viewBox="0 0 640 300" role="img" aria-labelledby="svg-t" aria-describedby="svg-d" id="evsvg">
+      <figure class="diagram card">
+        <svg class="d" viewBox="0 0 640 300" role="img" aria-labelledby="svg-t" aria-describedby="svg-d" id="evsvg">
           <title id="svg-t">Flux d’événements via Kafka</title>
           <desc id="svg-d">Le service de paiement publie trois événements dans un topic Kafka ; les services fraude, comptabilité et notification les lisent chacun à leur rythme.</desc>
           <path class="wire" d="M170 150 H230"/>
@@ -580,23 +630,42 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
           <text class="t2" x="30" y="165"><tspan class="t-fr">publie un événement</tspan><tspan class="t-en">publishes an event</tspan></text>
           <rect class="topic" x="230" y="96" width="180" height="112" rx="10"/>
           <text class="t1" x="244" y="120">Kafka</text>
-          <rect class="slot" id="s0" x="246" y="136" width="30" height="30" rx="4"/>
-          <rect class="slot" id="s1" x="284" y="136" width="30" height="30" rx="4"/>
-          <rect class="slot" id="s2" x="322" y="136" width="30" height="30" rx="4"/>
+          <rect class="slot" data-s="0" x="246" y="136" width="30" height="30" rx="4"/>
+          <rect class="slot" data-s="1" x="284" y="136" width="30" height="30" rx="4"/>
+          <rect class="slot" data-s="2" x="322" y="136" width="30" height="30" rx="4"/>
           <rect class="slot" x="360" y="136" width="30" height="30" rx="4"/>
           <text class="t2" x="244" y="194"><tspan class="t-fr">topic « paiements »</tspan><tspan class="t-en">“payments” topic</tspan></text>
           <rect class="box" x="470" y="24" width="154" height="62" rx="10"/>
           <text class="t1" x="484" y="50"><tspan class="t-fr">Fraude</tspan><tspan class="t-en">Fraud</tspan></text>
-          <text class="count" x="484" y="72" id="c0">3 / 3</text>
+          <text class="count" x="484" y="72" data-c="0">3 / 3</text>
           <rect class="box" x="470" y="119" width="154" height="62" rx="10"/>
           <text class="t1" x="484" y="145"><tspan class="t-fr">Comptabilité</tspan><tspan class="t-en">Accounting</tspan></text>
-          <text class="count" x="484" y="167" id="c1">3 / 3</text>
+          <text class="count" x="484" y="167" data-c="1">3 / 3</text>
           <rect class="box" x="470" y="214" width="154" height="62" rx="10"/>
           <text class="t1" x="484" y="240"><tspan class="t-fr">Notification client</tspan><tspan class="t-en">Customer notification</tspan></text>
-          <text class="count" x="484" y="262" id="c2">3 / 3</text>
-          <g id="dots"></g>
+          <text class="count" x="484" y="262" data-c="2">3 / 3</text>
+          <g class="dots"></g>
         </svg>
-        </div>
+        <svg class="m" viewBox="0 0 340 400" aria-hidden="true" id="evsvgm">
+          <path class="wire" d="M170 76 V130"/>
+          <path class="wire" d="M170 230 C170 260 60 260 60 300"/>
+          <path class="wire" d="M170 230 V300"/>
+          <path class="wire" d="M170 230 C170 260 280 260 280 300"/>
+          <rect class="box" x="70" y="14" width="200" height="62" rx="10"/>
+          <text class="t1" x="84" y="40"><tspan class="t-fr">Service paiement</tspan><tspan class="t-en">Payment service</tspan></text>
+          <text class="t2" x="84" y="60"><tspan class="t-fr">publie un événement</tspan><tspan class="t-en">publishes an event</tspan></text>
+          <rect class="topic" x="80" y="130" width="180" height="100" rx="10"/>
+          <text class="t1" x="94" y="154">Kafka</text>
+          <rect class="slot" data-s="0" x="96" y="168" width="30" height="30" rx="4"/>
+          <rect class="slot" data-s="1" x="134" y="168" width="30" height="30" rx="4"/>
+          <rect class="slot" data-s="2" x="172" y="168" width="30" height="30" rx="4"/>
+          <rect class="slot" x="210" y="168" width="30" height="30" rx="4"/>
+          <text class="t2" x="94" y="220"><tspan class="t-fr">topic « paiements »</tspan><tspan class="t-en">“payments” topic</tspan></text>
+          <rect class="box" x="8" y="300" width="104" height="70" rx="10"/><text class="t1" x="20" y="328"><tspan class="t-fr">Fraude</tspan><tspan class="t-en">Fraud</tspan></text><text class="count" x="20" y="352" data-c="0">3 / 3</text>
+          <rect class="box" x="118" y="300" width="104" height="70" rx="10"/><text class="t1" x="130" y="328"><tspan class="t-fr">Compta</tspan><tspan class="t-en">Accounts</tspan></text><text class="count" x="130" y="352" data-c="1">3 / 3</text>
+          <rect class="box" x="228" y="300" width="104" height="70" rx="10"/><text class="t1" x="240" y="328"><tspan class="t-fr">Notif.</tspan><tspan class="t-en">Notify</tspan></text><text class="count" x="240" y="352" data-c="2">3 / 3</text>
+          <g class="dots"></g>
+        </svg>
         <div class="bar">
           <p><span class="t-fr">Chaque service lit les événements à son rythme.</span><span class="t-en">Each service reads the events at its own pace.</span></p>
           <button class="replay" id="replay" type="button"><span class="t-fr">Rejouer</span><span class="t-en">Replay</span></button>
@@ -608,7 +677,7 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
           <li><span><span class="t-fr">Kafka conserve les événements dans l’ordre. Chaque service les lit quand il est prêt.</span><span class="t-en">Kafka keeps the events in order. Each service reads them when it is ready.</span></span></li>
           <li><span><span class="t-fr">On ajoute un service sans toucher aux autres. S’il tombe en panne, il reprend là où il s’était arrêté.</span><span class="t-en">You can add a service without touching the others. If it goes down, it resumes where it stopped.</span></span></li>
         </ol>
-        <div class="when">
+        <div class="callout when">
           <b><span class="t-fr">Et quand ne pas l’utiliser ?</span><span class="t-en">And when not to use it?</span></b>
           <p><span class="t-fr">Quand un réseau impose un délai de réponse, comme VISA pour les opérations carte, un appel direct reste souvent le meilleur choix.</span><span class="t-en">When a network imposes a response time, as VISA does for card operations, a direct call is often still the best choice.</span></p>
         </div>
@@ -617,22 +686,22 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
   </section>
 
   <section class="block" id="paiement" aria-labelledby="pay-t">
-    <h2 class="h" id="pay-t"><span class="t-fr">Le paiement : partir une fois, arriver à l’heure, tomber juste</span><span class="t-en">Payments: go out once, arrive on time, reconcile to the cent</span></h2>
-    <p class="intro"><span class="t-fr">C’est le domaine où j’ai le plus livré, et celui où les erreurs coûtent le plus cher.</span><span class="t-en">It is the area where I have delivered the most, and where mistakes cost the most.</span></p>
+    <h2 class="h" id="pay-t"><span class="t-fr">Le paiement : cartes, wallets, fraude et contestation</span><span class="t-en">Payments: cards, wallets, fraud and disputes</span></h2>
+    <p class="intro"><span class="t-fr">Mon expérience du paiement vient de la carte et de la fraude, là où j’ai le plus livré. Les flux de virement, je les aborde en audit.</span><span class="t-en">My payments experience comes from cards and fraud, where I have delivered the most. Transfer flows I approach as an auditor.</span></p>
     <div class="pay">
       <div>
         <ul class="areas" role="list">
-          <li><b><span class="t-fr">Cartes et tokenisation</span><span class="t-en">Cards and tokenisation</span> <em class="tag"><span class="t-fr">livré</span><span class="t-en">delivered</span></em></b><span><span class="t-fr">Émission, activation, blocage, code PIN, Apple Pay et Google Pay, chez BforBank.</span><span class="t-en">Issuing, activation, blocking, PIN, Apple Pay and Google Pay, at BforBank.</span></span></li>
-          <li><b><span class="t-fr">Lutte contre la fraude</span><span class="t-en">Fraud prevention</span> <em class="tag"><span class="t-fr">livré</span><span class="t-en">delivered</span></em></b><span><span class="t-fr">Carte, virement et chèque, en mission chez LCL.</span><span class="t-en">Card, transfer and cheque, on assignment at LCL.</span></span></li>
-          <li><b><span class="t-fr">Virement instantané</span><span class="t-en">Instant transfers</span> <em class="tag alt"><span class="t-fr">en audit</span><span class="t-en">in review</span></em></b><span><span class="t-fr">Ce que je vérifie : contrôle du bénéficiaire, délais du schéma, relances sans doublon, rapprochement le jour même.</span><span class="t-en">What I check: verification of payee, scheme timeouts, retries without duplicates, same-day reconciliation.</span></span></li>
+          <li><b><span class="t-fr">Cartes et tokenisation</span><span class="t-en">Cards and tokenisation</span> <em class="tag"><span class="t-fr">livré</span><span class="t-en">delivered</span></em></b><span><span class="t-fr">Émission, activation, blocage, code PIN ; performances de la tokenisation Apple Pay et Google Pay ; contrôle de solde entre banque, processeur et VISA. Chez BforBank.</span><span class="t-en">Issuing, activation, blocking, PIN; Apple Pay and Google Pay tokenisation performance; balance check between bank, processor and VISA. At BforBank.</span></span></li>
+          <li><b><span class="t-fr">Fraude et contestation</span><span class="t-en">Fraud and disputes</span> <em class="tag"><span class="t-fr">livré</span><span class="t-en">delivered</span></em></b><span><span class="t-fr">SMS interactif sur carte, virement et chèque, puis contestation de fraude par le client, en mission chez LCL.</span><span class="t-en">Interactive SMS on card, transfer and cheque, then customer fraud disputes, on assignment at LCL.</span></span></li>
+          <li><b><span class="t-fr">Virement instantané</span><span class="t-en">Instant transfers</span> <em class="tag alt"><span class="t-fr">périmètre d’audit</span><span class="t-en">audit scope</span></em></b><span><span class="t-fr">Pas livré en production à ce jour. Ce que je vérifie : contrôle du bénéficiaire, délais du schéma, relances sans doublon, rapprochement le jour même.</span><span class="t-en">Not delivered in production to date. What I check: verification of payee, scheme timeouts, retries without duplicates, same-day reconciliation.</span></span></li>
         </ul>
-        <div class="deadline">
-          <span class="d8">09/04/2027</span>
+        <div class="callout deadline">
+          <span class="d8"><span class="t-fr">09/04/2027</span><span class="t-en">9 April 2027</span></span>
           <p><span class="t-fr">Zone euro : les établissements de paiement et de monnaie électronique doivent envoyer et recevoir des virements instantanés, avec contrôle du bénéficiaire.</span><span class="t-en">Euro area: payment and e-money institutions must send and receive instant transfers, with verification of payee.</span></p>
           <small><span class="t-fr">Source : règlement (UE) 2024/886</span><span class="t-en">Source: Regulation (EU) 2024/886</span></small>
         </div>
       </div>
-      <figure class="trace" aria-labelledby="trace-t">
+      <figure class="trace card" aria-labelledby="trace-t">
         <h3 id="trace-t"><span class="t-fr">Un virement instantané, étape par étape</span><span class="t-en">One instant transfer, step by step</span></h3>
         <p class="sub"><span class="t-fr">Exemple illustratif, valeurs fictives</span><span class="t-en">Illustrative example, fictional values</span></p>
         <ol>
@@ -652,35 +721,38 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
 
   <section class="block" id="offres" aria-labelledby="off-t">
     <h2 class="h" id="off-t"><span class="t-fr">Travailler ensemble</span><span class="t-en">Working together</span></h2>
-    <p class="intro"><span class="t-fr">Une mission longue dans votre équipe, un diagnostic au forfait ou un logiciel métier. Le périmètre est écrit avant de commencer.</span><span class="t-en">A long engagement in your team, a fixed-price assessment or business software. The scope is written down before we start.</span></p>
+    <p class="intro"><span class="t-fr">Une mission longue dans votre équipe, un diagnostic au forfait ou un logiciel sur mesure. Le périmètre est écrit avant de commencer.</span><span class="t-en">A long engagement in your team, a fixed-price assessment or custom software. The scope is written down before we start.</span></p>
 
-    <div class="lead-offer">
+    <div class="lead-offer card">
       <div>
         <h3><span class="t-fr">Architecte ou tech lead en mission</span><span class="t-en">Architect or tech lead on assignment</span></h3>
-        <p><span class="t-fr">Je rejoins votre équipe sur une plateforme bancaire, de paiement ou un logiciel métier : choix d’architecture, intégration Kafka et de l’existant, revue de code, accompagnement des développeurs.</span><span class="t-en">I join your team on a banking or payments platform or business software: architecture decisions, Kafka and legacy integration, code review, coaching developers.</span></p>
-        <p class="note"><span class="t-fr">ESN ou cabinet de placement : mon CV est téléchargeable ici, envoyez-moi la fiche de mission.</span><span class="t-en">IT consultancy or placement firm: my CV is available for download here; send me the assignment brief.</span></p>
+        <p><span class="t-fr">Je rejoins votre équipe sur une plateforme bancaire ou de paiement : choix d’architecture, intégration Kafka et de l’existant, revue de code, accompagnement des développeurs.</span><span class="t-en">I join your team on a banking or payments platform: architecture decisions, Kafka and legacy integration, code review, coaching developers.</span></p>
+        <p class="note"><span class="t-fr">ESN ou cabinet de placement : envoyez-moi la fiche de mission, mon CV est téléchargeable ici. Facturation directe par IAMINE TECH, sans portage.</span><span class="t-en">IT consultancy or placement firm: send me the assignment brief; my CV is available for download here. Invoiced directly by IAMINE TECH, no umbrella company.</span></p>
       </div>
       <div class="act">
         <a class="btn primary mailto" data-subject-fr="Proposition de mission" data-subject-en="Assignment proposal" href="mailto:contact@iaminetech.com"><span class="t-fr">Proposer une mission</span><span class="t-en">Propose an assignment</span></a>
         <a class="cvl t-fr" href="cv-amine-benmansour-fr.pdf">Télécharger mon CV (PDF)</a><a class="cvl t-en" href="cv-amine-benmansour-en.pdf">Download my CV (PDF)</a>
-        <small><span class="t-fr">Facturation par IAMINE TECH, société française.</span><span class="t-en">Invoiced by IAMINE TECH, a French company.</span></small>
+        <small><span class="t-fr">Île-de-France, sur site ou à distance selon la mission.</span><span class="t-en">Paris region, on site or remote depending on the assignment.</span></small>
       </div>
     </div>
 
     <div class="diag" id="diagnostic">
       <div>
         <h3><span class="t-fr">Diagnostic paiement en 5 jours</span><span class="t-en">5-day payments assessment</span></h3>
-        <p class="terms"><span class="t-fr">5 jours de travail, rendus en 3 semaines, prix fixe annoncé dans la proposition</span><span class="t-en">5 days of work, delivered over 3 weeks, fixed price stated in the proposal</span></p>
-        <p class="scope"><span class="t-fr">Pour un établissement de paiement, une fintech ou un éditeur : flux, événements, intégrations, risques de doublon et de perte. Peut servir d’audit avant une mise en production.</span><span class="t-en">For a payment institution, fintech or vendor: flows, events, integrations, risks of duplicates and losses. Can serve as a pre-go-live audit.</span></p>
+        <p class="terms"><span class="t-fr">5 jours de travail, rendus en 3 semaines, prix fixe annoncé dans la proposition. Ce qu’il me faut : un accès en lecture au code et aux journaux, et deux entretiens d’une heure avec vos développeurs.</span><span class="t-en">5 days of work, delivered over 3 weeks, fixed price stated in the proposal. What I need: read access to the code and logs, and two one-hour interviews with your developers.</span></p>
+        <p class="scope"><span class="t-fr">Pour un établissement de paiement, une fintech ou un éditeur : flux, événements, intégrations carte et processeur, risques de doublon et de perte. Peut servir d’audit avant une mise en production.</span><span class="t-en">For a payment institution, fintech or vendor: flows, events, card and processor integrations, risks of duplicates and losses. Can serve as a pre-go-live audit.</span></p>
         <ol class="weeks">
           <li><b><span class="t-fr">Semaine 1</span><span class="t-en">Week 1</span></b><span><span class="t-fr">Entretiens avec vos équipes, lecture de l’architecture, des flux et des journaux.</span><span class="t-en">Interviews with your teams; review of architecture, flows and logs.</span></span></li>
           <li><b><span class="t-fr">Semaine 2</span><span class="t-en">Week 2</span></b><span><span class="t-fr">Analyse des points de rupture : doublons, délais, reprises, intégrations.</span><span class="t-en">Analysis of failure points: duplicates, timeouts, recovery, integrations.</span></span></li>
           <li><b><span class="t-fr">Semaine 3</span><span class="t-en">Week 3</span></b><span><span class="t-fr">Rapport écrit, plan de correction priorisé, restitution en visio.</span><span class="t-en">Written report, prioritised remediation plan, video debrief.</span></span></li>
         </ol>
-        <p class="proof"><span class="t-fr">Ces contrôles, je les applique à mon propre logiciel comptable : une empreinte d’idempotence par transaction bancaire, et un exercice complet rejoué au centime près.</span><span class="t-en">I apply these checks to my own accounting software: one idempotency hash per bank transaction, and a full fiscal year replayed to the cent.</span></p>
+        <div class="callout proof">
+          <b><span class="t-fr">D’où viennent ces contrôles</span><span class="t-en">Where these checks come from</span></b>
+          <p><span class="t-fr">De la production bancaire : chez LCL, chaque appel externe, comme l’opposition d’une carte, est rendu idempotent et rejouable depuis une file de rejet dédiée.</span><span class="t-en">From banking production: at LCL, every external call, such as blocking a card, is made idempotent and replayable from a dedicated dead-letter queue.</span></p>
+        </div>
         <a class="btn primary mailto" data-subject-fr="Diagnostic paiement" data-subject-en="Payments assessment" href="mailto:contact@iaminetech.com"><span class="t-fr">Demander le diagnostic</span><span class="t-en">Request the assessment</span></a>
       </div>
-      <div class="sample" role="group" aria-labelledby="sample-t">
+      <div class="sample card" role="group" aria-labelledby="sample-t">
         <h4 id="sample-t"><span class="t-fr">À quoi ressemble le rapport</span><span class="t-en">What the report looks like</span></h4>
         <p class="fict"><span class="t-fr">Extrait fictif, pour montrer le format : chaque constat a une gravité et une correction.</span><span class="t-en">Fictional excerpt showing the format: every finding has a severity and a fix.</span></p>
         <div class="finding">
@@ -701,50 +773,45 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
       </div>
     </div>
 
-    <div class="funders">
+    <div class="custom" id="logiciel">
       <div>
-        <h3><span class="t-fr">Logiciel métier pour une PME ou un cabinet</span><span class="t-en">Business software for a small business or practice</span></h3>
-        <p><span class="t-fr">Architecture et back-end d’une application métier : données, règles, documents, reprise de l’historique, IA en local si vos données sont sensibles. Exemple : Liam Medical.</span><span class="t-en">Architecture and back end of a business application: data, rules, documents, history migration, local AI if your data is sensitive. Example: Liam Medical.</span></p>
-      </div>
-      <div>
-        <p><span class="t-fr">Pour un cabinet médical, une PME ou une association qui veut un outil fiable, conçu par une seule personne qui en porte toute l’architecture.</span><span class="t-en">For a medical practice, a small business or a non-profit that wants a dependable tool, designed by one person who owns its whole architecture.</span></p>
-      </div>
-    </div>
-    <div class="funders">
-      <div>
-        <h3><span class="t-fr">Relecture indépendante, pour financeurs et programmes</span><span class="t-en">Independent review, for funders and programmes</span></h3>
-        <p><span class="t-fr">Un avis écrit à chaque jalon d’un projet de paiement : architecture, spécifications, code. Quelques jours par mois.</span><span class="t-en">A written opinion at each milestone of a payments project: architecture, specifications, code. A few days a month.</span></p>
-      </div>
-      <div>
-        <p><span class="t-fr">UEMOA : les systèmes financiers décentralisés doivent être raccordés au système de paiement instantané régional PI-SPI au plus tard le 30/06/2027 (BCEAO, communiqué de juin 2026). Mon expérience vient des banques françaises : ISO 20022, fraude, intégration du core banking.</span><span class="t-en">WAEMU: decentralised financial institutions must connect to the regional instant payment system PI-SPI by 30/06/2027 (BCEAO, June 2026 announcement). My experience comes from French banks: ISO 20022, fraud, core banking integration.</span></p>
+        <h3><span class="t-fr">Un logiciel sur mesure pour votre cabinet ou votre PME</span><span class="t-en">Custom software for your practice or small business</span></h3>
+        <p><span class="t-fr">Votre logiciel ne suit plus, ou il n’existe pas encore. Je conçois et je construis l’outil dont vous avez besoin : vos dossiers, vos règles, vos documents, et la reprise de l’historique de votre ancien logiciel. Vos données restent chez vous. Exemple : Liam Medical, ci-dessus.</span><span class="t-en">Your software no longer keeps up, or does not exist yet. I design and build the tool you need: your records, your rules, your documents, and the migration of your previous software’s history. Your data stays with you. Example: Liam Medical, above.</span></p>
+        <p class="soft"><span class="t-fr">Un seul interlocuteur du début à la fin : je conçois, je construis, je livre, avec la documentation. Un premier échange suffit pour savoir si je peux vous aider.</span><span class="t-en">One person from start to finish: I design, build and deliver, with the documentation. A first conversation is enough to find out whether I can help.</span></p>
+        <a class="btn ghost mailto" data-subject-fr="Logiciel sur mesure" data-subject-en="Custom software" href="mailto:contact@iaminetech.com"><span class="t-fr">Décrire mon besoin</span><span class="t-en">Describe my need</span></a>
       </div>
     </div>
-  </section>
-
-  <section class="block" aria-labelledby="proc-t">
-    <h2 class="h" id="proc-t"><span class="t-fr">Comment ça se passe</span><span class="t-en">How it works</span></h2>
-    <ol class="process">
-      <li><b><span class="t-fr">Vous m’écrivez</span><span class="t-en">You write to me</span></b><span><span class="t-fr">Votre contexte, vos contraintes, votre échéance.</span><span class="t-en">Your context, your constraints, your deadline.</span></span></li>
-      <li><b><span class="t-fr">Je vous fais une proposition écrite</span><span class="t-en">I send a written proposal</span></b><span><span class="t-fr">Périmètre, livrables, critères d’acceptation, date de rendu et prix.</span><span class="t-en">Scope, deliverables, acceptance criteria, due date and price.</span></span></li>
-      <li><b><span class="t-fr">Nous travaillons, avec des points réguliers</span><span class="t-en">We work, with regular check-ins</span></b><span><span class="t-fr">Par écrit et en visio, jusqu’à la restitution.</span><span class="t-en">In writing and by video, through to the debrief.</span></span></li>
-    </ol>
+    </div>
   </section>
 
   <section class="block" id="parcours" aria-labelledby="par-t">
     <h2 class="h" id="par-t"><span class="t-fr">Mon parcours</span><span class="t-en">Background</span></h2>
-    <p class="intro"><span class="t-fr">L’architecture applicative et des flux à chaque mission : banque (cartes, fraude, KYC, garanties de prêts, gestion documentaire, cloud privé), santé et transport.</span><span class="t-en">Application and flow architecture on every engagement: banking (cards, fraud, KYC, loan guarantees, document management, private cloud), healthcare and transport.</span></p>
+    <p class="intro"><span class="t-fr">Banque (cartes, fraude, KYC, garanties de prêts, gestion documentaire, cloud privé), santé et transport.</span><span class="t-en">Banking (cards, fraud, KYC, loan guarantees, document management, private cloud), healthcare and transport.</span></p>
+    <div class="tl-wrap">
+      <ul class="tl" id="tl" role="list" aria-hidden="true">
+        <li class="s" style="flex:3;--k:0"><span>RATP</span></li>
+        <li class="bank" style="flex:3;--k:1"><span>Natixis</span></li>
+        <li class="bank s" style="flex:1;--k:2"><span>Bpifrance</span></li>
+        <li class="bank" style="flex:2;--k:3"><span>BPCE-IT</span></li>
+        <li class="bank s" style="flex:2;--k:4"><span>Société Générale</span></li>
+        <li class="bank" style="flex:2.7;--k:5"><span>BforBank</span></li>
+        <li class="now" style="flex:1.3;--k:6"><span>LCL</span></li>
+      </ul>
+      <div class="tl-years"><span style="left:0">2012</span><span style="left:20%">2015</span><span style="left:46.7%">2019</span><span style="left:73.3%">2023</span><span style="right:0"><span class="t-fr">aujourd’hui</span><span class="t-en">today</span></span></div>
+      <p class="tl-leg"><i class="bank"></i><span class="t-fr">banque</span><span class="t-en">banking</span> <i class="other"></i><span class="t-fr">transport</span><span class="t-en">transport</span> <i class="now"></i><span class="t-fr">mission en cours</span><span class="t-en">current assignment</span></p>
+    </div>
     <ol class="path" reversed>
-      <li class="now"><span class="yr"><span class="t-fr">2025 – aujourd’hui</span><span class="t-en">2025 – present</span></span><div><b>LCL</b><span class="d"><span class="t-fr">Ingénieur Java senior, architecture applicative et de flux, squad fraude : SMS interactif carte, virement et chèque, puis sa mise en place pour la nouvelle offre de contestation de fraude par le client. Flux Kafka à contrats Avro, échanges mainframe, agent d’analyse d’incidents.</span><span class="t-en">Senior Java engineer, application and flow architecture, fraud squad: interactive SMS for card, transfer and cheque, then its roll-out for the new customer fraud-dispute offer. Kafka flows with Avro contracts, mainframe exchanges, incident-analysis agent.</span></span></div></li>
-      <li><span class="yr">2025 – 2026</span><div><b>Liam Medical</b><span class="d"><span class="t-fr">Architecte et développeur unique, logiciel de gestion d’un cabinet médical : patients, consultations, ordonnances, IA en local</span><span class="t-en">Architect and sole developer, medical practice software: patients, consultations, prescriptions, local AI</span></span></div></li>
-      <li><span class="yr">2023 – 2025</span><div><b>BforBank</b><span class="d"><span class="t-fr">Lead dev, architecture applicative et événementielle de la plateforme cartes et tokenisation</span><span class="t-en">Lead developer, application and event-driven architecture of the card and tokenisation platform</span></span></div></li>
-      <li><span class="yr">2021 – 2022</span><div><b>Société Générale</b><span class="d"><span class="t-fr">Team lead et développeur Java, architecture applicative et des flux des API de gestion documentaire et des traitements par lots</span><span class="t-en">Team lead and Java developer, application and flow architecture of the document management APIs and batch jobs</span></span></div></li>
-      <li><span class="yr">2019 – 2021</span><div><b>BPCE-IT</b><span class="d"><span class="t-fr">Tech lead aux côtés de l’architecte, cloud privé du groupe : Event Sourcing / CQRS, flux de provisionnement multi-fournisseurs</span><span class="t-en">Tech lead alongside the architect, group private cloud: Event Sourcing / CQRS, multi-provider provisioning flows</span></span></div></li>
-      <li><span class="yr">2018 – 2019</span><div><b>Bpifrance</b><span class="d"><span class="t-fr">Team lead dans une équipe de 13, extranet de garantie de prêts : architecture applicative du portail et des flux d’échange</span><span class="t-en">Team lead in a team of 13, loan guarantee extranet: application architecture of the portal and its exchange flows</span></span></div></li>
-      <li><span class="yr">2015 – 2018</span><div><b>Natixis Wealth Management</b><span class="d"><span class="t-fr">Développeur Java et team lead d’une équipe de 4, KYC et scoring réglementaire : architecture hexagonale, flux de fédération d’identité</span><span class="t-en">Java developer and team lead of 4, KYC and regulatory scoring: hexagonal architecture, identity-federation flows</span></span></div></li>
+      <li class="now"><span class="yr"><span class="t-fr">2025 – aujourd’hui</span><span class="t-en">2025 – present</span></span><div><b>LCL</b><span class="d"><span class="t-fr">Ingénieur Java senior, architecture applicative et des flux, squad fraude : SMS interactif carte, virement et chèque, puis sa mise en place pour la nouvelle offre de contestation de fraude par le client. Kafka et Avro, échanges mainframe.</span><span class="t-en">Senior Java engineer, application architecture and integration flows, fraud squad: interactive SMS for card, transfer and cheque, then its roll-out for the new customer fraud-dispute offer. Kafka and Avro, mainframe exchanges.</span></span></div></li>
+      <li><span class="yr">2025 – 2026</span><div><b>Liam Medical</b><span class="d"><span class="t-fr">Architecte et développeur unique, logiciel de cabinet médical, en test</span><span class="t-en">Architect and sole developer, medical practice software, in pilot</span></span></div></li>
+      <li><span class="yr">2023 – 2025</span><div><b>BforBank</b><span class="d"><span class="t-fr">Lead dev, architecture applicative et événementielle de la plateforme cartes ; tokenisation Apple Pay et Google Pay, contrôle de solde avec Monext et VISA</span><span class="t-en">Lead developer, application and event-driven architecture of the card platform; Apple Pay and Google Pay tokenisation, balance check with Monext and VISA</span></span></div></li>
+      <li><span class="yr">2021 – 2022</span><div><b>Société Générale</b><span class="d"><span class="t-fr">Team lead et développeur Java, API de gestion documentaire et traitements par lots</span><span class="t-en">Team lead and Java developer, document management APIs and batch jobs</span></span></div></li>
+      <li><span class="yr">2019 – 2021</span><div><b>BPCE-IT</b><span class="d"><span class="t-fr">Tech lead aux côtés de l’architecte, cloud privé du groupe : Event Sourcing / CQRS, provisionnement multi-fournisseurs</span><span class="t-en">Tech lead alongside the architect, group private cloud: Event Sourcing / CQRS, multi-provider provisioning</span></span></div></li>
+      <li><span class="yr">2018 – 2019</span><div><b>Bpifrance</b><span class="d"><span class="t-fr">Team lead dans une équipe de 13, extranet de garantie de prêts et ses flux d’échange</span><span class="t-en">Team lead in a team of 13, loan guarantee extranet and its exchange flows</span></span></div></li>
+      <li><span class="yr">2015 – 2018</span><div><b>Natixis Wealth Management</b><span class="d"><span class="t-fr">Développeur Java et team lead d’une équipe de 4, KYC et scoring réglementaire, architecture hexagonale</span><span class="t-en">Java developer and team lead of 4, KYC and regulatory scoring, hexagonal architecture</span></span></div></li>
       <li><span class="yr">2012 – 2015</span><div><b>RATP, Île-de-France Mobilités</b><span class="d"><span class="t-fr">Développeur Java, flux d’information voyageurs en temps réel (Camel, ActiveMQ)</span><span class="t-en">Java developer, real-time passenger information flows (Camel, ActiveMQ)</span></span></div></li>
       <li><span class="yr">2012</span><div><b>Master MIAGE</b><span class="d">Université Nice Sophia Antipolis</span></div></li>
     </ol>
-    <p class="tools"><span class="t-fr"><b>Cadre réglementaire :</b> PCI DSS, DORA, KYC, exigences ACPR. <b>IA appliquée :</b> agents de code, serveurs MCP, API Anthropic, OpenAI et Vertex AI.</span><span class="t-en"><b>Regulation:</b> PCI DSS, DORA, KYC, ACPR requirements. <b>Applied AI:</b> coding agents, MCP servers, Anthropic, OpenAI and Vertex AI APIs.</span></p>
+    <p class="tools"><span class="t-fr"><b>Cadre réglementaire rencontré en mission :</b> KYC et scoring réglementaire, PCI DSS, DORA, exigences ACPR. <b>IA appliquée :</b> agents de code, serveurs MCP, API Anthropic, OpenAI et Vertex AI.</span><span class="t-en"><b>Regulation met on assignment:</b> KYC and regulatory scoring, PCI DSS, DORA, ACPR requirements. <b>Applied AI:</b> coding agents, MCP servers, Anthropic, OpenAI and Vertex AI APIs.</span></p>
   </section>
 </div>
 
@@ -753,7 +820,7 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
     <h2 id="contact-t"><span class="t-fr">Parlons de votre projet.</span><span class="t-en">Let’s talk about your project.</span></h2>
     <p class="intro"><span class="t-fr">Un premier message suffit pour savoir si je peux vous aider. Indiquez votre organisation, votre échéance et votre système actuel. Je réponds moi-même.</span><span class="t-en">One message is enough to find out whether I can help. Tell me your organisation, your deadline and your current system. I answer personally.</span></p>
     <div class="ctas">
-      <a class="btn primary mailto" data-subject-fr="Votre projet" data-subject-en="Your project" href="mailto:contact@iaminetech.com"><span class="t-fr">Me décrire votre projet</span><span class="t-en">Describe your project</span></a>
+      <a class="btn primary mailto" data-subject-fr="Votre projet" data-subject-en="Your project" href="mailto:contact@iaminetech.com"><span class="t-fr">Décrivez-moi votre projet</span><span class="t-en">Describe your project</span></a>
       <a class="btn ghost t-fr" href="cv-amine-benmansour-fr.pdf">Télécharger mon CV</a><a class="btn ghost t-en" href="cv-amine-benmansour-en.pdf">Download my CV</a>
     </div>
     <div class="mail">
@@ -761,11 +828,16 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
       <button class="copy" id="copy" type="button"><span class="t-fr">Copier l’adresse</span><span class="t-en">Copy address</span></button>
       <span class="copied" id="copied" role="status"></span>
     </div>
+    <ol class="process">
+      <li><div><b><span class="t-fr">Vous m’écrivez</span><span class="t-en">You write to me</span></b><span><span class="t-fr">Contexte, contraintes, échéance.</span><span class="t-en">Context, constraints, deadline.</span></span></div></li>
+      <li><div><b><span class="t-fr">Proposition écrite</span><span class="t-en">Written proposal</span></b><span><span class="t-fr">Périmètre, livrables, critères d’acceptation, date et prix.</span><span class="t-en">Scope, deliverables, acceptance criteria, date and price.</span></span></div></li>
+      <li><div><b><span class="t-fr">Points réguliers</span><span class="t-en">Regular check-ins</span></b><span><span class="t-fr">Par écrit et en visio, jusqu’à la restitution.</span><span class="t-en">In writing and by video, through to the debrief.</span></span></div></li>
+    </ol>
     <div class="practical">
-      <div><b><span class="t-fr">À distance</span><span class="t-en">Remote</span></b><span><span class="t-fr">Fuseau de Paris, échanges écrits et visios planifiées.</span><span class="t-en">Paris time zone, written exchanges and scheduled calls.</span></span></div>
+      <div><b><span class="t-fr">Où</span><span class="t-en">Where</span></b><span><span class="t-fr">Île-de-France. Sur site ou à distance selon la mission, fuseau de Paris.</span><span class="t-en">Paris region. On site or remote depending on the assignment, Paris time zone.</span></span></div>
       <div><b><span class="t-fr">Langues</span><span class="t-en">Languages</span></b><span><span class="t-fr">Français, anglais, arabe.</span><span class="t-en">French, English, Arabic.</span></span></div>
       <div><b><span class="t-fr">Confidentialité</span><span class="t-en">Confidentiality</span></b><span><span class="t-fr">Accord signé sur demande, avant tout échange de documents.</span><span class="t-en">NDA signed on request, before any documents are exchanged.</span></span></div>
-      <div><b><span class="t-fr">Facturation</span><span class="t-en">Invoicing</span></b><span><span class="t-fr">Par IAMINE TECH, société française.</span><span class="t-en">By IAMINE TECH, a French company.</span></span></div>
+      <div><b><span class="t-fr">Facturation</span><span class="t-en">Invoicing</span></b><span><span class="t-fr">Par IAMINE TECH, société française, sans portage.</span><span class="t-en">By IAMINE TECH, a French company, no umbrella company.</span></span></div>
     </div>
   </div>
 </section>
@@ -774,40 +846,28 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
 <footer>
   <div class="wrap">
     <span>IAMINE TECH, <span class="t-fr">SARL à associé unique, SIREN 953 165 784, France</span><span class="t-en">single-member limited company, SIREN 953 165 784, France</span></span>
-    <span>© 2026 Amine Benmansour<button class="theme" id="theme" type="button" aria-pressed="false"><span class="t-fr">Thème sombre</span><span class="t-en">Dark theme</span></button></span>
+    <span>© 2026 Amine Benmansour</span>
   </div>
 </footer>
 
 <script>
 (function(){
   var root = document.documentElement;
-  var RM = matchMedia('(prefers-reduced-motion: reduce)');
-  var refreshStream = function(){};
-  function withVT(fn, ev){
-    if (!document.startViewTransition || RM.matches) { fn(); return; }
-    if (ev) {
-      var x = ev.clientX, y = ev.clientY;
-      if (!ev.detail && ev.currentTarget) { var b = ev.currentTarget.getBoundingClientRect(); x = b.left + b.width / 2; y = b.top + b.height / 2; }
-      root.classList.add('vt-circle'); root.style.setProperty('--vx', x + 'px'); root.style.setProperty('--vy', y + 'px');
-    }
-    var tr = document.startViewTransition(fn);
-    function done(){ root.classList.remove('vt-circle'); }
-    tr.finished.then(done, done);
-  }
+  var RM = matchMedia('(prefers-reduced-motion: reduce)'), reduce = RM.matches, hasIO = 'IntersectionObserver' in window;
   var TXT = {
-    fr: {title:'Amine Benmansour, architecte technique et applicatif', desc:'Architecte technique et applicatif : microservices, architecture événementielle avec Kafka, intégration de l\'existant. Banque et paiement en spécialité, aussi santé, transport et finance d\'entreprise.', svgT:"Flux d'événements via Kafka", svgD:'Le service de paiement publie trois événements dans un topic Kafka ; les services fraude, comptabilité et notification les lisent chacun à leur rythme.', copied:'Adresse copiée', body:'Organisation :%0D%0AÉchéance :%0D%0ASystème actuel :%0D%0A'},
-    en: {title:'Amine Benmansour, technical and application architect', desc:'Technical and application architect: microservices, event-driven architecture with Kafka, integration with existing systems. Banking and payments specialty, also healthcare, transport and business finance.', svgT:'Event flow through Kafka', svgD:'The payment service publishes three events to a Kafka topic; the fraud, accounting and notification services each read them at their own pace.', copied:'Address copied', body:'Organisation:%0D%0ADeadline:%0D%0ACurrent system:%0D%0A'}
+    fr: {title:'Amine Benmansour, architecte technique et applicatif', desc:"Architecture applicative et flux Kafka pour les plateformes bancaires et de paiement, branchées sur l'existant. Aussi santé, transport et finance d'entreprise.", svgT:"Flux d'événements via Kafka", svgD:'Le service de paiement publie trois événements dans un topic Kafka ; les services fraude, comptabilité et notification les lisent chacun à leur rythme.', bfb:'Synchrone vers le processeur carte, Kafka vers le reste', copied:'Adresse copiée', body:'Organisation :%0D%0AÉchéance :%0D%0ASystème actuel :%0D%0A'},
+    en: {title:'Amine Benmansour, technical and application architect', desc:'Application architecture and Kafka flows for banking and payment platforms, connected to existing systems. Also healthcare, transport and business finance.', svgT:'Event flow through Kafka', svgD:'The payment service publishes three events to a Kafka topic; the fraud, accounting and notification services each read them at their own pace.', bfb:'Synchronous to the card processor, Kafka to the rest', copied:'Address copied', body:'Organisation:%0D%0ADeadline:%0D%0ACurrent system:%0D%0A'}
   };
+  function withVT(fn){ if (!document.startViewTransition || reduce) { fn(); return; } document.startViewTransition(fn); }
   function setLang(l){
-    root.setAttribute('data-l', l);
-    root.setAttribute('lang', l);
-    document.getElementById('l-fr').setAttribute('aria-pressed', String(l === 'fr'));
-    document.getElementById('l-en').setAttribute('aria-pressed', String(l === 'en'));
+    root.setAttribute('data-l', l); root.setAttribute('lang', l);
+    document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-set') === l)); });
     var t = TXT[l];
     document.title = t.title;
     var md = document.getElementById('meta-desc'); if (md) md.setAttribute('content', t.desc);
     document.getElementById('svg-t').textContent = t.svgT;
     document.getElementById('svg-d').textContent = t.svgD;
+    document.getElementById('bfb-t').textContent = t.bfb;
     document.querySelectorAll('a.mailto').forEach(function(a){
       var s = a.getAttribute('data-subject-' + l) || '';
       a.setAttribute('href', 'mailto:contact@iaminetech.com?subject=' + encodeURIComponent(s) + '&body=' + t.body);
@@ -819,216 +879,145 @@ svg .ev{filter:drop-shadow(0 0 4px var(--accent))}
     b.addEventListener('click', function(){ withVT(function(){ setLang(b.getAttribute('data-set')); }); });
   });
 
-  var themeBtn = document.getElementById('theme');
+  /* theme */
+  var themeBtns = [].slice.call(document.querySelectorAll('[data-theme-btn]'));
   function isDark(){ var t = root.getAttribute('data-theme'); return t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; }
   function syncTheme(){
     var d = isDark();
-    themeBtn.setAttribute('aria-pressed', String(d));
+    themeBtns.forEach(function(b){ b.setAttribute('aria-pressed', String(d)); });
     var m = document.getElementById('theme-color'); if (m) m.setAttribute('content', d ? '#0E131B' : '#F7F8F9');
   }
   syncTheme();
-  themeBtn.addEventListener('click', function(ev){
+  themeBtns.forEach(function(b){ b.addEventListener('click', function(){
     withVT(function(){
       var next = isDark() ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       try { localStorage.setItem('vitrine-theme', next); } catch (e) {}
       syncTheme();
-      refreshStream();
-    }, ev);
-  });
-  matchMedia('(prefers-color-scheme: dark)').addEventListener && matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(){ syncTheme(); refreshStream(); });
+    });
+  }); });
+  var pcs = matchMedia('(prefers-color-scheme: dark)'); if (pcs.addEventListener) pcs.addEventListener('change', syncTheme);
 
+  /* copy address */
   var btn = document.getElementById('copy'), ok = document.getElementById('copied'), addr = document.getElementById('addr');
   btn.addEventListener('click', function(){
     var text = addr.textContent.trim();
     function selectIt(){ var r = document.createRange(); r.selectNodeContents(addr); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }
     function done(){ ok.textContent = TXT[root.getAttribute('data-l')].copied; setTimeout(function(){ ok.textContent = ''; }, 2500); }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done, selectIt);
-    } else { selectIt(); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, selectIt); else selectIt();
   });
+
+  /* top bar: scrolled state, mobile rail after the hero, row 1 folds on scroll down */
+  var topbar = document.getElementById('topbar'), rail = document.getElementById('rail'), tocbtn = document.getElementById('tocbtn'), sheet = document.getElementById('sheet');
+  var heroEnd = 0, lastY = 0, ticking = false;
+  function measure(){ var w = document.querySelector('.worked'); heroEnd = w ? w.getBoundingClientRect().top + scrollY - 60 : 600; }
+  measure(); addEventListener('resize', measure);
+  function onScroll(){
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function(){
+      ticking = false;
+      var y = scrollY || 0;
+      topbar.classList.toggle('scrolled', y > 8);
+      var on = y > heroEnd && innerWidth <= 960;
+      topbar.classList.toggle('rail-on', on);
+      if (on && sheet.hidden) { if (y > lastY + 6) topbar.classList.add('hide-top'); else if (y < lastY - 6) topbar.classList.remove('hide-top'); }
+      else topbar.classList.remove('hide-top');
+      lastY = y;
+      spy();
+    });
+  }
+  addEventListener('scroll', onScroll, {passive: true}); onScroll();
+
+  /* scroll-spy shared by desktop links, rail and sheet */
+  var navA = [].slice.call(document.querySelectorAll('a[data-sec]'));
+  var secs = []; navA.forEach(function(a){ var id = a.getAttribute('data-sec'); if (secs.indexOf(id) < 0 && document.getElementById(id)) secs.push(id); });
+  secs.splice(secs.indexOf('paiement'), 0, 'evenementiel');
+  var current = null;
+  function spy(){
+    var line = Math.min(innerHeight * .38, 300), cur = '';
+    for (var i = 0; i < secs.length; i++) { if (document.getElementById(secs[i]).getBoundingClientRect().top <= line) cur = secs[i]; }
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) cur = 'contact';
+    if (cur === current) return; current = cur;
+    navA.forEach(function(a){
+      var on = a.getAttribute('data-sec') === cur;
+      if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      if (on && a.parentNode === rail && rail.scrollWidth > rail.clientWidth) rail.scrollTo({left: a.offsetLeft - rail.clientWidth / 2 + a.offsetWidth / 2, behavior: reduce ? 'auto' : 'smooth'});
+    });
+  }
+  function closeSheet(){ tocbtn.setAttribute('aria-expanded', 'false'); sheet.hidden = true; }
+  tocbtn.addEventListener('click', function(){ var open = tocbtn.getAttribute('aria-expanded') === 'true'; tocbtn.setAttribute('aria-expanded', String(!open)); sheet.hidden = open; topbar.classList.remove('hide-top'); });
+  sheet.addEventListener('click', function(e){ if (e.target.closest('a')) closeSheet(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeSheet(); });
+  addEventListener('resize', function(){ if (innerWidth > 960) closeSheet(); });
+
+  /* scroll reveal, light */
+  if (hasIO && !reduce) {
+    var REVEAL = ['.worked li','section.block h2.h','section.block > .intro','.strata .lab','.strata .lay','.strata .legend p','.ctx tbody tr','.after','.case','.side-t','.side > div','.explain .diagram','.steps-plain li','.when','.pay > div:first-child','.lead-offer','.diag > div','.custom > div','.tl-wrap','.path li','.tools','.contact h2','.contact .intro','.contact .ctas','.contact .mail','.process li','.practical > div'];
+    var rio = new IntersectionObserver(function(es){
+      var k = 0;
+      es.filter(function(e){ return e.isIntersecting; }).forEach(function(e){ e.target.style.setProperty('--i', Math.min(k++, 5)); e.target.classList.add('in'); rio.unobserve(e.target); });
+    }, {rootMargin: '0px 0px -5% 0px', threshold: .06});
+    document.querySelectorAll(REVEAL.join(',')).forEach(function(el){ el.setAttribute('data-reveal', ''); rio.observe(el); });
+    var safety = setTimeout(function(){ document.querySelectorAll('[data-reveal]:not(.in)').forEach(function(el){ if (el.getBoundingClientRect().top < innerHeight) el.classList.add('in'); }); }, 2500);
+  }
+
+  /* timeline bar and instant-transfer trace play once when visible */
+  var tl = document.getElementById('tl'), trace = document.querySelector('.trace');
+  if (hasIO && !reduce) {
+    tl.classList.add('armed'); trace.classList.add('armed');
+    var pio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('play'); pio.unobserve(e.target); } }); }, {threshold: .4});
+    pio.observe(tl); pio.observe(trace);
+  }
 
   /* event diagram: 3 events published, stored in the topic, read by 3 consumers at their own pace (about 4 s) */
   var NS = 'http://www.w3.org/2000/svg';
-  var dots = document.getElementById('dots');
-  var slots = [0,1,2].map(function(i){ return document.getElementById('s' + i); });
-  var counts = [0,1,2].map(function(i){ return document.getElementById('c' + i); });
-  var consumerY = [55, 150, 245], lag = [0, 300, 600];
-  var timers = [];
-  var evsvg = document.getElementById('evsvg');
-  var mq = matchMedia('(prefers-reduced-motion: reduce)');
-  function finalState(){
-    slots.forEach(function(s){ s.classList.add('on'); });
-    counts.forEach(function(c){ c.textContent = '3 / 3'; });
-  }
-  function reset(){
+  var LAY = {
+    evsvg: {prod:[170,150], slots:[[261,151],[299,151],[337,151]], cons:[[470,55],[470,150],[470,245]]},
+    evsvgm:{prod:[170,76],  slots:[[111,183],[149,183],[187,183]], cons:[[60,300],[170,300],[280,300]]}
+  };
+  var timers = [], mq = RM;
+  function activeSvg(){ var m = document.getElementById('evsvgm'); return (m.getClientRects().length ? m : document.getElementById('evsvg')); }
+  function els(svg){ return {dots: svg.querySelector('.dots'), slots: [0,1,2].map(function(i){ return svg.querySelector('[data-s="' + i + '"]'); }), counts: [0,1,2].map(function(i){ return svg.querySelector('[data-c="' + i + '"]'); })}; }
+  function finalState(){ [].forEach.call(document.querySelectorAll('#evsvg,#evsvgm'), function(svg){ var e = els(svg); e.slots.forEach(function(s){ s.classList.add('on'); }); e.counts.forEach(function(c){ c.textContent = '3 / 3'; }); }); }
+  function reset(svg){
     timers.forEach(clearTimeout); timers = [];
-    evsvg.classList.remove('playing');
-    while (dots.firstChild) dots.removeChild(dots.firstChild);
-    slots.forEach(function(s){ s.classList.remove('on'); });
-    counts.forEach(function(c){ c.textContent = '0 / 3'; });
+    [].forEach.call(document.querySelectorAll('#evsvg,#evsvgm'), function(s){ s.classList.remove('playing'); });
+    var e = els(svg);
+    while (e.dots.firstChild) e.dots.removeChild(e.dots.firstChild);
+    e.slots.forEach(function(s){ s.classList.remove('on'); });
+    e.counts.forEach(function(c){ c.textContent = '0 / 3'; });
   }
-  function move(x0, y0, x1, y1, dur, delay, after){
+  function move(dots, x0, y0, x1, y1, dur, delay, after){
     timers.push(setTimeout(function(){
       var c = document.createElementNS(NS, 'circle');
-      c.setAttribute('r', '7'); c.setAttribute('class', 'ev');
-      c.setAttribute('cx', x0); c.setAttribute('cy', y0);
+      c.setAttribute('r', '7'); c.setAttribute('class', 'ev'); c.setAttribute('cx', x0); c.setAttribute('cy', y0);
       dots.appendChild(c);
       var a = c.animate([{transform:'translate(0px,0px)'},{transform:'translate(' + (x1 - x0) + 'px,' + (y1 - y0) + 'px)'}], {duration: dur, easing: 'ease-in-out', fill: 'forwards'});
       a.onfinish = function(){ if (c.parentNode) c.parentNode.removeChild(c); if (after) after(); };
     }, delay));
   }
   function play(){
-    reset();
+    var svg = activeSvg(), L = LAY[svg.id], e = els(svg);
+    reset(svg);
     if (mq.matches || !Element.prototype.animate) { finalState(); return; }
-    evsvg.classList.add('playing');
-    timers.push(setTimeout(function(){ evsvg.classList.remove('playing'); }, 4700));
-    var done = [0,0,0];
+    svg.classList.add('playing'); timers.push(setTimeout(function(){ svg.classList.remove('playing'); }, 4700));
+    var done = [0,0,0], lag = [0, 300, 600];
     [0,1,2].forEach(function(i){
-      var start = 300 + i * 900, sx = 261 + i * 38;
-      move(170, 150, sx, 151, 600, start, function(){
-        slots[i].classList.add('on');
+      var start = 300 + i * 900;
+      move(e.dots, L.prod[0], L.prod[1], L.slots[i][0], L.slots[i][1], 600, start, function(){
+        e.slots[i].classList.add('on');
         [0,1,2].forEach(function(k){
-          move(sx, 151, 470, consumerY[k], 650, lag[k], function(){
-            done[k]++; counts[k].textContent = done[k] + ' / 3';
-          });
+          move(e.dots, L.slots[i][0], L.slots[i][1], L.cons[k][0], L.cons[k][1], 650, lag[k], function(){ done[k]++; e.counts[k].textContent = done[k] + ' / 3'; });
         });
       });
     });
   }
   document.getElementById('replay').addEventListener('click', play);
   finalState();
-  if ('IntersectionObserver' in window && !mq.matches) {
+  if (hasIO && !mq.matches) {
     var seen = false;
-    new IntersectionObserver(function(es, ob){ es.forEach(function(e){ if (e.isIntersecting && !seen) { seen = true; play(); ob.disconnect(); } }); }, {threshold: .5}).observe(document.getElementById('evsvg'));
+    new IntersectionObserver(function(es, ob){ es.forEach(function(e){ if (e.isIntersecting && !seen) { seen = true; play(); ob.disconnect(); } }); }, {threshold: .5}).observe(document.querySelector('.diagram'));
   }
-
-  /* ---------- v7 motion layer ---------- */
-  var reduce = RM.matches, hasIO = 'IntersectionObserver' in window;
-  var topbar = document.getElementById('topbar'), prog = document.querySelector('.progress');
-  var cssScroll = !!(window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()'));
-  var ticking = false;
-  function onScroll(){
-    if (ticking) return; ticking = true;
-    requestAnimationFrame(function(){
-      ticking = false;
-      var y = window.scrollY || 0;
-      topbar.classList.toggle('scrolled', y > 8);
-      if (!cssScroll && prog) { var h = document.documentElement.scrollHeight - innerHeight; prog.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, y / h) : 0) + ')'; }
-    });
-  }
-  addEventListener('scroll', onScroll, {passive: true}); onScroll();
-
-  /* scroll reveal, staggered within each batch that enters together */
-  if (hasIO && !reduce) {
-    var REVEAL = ['.worked li','section.block h2.h','section.block > .intro','.router li','.sectors li','.pillar','.special','.ctx tbody tr','.after','.case','.side-t','.side > div','.explain .diagram','.steps-plain li','.when','.pay > div:first-child','.lead-offer','.diag > div','.funders','.process li','.path li','.tools','.contact h2','.contact .intro','.contact .ctas','.contact .mail','.practical > div'];
-    var rio = new IntersectionObserver(function(es){
-      var k = 0;
-      es.filter(function(e){ return e.isIntersecting; }).forEach(function(e){
-        e.target.style.setProperty('--i', Math.min(k++, 6));
-        e.target.classList.add('in');
-        rio.unobserve(e.target);
-      });
-    }, {rootMargin: '0px 0px -6% 0px', threshold: .08});
-    document.querySelectorAll(REVEAL.join(',')).forEach(function(el){ el.setAttribute('data-reveal', ''); rio.observe(el); });
-  }
-
-  /* count-up on the three facts */
-  if (hasIO && !reduce) {
-    var cio = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if (!e.isIntersecting) return;
-        cio.unobserve(e.target);
-        var el = e.target, to = +el.getAttribute('data-to'), t0 = 0;
-        el.textContent = '0';
-        setTimeout(function(){
-          requestAnimationFrame(function step(t){
-            if (!t0) t0 = t;
-            var p = Math.min(1, (t - t0) / 1100); p = 1 - Math.pow(1 - p, 3);
-            el.textContent = String(Math.round(to * p));
-            if (p < 1) requestAnimationFrame(step);
-          });
-        }, 650);
-      });
-    }, {threshold: .6});
-    document.querySelectorAll('.num').forEach(function(n){ cio.observe(n); });
-  }
-
-  /* instant transfer trace plays once when visible */
-  var trace = document.querySelector('.trace');
-  if (trace && hasIO && !reduce) {
-    trace.classList.add('armed');
-    var tio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { trace.classList.add('play'); tio.disconnect(); } }); }, {threshold: .45});
-    tio.observe(trace);
-  }
-
-  /* pointer spotlight on the main cards (mouse only) */
-  if (!reduce && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('.lead-offer,.diagram,.trace,.sample').forEach(function(el){
-      el.classList.add('spot');
-      el.addEventListener('pointermove', function(ev){
-        var r = el.getBoundingClientRect();
-        el.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
-        el.style.setProperty('--my', (ev.clientY - r.top) + 'px');
-      });
-    });
-  }
-
-  /* flux band: producers converge into one topic, consumers fan out */
-  (function(){
-    var cv = document.getElementById('stream');
-    if (!cv || !cv.getContext) return;
-    var ctx = cv.getContext('2d'), W = 0, H = 0, lanes = [], evs = [], raf = 0, last = 0, onScreen = true;
-    var col = {a: '#0B7A5E', l: '#DDE1E6', f: '#687281'}, N = 6, OUT = [2, 0, 4, 1, 5, 3];
-    function ss(t){ return t * t * (3 - 2 * t); }
-    function yAt(L, x){ var u = x / W; if (u < .36) return L.yl + (L.yc - L.yl) * ss(Math.max(0, u) / .36); if (u < .64) return L.yc; return L.yc + (L.yr - L.yc) * ss(Math.min(1, (u - .64) / .36)); }
-    function rgba(hex, a){ hex = hex.replace('#', ''); if (hex.length === 3) hex = hex.replace(/./g, '$&$&'); var n = parseInt(hex, 16); return 'rgba(' + (n >> 16 & 255) + ',' + (n >> 8 & 255) + ',' + (n & 255) + ',' + a + ')'; }
-    function colors(){ var cs = getComputedStyle(root); col.a = cs.getPropertyValue('--accent').trim() || col.a; col.l = cs.getPropertyValue('--line').trim() || col.l; col.f = cs.getPropertyValue('--faint').trim() || col.f; }
-    function size(){
-      var r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1);
-      if (!r.width) return;
-      W = r.width; H = r.height; cv.width = Math.round(W * d); cv.height = Math.round(H * d); ctx.setTransform(d, 0, 0, d, 0, 0);
-      lanes = [];
-      for (var i = 0; i < N; i++) lanes.push({yl: H * (.12 + .76 * i / (N - 1)), yc: H / 2 + (i - (N - 1) / 2) * 5, yr: H * (.12 + .76 * OUT[i] / (N - 1)), v: 70 + (i * 7 % 4) * 16, wait: Math.random() * 1.4});
-    }
-    function seed(){ evs = []; for (var i = 0; i < 9; i++) evs.push({l: i % N, x: W * (.05 + .9 * Math.random())}); }
-    function draw(){
-      if (!W) return;
-      ctx.clearRect(0, 0, W, H);
-      ctx.lineWidth = 1; ctx.strokeStyle = col.l;
-      lanes.forEach(function(L){ ctx.beginPath(); for (var x = 0; x <= W + 8; x += 8) { var y = yAt(L, x); if (x) ctx.lineTo(x, y); else ctx.moveTo(x, y); } ctx.stroke(); });
-      var bx = W * .36 - 6, bw = W * .28 + 12, bh = N * 5 + 22;
-      ctx.strokeStyle = rgba(col.f, .55); ctx.beginPath();
-      if (ctx.roundRect) ctx.roundRect(bx, H / 2 - bh / 2, bw, bh, 9); else ctx.rect(bx, H / 2 - bh / 2, bw, bh);
-      ctx.stroke();
-      evs.forEach(function(e){
-        var L = lanes[e.l]; if (!L) return;
-        var g = ctx.createLinearGradient(e.x - 46, 0, e.x, 0);
-        g.addColorStop(0, rgba(col.a, 0)); g.addColorStop(1, rgba(col.a, .75));
-        ctx.strokeStyle = g; ctx.lineWidth = 2; ctx.beginPath();
-        for (var x = e.x - 46; x <= e.x; x += 4) { var y = yAt(L, x); if (x === e.x - 46) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
-        ctx.stroke();
-        ctx.fillStyle = col.a; ctx.shadowColor = col.a; ctx.shadowBlur = 10;
-        ctx.beginPath(); ctx.arc(e.x, yAt(L, e.x), 3, 0, 6.2832); ctx.fill(); ctx.shadowBlur = 0;
-      });
-    }
-    function tick(t){
-      raf = requestAnimationFrame(tick);
-      var dt = last ? Math.min(.05, (t - last) / 1000) : 0; last = t;
-      lanes.forEach(function(L, i){ L.wait -= dt; if (L.wait <= 0) { evs.push({l: i, x: -12}); L.wait = 1.2 + Math.random() * 2.4; } });
-      evs.forEach(function(e){ var u = e.x / W, L = lanes[e.l]; e.x += (L ? L.v : 80) * (u > .36 && u < .64 ? 1.4 : 1) * dt; });
-      evs = evs.filter(function(e){ return e.x < W + 50; });
-      draw();
-    }
-    function start(){ if (!raf && !reduce && onScreen && !document.hidden) { last = 0; raf = requestAnimationFrame(tick); } }
-    function stop(){ if (raf) { cancelAnimationFrame(raf); raf = 0; } }
-    colors(); size(); seed(); draw();
-    refreshStream = function(){ colors(); draw(); };
-    addEventListener('resize', function(){ size(); draw(); });
-    document.addEventListener('visibilitychange', function(){ if (document.hidden) stop(); else start(); });
-    if (hasIO) new IntersectionObserver(function(es){ onScreen = es[0].isIntersecting; if (onScreen) start(); else stop(); }).observe(cv);
-    start();
-  })();
 })();
 </script>
 </body>
