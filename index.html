@@ -376,6 +376,8 @@ svg .draw{stroke-dasharray:1200;stroke-dashoffset:0}
 .copy:hover{color:var(--ink);border-color:var(--soft)}
 .copy:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .copied{color:var(--accent);font-size:.9rem;min-height:1em}
+.tel{margin:14px 0 0;color:var(--soft)}
+.tel a{font-weight:500;color:var(--ink);text-underline-offset:4px;display:inline-block;padding:4px 0}
 .process{list-style:none;margin:36px 0 0;padding:22px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;counter-reset:p}
 @media (max-width:700px){.process{grid-template-columns:1fr;gap:12px}}
 .process li{counter-increment:p;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
@@ -828,6 +830,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
       <button class="copy" id="copy" type="button"><span class="t-fr">Copier l’adresse</span><span class="t-en">Copy address</span></button>
       <span class="copied" id="copied" role="status"></span>
     </div>
+    <p class="tel"><a href="tel:+33651585928">+33 6 51 58 59 28</a><span class="t-fr"> · appel ou message</span><span class="t-en"> · call or text</span></p>
     <ol class="process">
       <li><div><b><span class="t-fr">Vous m’écrivez</span><span class="t-en">You write to me</span></b><span><span class="t-fr">Contexte, contraintes, échéance.</span><span class="t-en">Context, constraints, deadline.</span></span></div></li>
       <li><div><b><span class="t-fr">Proposition écrite</span><span class="t-en">Written proposal</span></b><span><span class="t-fr">Périmètre, livrables, critères d’acceptation, date et prix.</span><span class="t-en">Scope, deliverables, acceptance criteria, date and price.</span></span></div></li>
