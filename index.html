@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Amine Benmansour, architecte technique et applicatif</title>
-<meta name="description" id="meta-desc" content="Architecture applicative et flux Kafka pour les plateformes bancaires et de paiement, branchées sur l'existant. Aussi santé, transport et finance d'entreprise.">
+<meta name="description" id="meta-desc" content="Architecte logiciel indépendant pour les systèmes où l'erreur coûte cher : banque, paiement, temps réel, IA appliquée. 14 ans, six banques.">
 <link rel="canonical" href="https://www.iaminetech.com/">
 <link rel="alternate" hreflang="fr" href="https://www.iaminetech.com/?lang=fr">
 <link rel="alternate" hreflang="en" href="https://www.iaminetech.com/?lang=en">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://www.iaminetech.com/">
 <meta property="og:title" content="Amine Benmansour, architecte technique et applicatif">
-<meta property="og:description" content="Architecture applicative et flux Kafka pour les plateformes bancaires et de paiement, branchées sur l'existant, mainframe compris.">
+<meta property="og:description" content="Architecte logiciel indépendant pour les systèmes où l'erreur coûte cher. Architecture applicative et flux Kafka pour les plateformes bancaires et de paiement, branchées sur l'existant, mainframe compris.">
 <meta property="og:image" content="https://www.iaminetech.com/photo.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" id="theme-color" content="#F7F8F9">
@@ -418,6 +418,49 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 @keyframes portrait{from{opacity:0;clip-path:inset(8% 8% 8% 8% round 18px);transform:scale(1.05)}to{opacity:1;clip-path:inset(0 round 18px);transform:none}}
 @keyframes wire{to{stroke-dashoffset:-8}}
 @keyframes pulse{from{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}to{box-shadow:0 0 0 12px transparent}}
+
+/* ---------- v10 ---------- */
+.hero h1{max-width:18ch}
+.domains{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.domains li{font-size:.85rem;font-weight:500;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--soft);background:var(--surface)}
+.doors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:960px){.doors{grid-template-columns:1fr}}
+.door{padding:24px 22px;display:flex;flex-direction:column;gap:10px}
+.door .num{margin:0;font:400 .95rem/1 var(--serif);color:var(--accent);letter-spacing:.04em}
+.door h3{font:400 1.35rem/1.25 var(--serif);margin:0}
+.door p{margin:0}
+.door .also2{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);color:var(--soft);font-size:.93rem}
+.door .also2 a{color:var(--accent);font-weight:600;text-underline-offset:4px;white-space:nowrap}
+#offres .diag{margin-top:44px}
+.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:900px){.cases{grid-template-columns:1fr}}
+.cs{padding:22px 22px 18px}
+.cs header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.cs .org{font:500 1.3rem/1.2 var(--serif);margin:0}
+.cs .meta{margin:0;color:var(--faint);font-size:.85rem}
+.cs dl{display:grid;grid-template-columns:86px minmax(0,1fr);gap:8px 14px;margin:0}
+.cs dt{color:var(--faint);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;padding-top:3px}
+.cs dd{margin:0}
+.cs dt:nth-of-type(3),.cs dt:nth-of-type(3)+dd{color:var(--ink)}
+.cs dt:nth-of-type(3)+dd{font-weight:600}
+.cs dt:nth-of-type(4){color:var(--accent)}
+.cs .stack{margin:14px 0 0;color:var(--faint);font-size:.84rem;line-height:1.45;padding-top:10px;border-top:1px dashed var(--line)}
+@media (max-width:460px){.cs dl{grid-template-columns:1fr;gap:2px}.cs dd{margin-bottom:8px}}
+.pov{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;counter-reset:v}
+@media (max-width:900px){.pov{grid-template-columns:1fr;gap:24px}}
+.pov li{border-top:2px solid var(--ink);padding-top:16px;counter-increment:v}
+.pov h3{font:400 1.35rem/1.25 var(--serif);margin:0 0 8px}
+.pov p{margin:0 0 8px;color:var(--soft)}
+.pov small{color:var(--accent);font-weight:600;font-size:.82rem}
+#convictions h2.h{max-width:22ch}
+#produits .side{border-top:0;padding-top:0}
+#produits .ex{padding:20px 22px}
+#produits .ex h3{margin:0 0 2px}
+.cs.wide{grid-column:1/-1}
+.door .also2 a{display:inline-block;margin-left:4px}
+.practical a{color:var(--accent);text-underline-offset:3px}
+.tl-years>span{white-space:nowrap}
+@media (max-width:600px){.tl-years>span:nth-child(2),.tl-years>span:nth-child(4){display:none}.domains{display:none}}
 @media print{:root,:root[data-theme="dark"]{--bg:#fff;--surface:#fff;--ink:#15191F;--soft:#4B5463;--faint:#5F6978;--line:#DDE1E6;--accent:#0B7A5E;--accent-wash:#E3F2EC;color-scheme:light}.hero-zone::before,.hero-zone::after{display:none}.topbar{position:static}.rail,.sheet,.replay{display:none!important}[data-reveal],.trace.armed li,.tl.armed li{opacity:1!important;transform:none!important}svg .draw{stroke-dashoffset:0!important}}
 </style>
 </head>
@@ -429,15 +472,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
   <header class="top">
     <a class="who" href="#main" aria-label="Amine Benmansour">
       <img src="photo.jpg" alt="" width="40" height="40">
-      <span><b>Amine Benmansour</b><span class="sub"><span class="t-fr">Architecte technique et applicatif</span><span class="t-en">Technical and application architect</span></span></span>
+      <span><b>Amine Benmansour</b><span class="sub">IAMINE TECH</span></span>
     </a>
     <nav class="main" aria-label="Navigation">
       <div class="links">
-        <a class="lnk" href="#expertise" data-sec="expertise">Expertise</a>
-        <a class="lnk" href="#decisions" data-sec="decisions"><span class="t-fr">Décisions</span><span class="t-en">Decisions</span></a>
+        <a class="lnk" href="#offres" data-sec="offres"><span class="t-fr">Ce que je fais</span><span class="t-en">What I do</span></a>
         <a class="lnk" href="#realisations" data-sec="realisations"><span class="t-fr">Réalisations</span><span class="t-en">Work</span></a>
-        <a class="lnk" href="#paiement" data-sec="paiement"><span class="t-fr">Paiement</span><span class="t-en">Payments</span></a>
-        <a class="lnk" href="#offres" data-sec="offres"><span class="t-fr">Offres</span><span class="t-en">Services</span></a>
+        <a class="lnk" href="#convictions" data-sec="convictions"><span class="t-fr">Convictions</span><span class="t-en">Point of view</span></a>
+        <a class="lnk" href="#produits" data-sec="produits"><span class="t-fr">Produits</span><span class="t-en">Products</span></a>
         <a class="lnk" href="#parcours" data-sec="parcours"><span class="t-fr">Parcours</span><span class="t-en">Background</span></a>
       </div>
       <a class="cta-s" href="#contact" data-sec="contact">Contact</a>
@@ -452,11 +494,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 </div>
 <div class="sheet" id="sheet" hidden><nav class="wrap" aria-label="Sommaire">
   <ul role="list">
-    <li><a href="#expertise" data-sec="expertise">Expertise</a></li>
-    <li><a href="#decisions" data-sec="decisions"><span class="t-fr">Décisions</span><span class="t-en">Decisions</span></a></li>
+    <li><a href="#offres" data-sec="offres"><span class="t-fr">Ce que je fais</span><span class="t-en">What I do</span></a></li>
     <li><a href="#realisations" data-sec="realisations"><span class="t-fr">Réalisations</span><span class="t-en">Work</span></a></li>
-    <li><a href="#paiement" data-sec="paiement"><span class="t-fr">Paiement</span><span class="t-en">Payments</span></a></li>
-    <li><a href="#offres" data-sec="offres"><span class="t-fr">Offres</span><span class="t-en">Services</span></a></li>
+    <li><a href="#convictions" data-sec="convictions"><span class="t-fr">Convictions</span><span class="t-en">Point of view</span></a></li>
+    <li><a href="#produits" data-sec="produits"><span class="t-fr">Produits</span><span class="t-en">Products</span></a></li>
     <li><a href="#parcours" data-sec="parcours"><span class="t-fr">Parcours</span><span class="t-en">Background</span></a></li>
     <li><a href="#contact" data-sec="contact">Contact</a></li>
   </ul>
@@ -466,11 +507,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
   </div>
 </nav></div>
 <nav class="rail" id="rail" aria-label="Rubriques">
-  <a href="#expertise" data-sec="expertise">Expertise</a>
-  <a href="#decisions" data-sec="decisions"><span class="t-fr">Décisions</span><span class="t-en">Decisions</span></a>
+  <a href="#offres" data-sec="offres"><span class="t-fr">Ce que je fais</span><span class="t-en">What I do</span></a>
   <a href="#realisations" data-sec="realisations"><span class="t-fr">Réalisations</span><span class="t-en">Work</span></a>
-  <a href="#paiement" data-sec="paiement"><span class="t-fr">Paiement</span><span class="t-en">Payments</span></a>
-  <a href="#offres" data-sec="offres"><span class="t-fr">Offres</span><span class="t-en">Services</span></a>
+  <a href="#convictions" data-sec="convictions"><span class="t-fr">Convictions</span><span class="t-en">Point of view</span></a>
+  <a href="#produits" data-sec="produits"><span class="t-fr">Produits</span><span class="t-en">Products</span></a>
   <a href="#parcours" data-sec="parcours"><span class="t-fr">Parcours</span><span class="t-en">Background</span></a>
   <a class="c" href="#contact" data-sec="contact">Contact</a>
 </nav>
@@ -481,28 +521,28 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 <div class="wrap">
   <section class="hero">
     <div>
-      <p class="kicker rise" style="--d:0ms"><span class="t-fr">Indépendant · 14 ans · banque, paiement, santé</span><span class="t-en">Independent · 14 years · banking, payments, healthcare</span></p>
-      <h1 class="rise" style="--d:80ms"><span class="t-fr">Architecture applicative et flux Kafka, <em>pour les plateformes bancaires et de paiement.</em></span><span class="t-en">Application architecture and Kafka flows, <em>for banking and payment platforms.</em></span></h1>
-      <p class="lede rise" style="--d:200ms"><span class="t-fr">Je conçois des systèmes qui tiennent en production : des microservices qui échangent par événements avec Kafka, branchés sur l’existant, mainframe compris. J’ai aussi travaillé dans la santé, le transport et la finance d’entreprise.</span><span class="t-en">I design systems that hold up in production: microservices exchanging events through Kafka, connected to what already exists, mainframe included. I have also worked in healthcare, transport and business finance.</span></p>
-      <p class="role rise" style="--d:280ms"><span class="t-fr">Architecture applicative et flux portés sur chaque mission, sous des intitulés de développeur, lead dev ou tech lead.</span><span class="t-en">Application architecture and integration flows owned on every engagement, under developer, lead developer or tech lead titles.</span></p>
-      <div class="ctas rise" style="--d:360ms">
-        <a class="btn primary mailto" data-subject-fr="Votre projet" data-subject-en="Your project" href="mailto:contact@iaminetech.com"><span class="t-fr">Décrivez-moi votre projet</span><span class="t-en">Describe your project</span></a>
-        <a class="btn ghost" href="#decisions"><span class="t-fr">Voir mes décisions d’architecture</span><span class="t-en">See my architecture decisions</span></a>
+      <p class="kicker rise" style="--d:0ms"><span class="t-fr">Indépendant · Île-de-France</span><span class="t-en">Independent · Paris region</span></p>
+      <h1 class="rise" style="--d:80ms"><span class="t-fr">Architecte logiciel indépendant pour les systèmes <em>où l’erreur coûte cher.</em></span><span class="t-en">Independent software architect for systems <em>where mistakes are expensive.</em></span></h1>
+      <p class="lede rise" style="--d:200ms"><span class="t-fr">14 ans au cœur de la banque, des paiements et du temps réel. J’aide DSI et CTO à décider, concevoir et livrer des logiciels critiques, et à y intégrer l’IA sans perdre le contrôle.</span><span class="t-en">14 years inside French banking, payments and real-time systems. I help CIOs and CTOs decide, design and deliver critical software, and bring AI into it without losing control.</span></p>
+      <div class="ctas rise" style="--d:300ms">
+        <a class="btn primary mailto" data-subject-fr="Votre projet" data-subject-en="Your project" href="mailto:contact@iaminetech.com"><span class="t-fr">Discutons de votre projet</span><span class="t-en">Let’s talk about your project</span></a>
+        <a class="btn ghost t-fr" href="cv-amine-benmansour-fr.pdf">Dossier de compétences (PDF)</a><a class="btn ghost t-en" href="cv-amine-benmansour-en.pdf">Skills file (PDF)</a>
       </div>
-      <p class="cvline rise" style="--d:420ms"><a href="cv-amine-benmansour-fr.pdf" class="t-fr">Télécharger mon CV (PDF, 2 pages)</a><a href="cv-amine-benmansour-en.pdf" class="t-en">Download my CV (PDF, 2 pages)</a></p>
-      <ul class="router rise" role="list" style="--d:480ms">
-        <li><a href="#decisions"><b><span class="t-fr">Vous faites évoluer un SI bancaire vers l’événementiel, avec Kafka</span><span class="t-en">You are moving a banking system to event-driven, with Kafka</span></b><span class="go"><span class="t-fr">Mes choix</span><span class="t-en">My choices</span></span></a></li>
-        <li><a href="#offres"><b><span class="t-fr">Vous cherchez un architecte ou un tech lead pour une mission</span><span class="t-en">You need an architect or tech lead for an assignment</span></b><span class="go"><span class="t-fr">La mission</span><span class="t-en">The engagement</span></span></a></li>
-        <li><a href="#diagnostic"><b><span class="t-fr">Des paiements en double, un rapprochement qui ne tombe pas juste</span><span class="t-en">Duplicate payments, reconciliation that does not balance</span></b><span class="go"><span class="t-fr">Le diagnostic</span><span class="t-en">The assessment</span></span></a></li>
-        <li><a href="#logiciel"><b><span class="t-fr">Vous dirigez un cabinet ou une PME et votre logiciel ne suit plus</span><span class="t-en">You run a practice or a small business and your software no longer keeps up</span></b><span class="go"><span class="t-fr">Sur mesure</span><span class="t-en">Custom software</span></span></a></li>
+      <ul class="domains rise" role="list" style="--d:380ms">
+        <li><span class="t-fr">Cartes et paiement mobile</span><span class="t-en">Cards and mobile payments</span></li>
+        <li><span class="t-fr">Fraude et contestation</span><span class="t-en">Fraud and disputes</span></li>
+        <li><span class="t-fr">KYC et réglementaire</span><span class="t-en">KYC and regulatory</span></li>
+        <li><span class="t-fr">Temps réel</span><span class="t-en">Real time</span></li>
+        <li><span class="t-fr">IA appliquée</span><span class="t-en">Applied AI</span></li>
+        <li><span class="t-fr">Logiciel sur mesure</span><span class="t-en">Custom software</span></li>
       </ul>
     </div>
     <figure class="portrait rise-p">
       <img src="photo.jpg" alt="Amine Benmansour" width="640" height="800">
       <ul class="facts" role="list">
-        <li><b>14<small><span class="t-fr">ans</span><span class="t-en">yrs</span></small></b><span><span class="t-fr">du développement à l’architecture</span><span class="t-en">from development to architecture</span></span></li>
+        <li><b>14<small><span class="t-fr">ans</span><span class="t-en">yrs</span></small></b><span><span class="t-fr">de développeur à lead technique, en banque, paiement et temps réel</span><span class="t-en">from developer to technical lead, in banking, payments and real-time systems</span></span></li>
         <li><b>6<small><span class="t-fr">banques</span><span class="t-en">banks</span></small></b><span><span class="t-fr">de la banque privée à la néobanque</span><span class="t-en">from private banking to a neobank</span></span></li>
-        <li><b>4<small><span class="t-fr">secteurs</span><span class="t-en">sectors</span></small></b><span><span class="t-fr">banque, santé, transport, finance d’entreprise</span><span class="t-en">banking, healthcare, transport, business finance</span></span></li>
+        <li><b>2<small><span class="t-fr">produits</span><span class="t-en">products</span></small></b><span><span class="t-fr">personnels, conçus et construits seul</span><span class="t-en">of my own, designed and built alone</span></span></li>
       </ul>
     </figure>
   </section>
@@ -511,256 +551,58 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 
 <div class="worked">
   <div class="wrap">
-    <p><span class="t-fr">Systèmes sur lesquels j’ai travaillé</span><span class="t-en">Systems I have worked on</span></p>
-    <ul role="list"><li>LCL</li><li>BforBank</li><li>Société Générale</li><li>BPCE-IT</li><li>Bpifrance</li><li>Natixis</li><li>RATP</li><li>Liam Medical</li></ul>
+    <p><span class="t-fr">J’ai travaillé pour</span><span class="t-en">I have worked for</span></p>
+    <ul role="list"><li>LCL</li><li>BforBank</li><li>Société Générale</li><li>BPCE-IT</li><li>Bpifrance</li><li>Natixis Wealth Management</li><li>RATP</li></ul>
   </div>
 </div>
 
 <div class="wrap">
-  <section class="block" id="expertise" aria-labelledby="exp-t">
-    <h2 class="h" id="exp-t"><span class="t-fr">Ce que je fais pour vos équipes</span><span class="t-en">What I do for your teams</span></h2>
-    <p class="intro"><span class="t-fr">Un système se tient en trois strates. Selon votre besoin, j’interviens sur l’une ou sur les trois.</span><span class="t-en">A system holds together in three layers. Depending on your need, I work on one of them or on all three.</span></p>
-    <div class="strata" id="strata">
-      <div class="lab"><h3><span class="t-fr">Architecture applicative</span><span class="t-en">Application architecture</span></h3><p><span class="t-fr">Des services clairs, qui évoluent sans tout casser.</span><span class="t-en">Clear services that can change without breaking everything.</span></p></div>
-      <div class="lay svc" aria-hidden="true"><span class="bx"><span class="t-fr">Cartes</span><span class="t-en">Cards</span></span><i class="lnk-dash"></i><span class="bx"><span class="t-fr">Fraude</span><span class="t-en">Fraud</span></span><i class="lnk-dash"></i><span class="bx"><span class="t-fr">Comptes</span><span class="t-en">Accounts</span></span><i class="lnk-dash"></i><span class="bx"><span class="t-fr">Notifications</span><span class="t-en">Notifications</span></span><span class="note-s"><span class="t-fr">contrats d’API entre services</span><span class="t-en">API contracts between services</span></span></div>
-      <div class="lab"><h3><span class="t-fr">Architecture événementielle</span><span class="t-en">Event-driven architecture</span></h3><p><span class="t-fr">L’information circule en temps réel, sans dépendances entre services.</span><span class="t-en">Information moves in real time, with no dependencies between services.</span></p></div>
-      <div class="lay evt" aria-hidden="true"><span class="bx acc"><span class="t-fr">publie</span><span class="t-en">publishes</span></span><span class="arr">→</span><span class="tpc"><i></i><i></i><i></i><span class="t-fr">topic Kafka</span><span class="t-en">Kafka topic</span></span><span class="arr">→</span><span class="bx acc"><span class="t-fr">consomme à son rythme</span><span class="t-en">consumes at its own pace</span></span><span class="note-s"><span class="t-fr">relance, file de rejet rejouable</span><span class="t-en">retry, replayable dead-letter queue</span></span></div>
-      <div class="lab"><h3><span class="t-fr">Technique et intégration</span><span class="t-en">Technical architecture and integration</span></h3><p><span class="t-fr">Tout tourne en production, branché sur l’existant.</span><span class="t-en">Everything runs in production, connected to what already exists.</span></p></div>
-      <div class="lay inf" aria-hidden="true"><span class="bx">Kubernetes</span><span class="bx">GCP · AWS · Azure</span><i class="lnk-solid"><span class="t-fr">intégration</span><span class="t-en">integration</span></i><span class="bx gray">Mainframe</span><span class="bx gray">Core banking</span><span class="bx gray"><span class="t-fr">Processeur carte</span><span class="t-en">Card processor</span></span></div>
-      <div class="legend">
-        <p><span class="t-fr"><b>Concrètement :</b> architecture hexagonale, DDD, microservices, contrats d’API, montées de version (Spring Boot 2 vers 3, Java 21, GraalVM).</span><span class="t-en"><b>In practice:</b> hexagonal architecture, DDD, microservices, API contracts, version upgrades (Spring Boot 2 to 3, Java 21, GraalVM).</span></p>
-        <p><span class="t-fr"><b>Concrètement :</b> Kafka (Confluent, schema registry, contrats Avro), RabbitMQ, IBM MQ, Event Sourcing et CQRS, traitements idempotents, relances, reprise après panne.</span><span class="t-en"><b>In practice:</b> Kafka (Confluent, schema registry, Avro contracts), RabbitMQ, IBM MQ, Event Sourcing and CQRS, idempotent processing, retries, crash recovery.</span></p>
-        <p><span class="t-fr"><b>Concrètement :</b> Kubernetes (GKE, OpenShift), GCP, AWS, Azure, Datadog, Dynatrace ; intégration d’un core banking, d’un processeur carte, d’un mainframe, reprise de données d’un ancien logiciel.</span><span class="t-en"><b>In practice:</b> Kubernetes (GKE, OpenShift), GCP, AWS, Azure, Datadog, Dynatrace; integration of a core banking system, a card processor, a mainframe, data migration from legacy software.</span></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="decisions" aria-labelledby="ctx-t">
-    <h2 class="h" id="ctx-t"><span class="t-fr">Six décisions d’architecture, dans leur contexte</span><span class="t-en">Six architecture decisions, in context</span></h2>
-    <p class="intro"><span class="t-fr">La situation, la contrainte, le choix retenu et le rôle que j’avais. C’est ce qui vous dira le mieux comment je travaille.</span><span class="t-en">The situation, the constraint, the choice made and the role I held. This shows best how I work.</span></p>
-    <table class="ctx">
-      <thead><tr><th scope="col"><span class="t-fr">La situation</span><span class="t-en">The situation</span></th><th scope="col"><span class="t-fr">Le choix</span><span class="t-en">The choice</span></th><th scope="col"><span class="t-fr">Où, et mon rôle</span><span class="t-en">Where, and my role</span></th></tr></thead>
-      <tbody>
-        <tr><td><span class="t-fr">Le réseau de cartes impose un délai de réponse.</span><span class="t-en">The card network imposes a response time.</span></td><td><span class="t-fr">Appel synchrone quand la réponse est attendue, Kafka pour le reste.</span><span class="t-en">Synchronous calls where an answer is awaited, Kafka for the rest.</span></td><td>BforBank<small><span class="t-fr">lead dev</span><span class="t-en">lead developer</span></small></td></tr>
-        <tr><td><span class="t-fr">Le client confirme par SMS une opération jugée suspecte : carte, virement, chèque.</span><span class="t-en">The customer confirms a suspicious transaction by text message: card, transfer, cheque.</span></td><td><span class="t-fr">Flux Kafka à contrats Avro, échanges avec le mainframe, mécanisme de relance.</span><span class="t-en">Kafka flows with Avro contracts, mainframe exchanges, a retry mechanism.</span></td><td>LCL<small><span class="t-fr">ingénieur senior, squad fraude</span><span class="t-en">senior engineer, fraud squad</span></small></td></tr>
-        <tr><td><span class="t-fr">Un appel externe ne doit jamais être exécuté deux fois, par exemple l’opposition d’une carte.</span><span class="t-en">An external call must never run twice, for example blocking a card.</span></td><td><span class="t-fr">Relances Kafka, file de rejet rejouable, idempotence de chaque appel externe.</span><span class="t-en">Kafka retries, replayable dead-letter queue, idempotency of every external call.</span></td><td>LCL<small><span class="t-fr">ingénieur senior, squad fraude</span><span class="t-en">senior engineer, fraud squad</span></small></td></tr>
-        <tr><td><span class="t-fr">Un portail pilote des ressources chez plusieurs fournisseurs de cloud.</span><span class="t-en">A portal drives resources across several cloud providers.</span></td><td><span class="t-fr">Event Sourcing, CQRS et une machine à états.</span><span class="t-en">Event Sourcing, CQRS and a state machine.</span></td><td>BPCE-IT<small><span class="t-fr">tech lead, aux côtés de l’architecte</span><span class="t-en">tech lead, alongside the architect</span></small></td></tr>
-        <tr><td><span class="t-fr">Une banque privée doit noter le risque de ses clients pour le régulateur.</span><span class="t-en">A private bank must score its clients’ risk for the regulator.</span></td><td><span class="t-fr">Architecture hexagonale, pour isoler les règles métier.</span><span class="t-en">Hexagonal architecture, to isolate the business rules.</span></td><td>Natixis<small><span class="t-fr">développeur et team lead</span><span class="t-en">developer and team lead</span></small></td></tr>
-        <tr><td><span class="t-fr">Les données patient ne doivent pas quitter le cabinet médical.</span><span class="t-en">Patient data must not leave the medical practice.</span></td><td><span class="t-fr">Assistance par IA exécutée en local, sans fournisseur externe.</span><span class="t-en">AI assistance running locally, with no outside provider.</span></td><td>Liam Medical<small><span class="t-fr">architecte et développeur unique</span><span class="t-en">architect and sole developer</span></small></td></tr>
-      </tbody>
-    </table>
-    <div class="after">
-      <a class="btn primary mailto" data-subject-fr="Architecture" data-subject-en="Architecture" href="mailto:contact@iaminetech.com"><span class="t-fr">Parlez-moi de votre contexte</span><span class="t-en">Tell me about your context</span></a>
-    </div>
-  </section>
-
-  <section class="block" id="realisations" aria-labelledby="cas-t">
-    <h2 class="h" id="cas-t"><span class="t-fr">Quelques réalisations</span><span class="t-en">Selected work</span></h2>
-    <p class="intro"><span class="t-fr">Par confidentialité, les projets clients sont décrits sans données internes.</span><span class="t-en">For confidentiality, client projects are described without internal data.</span></p>
-
-    <article class="case with-fig">
-      <div><p class="org">BforBank</p><p class="meta"><span class="t-fr">2023 – 2025<br>lead dev</span><span class="t-en">2023 – 2025<br>lead developer</span></p></div>
-      <div>
-        <h3><span class="t-fr">Plateforme cartes et tokenisation Apple Pay et Google Pay</span><span class="t-en">Card platform and Apple Pay / Google Pay tokenisation</span></h3>
-        <p><span class="t-fr">Microservices du cycle de vie de la carte : émission, activation, blocage, code PIN. Tokenisation Apple Pay et Google Pay, dont j’ai amélioré les performances. Intégration du processeur Monext et du core banking Temenos T24 par contrats d’API ; diagnostic du contrôle de solde entre BforBank, Monext et VISA.</span><span class="t-en">Card lifecycle microservices: issuing, activation, blocking, PIN. Apple Pay and Google Pay tokenisation, whose performance I improved. Integration with the Monext processor and the Temenos T24 core banking system through API contracts; diagnosis of the balance check between BforBank, Monext and VISA.</span></p>
-        <p><span class="t-fr"><span class="k">La décision clé :</span> l’arbitrage entre appels synchrones et Kafka pour tenir les délais imposés par VISA.</span><span class="t-en"><span class="k">The key decision:</span> trading off synchronous calls against Kafka to meet the response times VISA imposes.</span></p>
-        <p class="result"><span class="t-fr">Migration Spring Boot 2 vers 3 et GraalVM ; incident de latence en production résolu entre cloud privé et site.</span><span class="t-en">Spring Boot 2 to 3 and GraalVM migration; a production latency incident between private cloud and site resolved.</span></p>
-        <p class="stack">Java 21, Spring Boot 3, Kafka Confluent et schema registry, GCP / GKE et on-prem, ArgoCD, PostgreSQL, Datadog</p>
-      </div>
-      <figure class="card">
-        <svg viewBox="0 0 470 250" role="img" aria-labelledby="bfb-t"><title id="bfb-t">Synchrone vers le processeur carte, Kafka vers le reste</title>
-          <rect class="box" x="8" y="102" width="92" height="48" rx="8"/><text class="t1" x="20" y="123"><tspan class="t-fr">App client</tspan><tspan class="t-en">Client app</tspan></text><text class="t2" x="20" y="141"><tspan class="t-fr">demande</tspan><tspan class="t-en">request</tspan></text>
-          <path class="solid draw" d="M100 126 H136"/>
-          <rect class="box ink" x="136" y="98" width="112" height="56" rx="8"/><text class="t1" x="150" y="121"><tspan class="t-fr">Service cartes</tspan><tspan class="t-en">Card service</tspan></text><text class="t2" x="150" y="140"><tspan class="t-fr">choisit la voie</tspan><tspan class="t-en">picks the path</tspan></text>
-          <path class="solid draw" d="M248 112 C300 112 290 42 330 42"/>
-          <rect class="box" x="330" y="18" width="132" height="48" rx="8"/><text class="t1" x="342" y="39">Monext</text><text class="t2" x="342" y="57"><tspan class="t-fr">processeur carte</tspan><tspan class="t-en">card processor</tspan></text>
-          <circle cx="124" cy="26" r="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/><path d="M124 22v4h3" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
-          <text class="t3" x="136" y="30"><tspan class="t-fr">synchrone, délai VISA</tspan><tspan class="t-en">synchronous, VISA deadline</tspan></text>
-          <path class="wire" d="M248 140 C280 140 270 178 300 178"/>
-          <rect class="topic" x="300" y="162" width="76" height="32" rx="7"/><text class="t1" x="313" y="183" font-size="13">Kafka</text>
-          <path class="wire" d="M376 178 C390 178 386 152 400 152"/>
-          <rect class="box" x="400" y="139" width="50" height="26" rx="6"/><text class="t2" x="410" y="156">T24</text>
-          <path class="wire" d="M376 178 C390 178 386 212 400 212"/>
-          <rect class="box" x="382" y="199" width="84" height="26" rx="6"/><text class="t2" x="390" y="216" font-size="11.5"><tspan class="t-fr">notifications</tspan><tspan class="t-en">notifications</tspan></text>
-          <text class="t2" x="300" y="226"><tspan class="t-fr">asynchrone</tspan><tspan class="t-en">asynchronous</tspan></text>
-        </svg>
-        <figcaption><span class="t-fr">La décision clé, en un schéma : la réponse attendue par VISA passe en synchrone, le reste par Kafka.</span><span class="t-en">The key decision in one picture: what VISA waits for goes synchronous, the rest through Kafka.</span></figcaption>
-      </figure>
-    </article>
-
-    <article class="case">
-      <div><p class="org">BPCE-IT</p><p class="meta">2019 – 2021<br>tech lead</p></div>
-      <div>
-        <h3><span class="t-fr">Portail de cloud privé du groupe BPCE</span><span class="t-en">BPCE group private cloud portal</span></h3>
-        <p><span class="t-fr">Aux côtés de l’architecte : provisionnement automatisé chez plusieurs fournisseurs dont AWS et Azure, contrôle d’accès par attributs, refacturation des coûts. Event Sourcing, CQRS et machine à états du portail.</span><span class="t-en">Alongside the architect: automated provisioning across several providers including AWS and Azure, attribute-based access control, cost chargeback. Event Sourcing, CQRS and the portal’s state machine.</span></p>
-        <svg class="mini" viewBox="0 0 360 44" aria-hidden="true"><rect class="box ink" x="2" y="8" width="92" height="28" rx="14"/><text class="t2" x="48" y="26" text-anchor="middle"><tspan class="t-fr">demandé</tspan><tspan class="t-en">requested</tspan></text><path class="solid draw" d="M94 22 H126"/><rect class="box ink" x="126" y="8" width="104" height="28" rx="14"/><text class="t2" x="178" y="26" text-anchor="middle"><tspan class="t-fr">provisionné</tspan><tspan class="t-en">provisioned</tspan></text><path class="solid draw" d="M230 22 H262"/><rect class="box acc" x="262" y="8" width="92" height="28" rx="14"/><text class="t3" x="308" y="26" text-anchor="middle"><tspan class="t-fr">facturé</tspan><tspan class="t-en">billed</tspan></text></svg>
-        <p class="stack">Java, Spring Boot, Event Sourcing / CQRS, RabbitMQ, MongoDB, PostgreSQL</p>
-      </div>
-    </article>
-
-    <p class="side-t"><span class="t-fr">Deux produits personnels, hors banque</span><span class="t-en">Two personal products, beyond banking</span></p>
-    <div class="side">
-      <div>
-        <h3><span class="t-fr">Liam Medical : logiciel de cabinet médical</span><span class="t-en">Liam Medical: medical practice software</span></h3>
-        <p class="meta"><span class="t-fr">2025 – 2026, conçu seul, en test dans un cabinet</span><span class="t-en">2025 – 2026, designed alone, piloting in a practice</span></p>
-        <p><span class="t-fr">Patients, consultations et ordonnances. 26 ans d’historique repris depuis l’ancien logiciel. Assistance par IA exécutée en local : aucune donnée patient ne sort du cabinet.</span><span class="t-en">Patients, consultations and prescriptions. 26 years of history migrated from the previous software. AI assistance runs locally: no patient data leaves the practice.</span></p>
-        <svg class="mini" viewBox="0 0 380 70" aria-hidden="true"><rect class="box ink" x="4" y="6" width="236" height="58" rx="8"/><text class="t2" x="16" y="24"><tspan class="t-fr">cabinet</tspan><tspan class="t-en">practice</tspan></text><rect class="box" x="16" y="34" width="104" height="22" rx="5"/><text class="t2" x="24" y="49" font-size="11.5"><tspan class="t-fr">données patient</tspan><tspan class="t-en">patient data</tspan></text><rect class="box acc" x="130" y="34" width="98" height="22" rx="5"/><text class="t3" x="140" y="49" font-size="11.5"><tspan class="t-fr">IA en local</tspan><tspan class="t-en">local AI</tspan></text><path class="wire" d="M240 36 H268"/><circle cx="282" cy="36" r="9" fill="none" stroke="var(--crit)" stroke-width="2"/><path d="M276 30 L288 42" stroke="var(--crit)" stroke-width="2"/><text class="t2" x="298" y="40"><tspan class="t-fr">rien ne sort</tspan><tspan class="t-en">nothing leaves</tspan></text></svg>
-      </div>
-      <div>
-        <h3><span class="t-fr">IAMINE Compta : une comptabilité branchée sur une API bancaire</span><span class="t-en">IAMINE Compta: accounting on top of a banking API</span></h3>
-        <p class="meta"><span class="t-fr">2026, produit personnel</span><span class="t-en">2026, own product</span></p>
-        <p><span class="t-fr">Grand livre en partie double sur PostgreSQL, écritures chaînées et immuables, ingestion bancaire dans Kafka avec une empreinte d’idempotence par transaction. Un exercice complet rejoué : compte de résultat identique au centime à celui du cabinet comptable.</span><span class="t-en">Double-entry ledger on PostgreSQL, hash-chained immutable entries, bank ingestion into Kafka with one idempotency hash per transaction. A full financial year replayed: income statement identical to the cent to the accounting firm’s.</span></p>
-        <svg class="mini" viewBox="0 0 380 50" aria-hidden="true"><rect class="box" x="4" y="10" width="76" height="30" rx="6"/><text class="t2" x="42" y="30" text-anchor="middle" font-size="12.5"><tspan class="t-fr">écriture 1</tspan><tspan class="t-en">entry 1</tspan></text><path class="solid draw" d="M80 25 H104"/><rect class="box" x="104" y="10" width="76" height="30" rx="6"/><text class="t2" x="142" y="30" text-anchor="middle" font-size="12.5"><tspan class="t-fr">écriture 2</tspan><tspan class="t-en">entry 2</tspan></text><path class="solid draw" d="M180 25 H204"/><rect class="box" x="204" y="10" width="76" height="30" rx="6"/><text class="t2" x="242" y="30" text-anchor="middle" font-size="12.5"><tspan class="t-fr">écriture 3</tspan><tspan class="t-en">entry 3</tspan></text><text class="t1" x="294" y="24">= 0,00 €</text><text class="t2" x="294" y="42" font-size="11.5"><tspan class="t-fr">écart avec le cabinet</tspan><tspan class="t-en">vs the firm</tspan></text></svg>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="evenementiel" aria-labelledby="ev-t">
-    <h2 class="h" id="ev-t"><span class="t-fr">L’architecture événementielle, expliquée en une minute</span><span class="t-en">Event-driven architecture, explained in one minute</span></h2>
-    <p class="intro"><span class="t-fr">Voici ce qui se passe quand un paiement est accepté.</span><span class="t-en">Here is what happens when a payment is accepted.</span></p>
-    <div class="explain">
-      <figure class="diagram card">
-        <svg class="d" viewBox="0 0 640 300" role="img" aria-labelledby="svg-t" aria-describedby="svg-d" id="evsvg">
-          <title id="svg-t">Flux d’événements via Kafka</title>
-          <desc id="svg-d">Le service de paiement publie trois événements dans un topic Kafka ; les services fraude, comptabilité et notification les lisent chacun à leur rythme.</desc>
-          <path class="wire" d="M170 150 H230"/>
-          <path class="wire" d="M410 150 C440 150 440 55 470 55"/>
-          <path class="wire" d="M410 150 H470"/>
-          <path class="wire" d="M410 150 C440 150 440 245 470 245"/>
-          <rect class="box" x="16" y="112" width="154" height="76" rx="10"/>
-          <text class="t1" x="30" y="143"><tspan class="t-fr">Service paiement</tspan><tspan class="t-en">Payment service</tspan></text>
-          <text class="t2" x="30" y="165"><tspan class="t-fr">publie un événement</tspan><tspan class="t-en">publishes an event</tspan></text>
-          <rect class="topic" x="230" y="96" width="180" height="112" rx="10"/>
-          <text class="t1" x="244" y="120">Kafka</text>
-          <rect class="slot" data-s="0" x="246" y="136" width="30" height="30" rx="4"/>
-          <rect class="slot" data-s="1" x="284" y="136" width="30" height="30" rx="4"/>
-          <rect class="slot" data-s="2" x="322" y="136" width="30" height="30" rx="4"/>
-          <rect class="slot" x="360" y="136" width="30" height="30" rx="4"/>
-          <text class="t2" x="244" y="194"><tspan class="t-fr">topic « paiements »</tspan><tspan class="t-en">“payments” topic</tspan></text>
-          <rect class="box" x="470" y="24" width="154" height="62" rx="10"/>
-          <text class="t1" x="484" y="50"><tspan class="t-fr">Fraude</tspan><tspan class="t-en">Fraud</tspan></text>
-          <text class="count" x="484" y="72" data-c="0">3 / 3</text>
-          <rect class="box" x="470" y="119" width="154" height="62" rx="10"/>
-          <text class="t1" x="484" y="145"><tspan class="t-fr">Comptabilité</tspan><tspan class="t-en">Accounting</tspan></text>
-          <text class="count" x="484" y="167" data-c="1">3 / 3</text>
-          <rect class="box" x="470" y="214" width="154" height="62" rx="10"/>
-          <text class="t1" x="484" y="240"><tspan class="t-fr">Notification client</tspan><tspan class="t-en">Customer notification</tspan></text>
-          <text class="count" x="484" y="262" data-c="2">3 / 3</text>
-          <g class="dots"></g>
-        </svg>
-        <svg class="m" viewBox="0 0 340 400" aria-hidden="true" id="evsvgm">
-          <path class="wire" d="M170 76 V130"/>
-          <path class="wire" d="M170 230 C170 260 60 260 60 300"/>
-          <path class="wire" d="M170 230 V300"/>
-          <path class="wire" d="M170 230 C170 260 280 260 280 300"/>
-          <rect class="box" x="70" y="14" width="200" height="62" rx="10"/>
-          <text class="t1" x="84" y="40"><tspan class="t-fr">Service paiement</tspan><tspan class="t-en">Payment service</tspan></text>
-          <text class="t2" x="84" y="60"><tspan class="t-fr">publie un événement</tspan><tspan class="t-en">publishes an event</tspan></text>
-          <rect class="topic" x="80" y="130" width="180" height="100" rx="10"/>
-          <text class="t1" x="94" y="154">Kafka</text>
-          <rect class="slot" data-s="0" x="96" y="168" width="30" height="30" rx="4"/>
-          <rect class="slot" data-s="1" x="134" y="168" width="30" height="30" rx="4"/>
-          <rect class="slot" data-s="2" x="172" y="168" width="30" height="30" rx="4"/>
-          <rect class="slot" x="210" y="168" width="30" height="30" rx="4"/>
-          <text class="t2" x="94" y="220"><tspan class="t-fr">topic « paiements »</tspan><tspan class="t-en">“payments” topic</tspan></text>
-          <rect class="box" x="8" y="300" width="104" height="70" rx="10"/><text class="t1" x="20" y="328"><tspan class="t-fr">Fraude</tspan><tspan class="t-en">Fraud</tspan></text><text class="count" x="20" y="352" data-c="0">3 / 3</text>
-          <rect class="box" x="118" y="300" width="104" height="70" rx="10"/><text class="t1" x="130" y="328"><tspan class="t-fr">Compta</tspan><tspan class="t-en">Accounts</tspan></text><text class="count" x="130" y="352" data-c="1">3 / 3</text>
-          <rect class="box" x="228" y="300" width="104" height="70" rx="10"/><text class="t1" x="240" y="328"><tspan class="t-fr">Notif.</tspan><tspan class="t-en">Notify</tspan></text><text class="count" x="240" y="352" data-c="2">3 / 3</text>
-          <g class="dots"></g>
-        </svg>
-        <div class="bar">
-          <p><span class="t-fr">Chaque service lit les événements à son rythme.</span><span class="t-en">Each service reads the events at its own pace.</span></p>
-          <button class="replay" id="replay" type="button"><span class="t-fr">Rejouer</span><span class="t-en">Replay</span></button>
-        </div>
-      </figure>
-      <div>
-        <ol class="steps-plain">
-          <li><span><span class="t-fr">Le service de paiement publie un événement, sans savoir qui l’écoute.</span><span class="t-en">The payment service publishes an event without knowing who is listening.</span></span></li>
-          <li><span><span class="t-fr">Kafka conserve les événements dans l’ordre. Chaque service les lit quand il est prêt.</span><span class="t-en">Kafka keeps the events in order. Each service reads them when it is ready.</span></span></li>
-          <li><span><span class="t-fr">On ajoute un service sans toucher aux autres. S’il tombe en panne, il reprend là où il s’était arrêté.</span><span class="t-en">You can add a service without touching the others. If it goes down, it resumes where it stopped.</span></span></li>
-        </ol>
-        <div class="callout when">
-          <b><span class="t-fr">Et quand ne pas l’utiliser ?</span><span class="t-en">And when not to use it?</span></b>
-          <p><span class="t-fr">Quand un réseau impose un délai de réponse, comme VISA pour les opérations carte, un appel direct reste souvent le meilleur choix.</span><span class="t-en">When a network imposes a response time, as VISA does for card operations, a direct call is often still the best choice.</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="paiement" aria-labelledby="pay-t">
-    <h2 class="h" id="pay-t"><span class="t-fr">Le paiement : cartes, wallets, fraude et contestation</span><span class="t-en">Payments: cards, wallets, fraud and disputes</span></h2>
-    <p class="intro"><span class="t-fr">Mon expérience du paiement vient de la carte et de la fraude, là où j’ai le plus livré. Les flux de virement, je les aborde en audit.</span><span class="t-en">My payments experience comes from cards and fraud, where I have delivered the most. Transfer flows I approach as an auditor.</span></p>
-    <div class="pay">
-      <div>
-        <ul class="areas" role="list">
-          <li><b><span class="t-fr">Cartes et tokenisation</span><span class="t-en">Cards and tokenisation</span> <em class="tag"><span class="t-fr">livré</span><span class="t-en">delivered</span></em></b><span><span class="t-fr">Émission, activation, blocage, code PIN ; performances de la tokenisation Apple Pay et Google Pay ; contrôle de solde entre banque, processeur et VISA. Chez BforBank.</span><span class="t-en">Issuing, activation, blocking, PIN; Apple Pay and Google Pay tokenisation performance; balance check between bank, processor and VISA. At BforBank.</span></span></li>
-          <li><b><span class="t-fr">Fraude et contestation</span><span class="t-en">Fraud and disputes</span> <em class="tag"><span class="t-fr">livré</span><span class="t-en">delivered</span></em></b><span><span class="t-fr">SMS interactif sur carte, virement et chèque, puis contestation de fraude par le client, en mission chez LCL.</span><span class="t-en">Interactive SMS on card, transfer and cheque, then customer fraud disputes, on assignment at LCL.</span></span></li>
-          <li><b><span class="t-fr">Virement instantané</span><span class="t-en">Instant transfers</span> <em class="tag alt"><span class="t-fr">périmètre d’audit</span><span class="t-en">audit scope</span></em></b><span><span class="t-fr">Pas livré en production à ce jour. Ce que je vérifie : contrôle du bénéficiaire, délais du schéma, relances sans doublon, rapprochement le jour même.</span><span class="t-en">Not delivered in production to date. What I check: verification of payee, scheme timeouts, retries without duplicates, same-day reconciliation.</span></span></li>
-        </ul>
-        <div class="callout deadline">
-          <span class="d8"><span class="t-fr">09/04/2027</span><span class="t-en">9 April 2027</span></span>
-          <p><span class="t-fr">Zone euro : les établissements de paiement et de monnaie électronique doivent envoyer et recevoir des virements instantanés, avec contrôle du bénéficiaire.</span><span class="t-en">Euro area: payment and e-money institutions must send and receive instant transfers, with verification of payee.</span></p>
-          <small><span class="t-fr">Source : règlement (UE) 2024/886</span><span class="t-en">Source: Regulation (EU) 2024/886</span></small>
-        </div>
-      </div>
-      <figure class="trace card" aria-labelledby="trace-t">
-        <h3 id="trace-t"><span class="t-fr">Un virement instantané, étape par étape</span><span class="t-en">One instant transfer, step by step</span></h3>
-        <p class="sub"><span class="t-fr">Exemple illustratif, valeurs fictives</span><span class="t-en">Illustrative example, fictional values</span></p>
-        <ol>
-          <li><span class="tm"><span class="t-fr">0,00 s</span><span class="t-en">0.00 s</span></span><span class="what"><span class="t-fr">Bénéficiaire vérifié</span><span class="t-en">Payee verified</span><small><span class="t-fr">contrôle nom et IBAN</span><span class="t-en">name and IBAN check</span></small></span></li>
-          <li><span class="tm"><span class="t-fr">0,21 s</span><span class="t-en">0.21 s</span></span><span class="what"><span class="t-fr">Ordre émis</span><span class="t-en">Order sent</span><small><span class="t-fr">pacs.008, identifiant unique</span><span class="t-en">pacs.008, unique identifier</span></small></span></li>
-          <li><span class="tm"><span class="t-fr">0,95 s</span><span class="t-en">0.95 s</span></span><span class="what"><span class="t-fr">Reçu par la banque du bénéficiaire</span><span class="t-en">Received by the payee’s bank</span><small>pacs.008</small></span></li>
-          <li class="done"><span class="tm"><span class="t-fr">1,62 s</span><span class="t-en">1.62 s</span></span><span class="what"><span class="t-fr">Réglé</span><span class="t-en">Settled</span><small><span class="t-fr">pacs.002, statut positif</span><span class="t-en">pacs.002, positive status</span></small></span></li>
-          <li><span class="tm"><span class="t-fr">J+0</span><span class="t-en">D+0</span></span><span class="what"><span class="t-fr">Rapproché, écart nul</span><span class="t-en">Reconciled, zero difference</span><small>camt.053</small></span></li>
-        </ol>
-        <div class="budget">
-          <p><span class="t-fr"><strong>1,62 s</strong> sur les 10 s autorisées par le schéma</span><span class="t-en"><strong>1.62 s</strong> of the 10 s the scheme allows</span></p>
-          <div class="meter" aria-hidden="true"><i></i></div>
-        </div>
-      </figure>
-    </div>
-  </section>
-
   <section class="block" id="offres" aria-labelledby="off-t">
-    <h2 class="h" id="off-t"><span class="t-fr">Travailler ensemble</span><span class="t-en">Working together</span></h2>
-    <p class="intro"><span class="t-fr">Une mission longue dans votre équipe, un diagnostic au forfait ou un logiciel sur mesure. Le périmètre est écrit avant de commencer.</span><span class="t-en">A long engagement in your team, a fixed-price assessment or custom software. The scope is written down before we start.</span></p>
-
-    <div class="lead-offer card">
-      <div>
-        <h3><span class="t-fr">Architecte ou tech lead en mission</span><span class="t-en">Architect or tech lead on assignment</span></h3>
-        <p><span class="t-fr">Je rejoins votre équipe sur une plateforme bancaire ou de paiement : choix d’architecture, intégration Kafka et de l’existant, revue de code, accompagnement des développeurs.</span><span class="t-en">I join your team on a banking or payments platform: architecture decisions, Kafka and legacy integration, code review, coaching developers.</span></p>
-        <p class="note"><span class="t-fr">ESN ou cabinet de placement : envoyez-moi la fiche de mission, mon CV est téléchargeable ici. Facturation directe par IAMINE TECH, sans portage.</span><span class="t-en">IT consultancy or placement firm: send me the assignment brief; my CV is available for download here. Invoiced directly by IAMINE TECH, no umbrella company.</span></p>
-      </div>
-      <div class="act">
-        <a class="btn primary mailto" data-subject-fr="Proposition de mission" data-subject-en="Assignment proposal" href="mailto:contact@iaminetech.com"><span class="t-fr">Proposer une mission</span><span class="t-en">Propose an assignment</span></a>
-        <a class="cvl t-fr" href="cv-amine-benmansour-fr.pdf">Télécharger mon CV (PDF)</a><a class="cvl t-en" href="cv-amine-benmansour-en.pdf">Download my CV (PDF)</a>
-        <small><span class="t-fr">Île-de-France, sur site ou à distance selon la mission.</span><span class="t-en">Paris region, on site or remote depending on the assignment.</span></small>
-      </div>
+    <h2 class="h" id="off-t"><span class="t-fr">Ce que je fais pour vous</span><span class="t-en">What I do for you</span></h2>
+    <p class="intro"><span class="t-fr">Une même exigence, trois portes d’entrée. Le périmètre est écrit avant de commencer.</span><span class="t-en">One standard, three ways in. The scope is written down before we start.</span></p>
+    <div class="doors">
+      <article class="door card">
+        <p class="num">01</p>
+        <h3><span class="t-fr">Banque et paiement : l’architecture des systèmes critiques</span><span class="t-en">Banking and payments: architecture for critical systems</span></h3>
+        <p><span class="t-fr">Je rejoins votre équipe comme architecte ou tech lead sur une plateforme carte, fraude ou paiement. Je tranche les choix d’architecture, je branche le neuf sur l’existant et je fais monter l’équipe en exigence.</span><span class="t-en">I join your team as architect or tech lead on a card, fraud or payments platform. I make the architecture calls, connect the new to what already exists and raise the team’s standards.</span></p>
+        <p class="also2"><span class="t-fr">Ou un diagnostic au forfait, en 5 jours, pour trouver où une opération peut se perdre, être comptée deux fois ou arriver en retard.</span><span class="t-en">Or a fixed-price 5-day assessment to find where a transaction can be lost, counted twice or arrive late.</span> <a href="#diagnostic"><span class="t-fr">Voir le diagnostic</span><span class="t-en">See the assessment</span></a></p>
+      </article>
+      <article class="door card">
+        <p class="num">02</p>
+        <h3><span class="t-fr">IA appliquée : des agents utiles, dans des systèmes qui ne pardonnent pas</span><span class="t-en">Applied AI: useful agents, in systems that do not forgive</span></h3>
+        <p><span class="t-fr">J’intègre des agents IA dans les équipes qui font tourner des systèmes critiques : analyse d’incidents, repérage des vulnérabilités à corriger, et IA exécutée en local quand les données ne doivent pas sortir.</span><span class="t-en">I bring AI agents into the teams that run critical systems: incident analysis, spotting vulnerabilities to fix, and AI that runs locally when data must not leave.</span></p>
+        <p class="also2"><span class="t-fr">En mission bancaire, un agent d’analyse d’incidents que les équipes lancent elles-mêmes. Dans Liam Medical, un modèle exécuté en local.</span><span class="t-en">On a banking assignment, an incident-analysis agent that teams run themselves. In Liam Medical, a model that runs locally.</span> <a href="#cas-ia"><span class="t-fr">La réalisation</span><span class="t-en">The case</span></a></p>
+      </article>
+      <article class="door card">
+        <p class="num">03</p>
+        <h3><span class="t-fr">Logiciel sur mesure pour PME et cabinets</span><span class="t-en">Custom software for small businesses and practices</span></h3>
+        <p><span class="t-fr">Votre logiciel ne suit plus, ou il n’existe pas encore. Je pars de vos dossiers, de vos règles et de vos documents, tels que vous travaillez aujourd’hui. Je conçois, je construis, je reprends l’historique de l’ancien logiciel et je livre avec la documentation. Un seul interlocuteur du début à la fin.</span><span class="t-en">Your software no longer keeps up, or does not exist yet. I start from your files, your rules and your documents, the way you work today. I design, build, carry over the old software’s history and deliver with documentation. One contact from start to finish.</span></p>
+        <p class="also2"><a href="#produits"><span class="t-fr">Voir Liam Medical</span><span class="t-en">See Liam Medical</span></a></p>
+      </article>
     </div>
 
     <div class="diag" id="diagnostic">
       <div>
-        <h3><span class="t-fr">Diagnostic paiement en 5 jours</span><span class="t-en">5-day payments assessment</span></h3>
-        <p class="terms"><span class="t-fr">5 jours de travail, rendus en 3 semaines, prix fixe annoncé dans la proposition. Ce qu’il me faut : un accès en lecture au code et aux journaux, et deux entretiens d’une heure avec vos développeurs.</span><span class="t-en">5 days of work, delivered over 3 weeks, fixed price stated in the proposal. What I need: read access to the code and logs, and two one-hour interviews with your developers.</span></p>
-        <p class="scope"><span class="t-fr">Pour un établissement de paiement, une fintech ou un éditeur : flux, événements, intégrations carte et processeur, risques de doublon et de perte. Peut servir d’audit avant une mise en production.</span><span class="t-en">For a payment institution, fintech or vendor: flows, events, card and processor integrations, risks of duplicates and losses. Can serve as a pre-go-live audit.</span></p>
+        <h3><span class="t-fr">Le diagnostic paiement en 5 jours</span><span class="t-en">The 5-day payments assessment</span></h3>
+        <p class="terms"><span class="t-fr">5 jours de travail, rendus en 3 semaines, prix fixe annoncé dans la proposition. Il me faut un accès en lecture au code et aux journaux, et deux entretiens d’une heure avec vos développeurs.</span><span class="t-en">5 days of work, delivered over 3 weeks, fixed price stated in the proposal. I need read access to the code and logs, and two one-hour interviews with your developers.</span></p>
         <ol class="weeks">
-          <li><b><span class="t-fr">Semaine 1</span><span class="t-en">Week 1</span></b><span><span class="t-fr">Entretiens avec vos équipes, lecture de l’architecture, des flux et des journaux.</span><span class="t-en">Interviews with your teams; review of architecture, flows and logs.</span></span></li>
-          <li><b><span class="t-fr">Semaine 2</span><span class="t-en">Week 2</span></b><span><span class="t-fr">Analyse des points de rupture : doublons, délais, reprises, intégrations.</span><span class="t-en">Analysis of failure points: duplicates, timeouts, recovery, integrations.</span></span></li>
+          <li><b><span class="t-fr">Semaine 1</span><span class="t-en">Week 1</span></b><span><span class="t-fr">Entretiens, lecture de l’architecture, des flux et des journaux.</span><span class="t-en">Interviews; review of architecture, flows and logs.</span></span></li>
+          <li><b><span class="t-fr">Semaine 2</span><span class="t-en">Week 2</span></b><span><span class="t-fr">Points de rupture : doublons, délais, reprises, intégrations.</span><span class="t-en">Failure points: duplicates, timeouts, recovery, integrations.</span></span></li>
           <li><b><span class="t-fr">Semaine 3</span><span class="t-en">Week 3</span></b><span><span class="t-fr">Rapport écrit, plan de correction priorisé, restitution en visio.</span><span class="t-en">Written report, prioritised remediation plan, video debrief.</span></span></li>
         </ol>
-        <div class="callout proof">
-          <b><span class="t-fr">D’où viennent ces contrôles</span><span class="t-en">Where these checks come from</span></b>
-          <p><span class="t-fr">De la production bancaire : chez LCL, chaque appel externe, comme l’opposition d’une carte, est rendu idempotent et rejouable depuis une file de rejet dédiée.</span><span class="t-en">From banking production: at LCL, every external call, such as blocking a card, is made idempotent and replayable from a dedicated dead-letter queue.</span></p>
+        <div class="callout deadline">
+          <span class="d8"><span class="t-fr">09/04/2027</span><span class="t-en">9 April 2027</span></span>
+          <p><span class="t-fr">Zone euro : d’ici cette date, les établissements de paiement et de monnaie électronique doivent pouvoir envoyer et recevoir des virements instantanés. Le diagnostic vérifie ces points avant l’échéance.</span><span class="t-en">Euro area: by this date, payment and e-money institutions must be able to send and receive instant credit transfers. The assessment checks these points before the deadline.</span></p>
+          <small><span class="t-fr">Source : règlement (UE) 2024/886</span><span class="t-en">Source: Regulation (EU) 2024/886</span></small>
         </div>
-        <a class="btn primary mailto" data-subject-fr="Diagnostic paiement" data-subject-en="Payments assessment" href="mailto:contact@iaminetech.com"><span class="t-fr">Demander le diagnostic</span><span class="t-en">Request the assessment</span></a>
       </div>
       <div class="sample card" role="group" aria-labelledby="sample-t">
         <h4 id="sample-t"><span class="t-fr">À quoi ressemble le rapport</span><span class="t-en">What the report looks like</span></h4>
         <p class="fict"><span class="t-fr">Extrait fictif, pour montrer le format : chaque constat a une gravité et une correction.</span><span class="t-en">Fictional excerpt showing the format: every finding has a severity and a fix.</span></p>
         <div class="finding">
           <span class="sev c"><span class="t-fr">Critique</span><span class="t-en">Critical</span></span>
-          <p><span class="t-fr">Après un redémarrage, un consommateur Kafka relit un message et crée une écriture en double.</span><span class="t-en">After a restart, a Kafka consumer re-reads a message and creates a duplicate entry.</span></p>
-          <p class="fix"><span class="t-fr">Traitement idempotent, clé unique par opération.</span><span class="t-en">Idempotent processing, one key per operation.</span></p>
+          <p><span class="t-fr">Après un redémarrage, un service relit un message déjà traité et crée une écriture en double.</span><span class="t-en">After a restart, a service re-reads a message already processed and creates a duplicate entry.</span></p>
+          <p class="fix"><span class="t-fr">Une clé unique par opération : rejouée, elle ne produit rien de plus.</span><span class="t-en">One unique key per operation: replayed, it produces nothing more.</span></p>
         </div>
         <div class="finding">
           <span class="sev h"><span class="t-fr">Élevée</span><span class="t-en">High</span></span>
@@ -769,26 +611,116 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
         </div>
         <div class="finding">
           <span class="sev m"><span class="t-fr">Moyenne</span><span class="t-en">Medium</span></span>
-          <p><span class="t-fr">Un message invalide bloque toute la partition.</span><span class="t-en">One invalid message blocks the whole partition.</span></p>
-          <p class="fix"><span class="t-fr">File de rejet dédiée et alerte.</span><span class="t-en">Dedicated dead-letter queue and alert.</span></p>
+          <p><span class="t-fr">Un message invalide bloque toute la file derrière lui.</span><span class="t-en">One invalid message blocks the whole queue behind it.</span></p>
+          <p class="fix"><span class="t-fr">Le mettre de côté et alerter, sans arrêter les autres.</span><span class="t-en">Set it aside and alert, without stopping the others.</span></p>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="custom" id="logiciel">
-      <div>
-        <h3><span class="t-fr">Un logiciel sur mesure pour votre cabinet ou votre PME</span><span class="t-en">Custom software for your practice or small business</span></h3>
-        <p><span class="t-fr">Votre logiciel ne suit plus, ou il n’existe pas encore. Je conçois et je construis l’outil dont vous avez besoin : vos dossiers, vos règles, vos documents, et la reprise de l’historique de votre ancien logiciel. Vos données restent chez vous. Exemple : Liam Medical, ci-dessus.</span><span class="t-en">Your software no longer keeps up, or does not exist yet. I design and build the tool you need: your records, your rules, your documents, and the migration of your previous software’s history. Your data stays with you. Example: Liam Medical, above.</span></p>
-        <p class="soft"><span class="t-fr">Un seul interlocuteur du début à la fin : je conçois, je construis, je livre, avec la documentation. Un premier échange suffit pour savoir si je peux vous aider.</span><span class="t-en">One person from start to finish: I design, build and deliver, with the documentation. A first conversation is enough to find out whether I can help.</span></p>
-        <a class="btn ghost mailto" data-subject-fr="Logiciel sur mesure" data-subject-en="Custom software" href="mailto:contact@iaminetech.com"><span class="t-fr">Décrire mon besoin</span><span class="t-en">Describe my need</span></a>
-      </div>
+  <section class="block" id="realisations" aria-labelledby="cas-t">
+    <h2 class="h" id="cas-t"><span class="t-fr">Ce que j’ai livré, et la décision qui a compté</span><span class="t-en">What I delivered, and the decision that mattered</span></h2>
+    <p class="intro"><span class="t-fr">Le contexte, l’enjeu, la décision qui comptait, le résultat. Par confidentialité, sans données internes.</span><span class="t-en">The context, the stakes, the decision that mattered, the outcome. For confidentiality, without internal data.</span></p>
+    <div class="cases">
+      <article class="cs card">
+        <header><p class="org">LCL</p><p class="meta"><span class="t-fr">2025 – aujourd’hui · ingénieur Java senior, squad fraude</span><span class="t-en">2025 – present · senior Java engineer, fraud squad</span></p></header>
+        <dl>
+          <dt><span class="t-fr">Contexte</span><span class="t-en">Context</span></dt><dd><span class="t-fr">Une opération carte, virement ou chèque jugée suspecte doit être confirmée par le client, par SMS.</span><span class="t-en">A card, transfer or cheque transaction flagged as suspicious must be confirmed by the customer, by text.</span></dd>
+          <dt><span class="t-fr">Enjeu</span><span class="t-en">Stakes</span></dt><dd><span class="t-fr">Bloquer la fraude sans bloquer le client, et ne jamais exécuter deux fois une opposition de carte.</span><span class="t-en">Stop the fraud without stopping the customer, and never block a card twice.</span></dd>
+          <dt><span class="t-fr">Décision</span><span class="t-en">Decision</span></dt><dd><span class="t-fr">Chaque appel externe rendu sûr à rejouer, les échecs mis de côté puis rejoués, le système central de la banque tenu informé.</span><span class="t-en">Every external call made safe to replay, failures set aside then replayed, the bank’s core system kept informed.</span></dd>
+          <dt><span class="t-fr">Ma part</span><span class="t-en">My part</span></dt><dd><span class="t-fr">Conception et réalisation de la confirmation par SMS avec la squad ; sur le volet carte, l’intégration des messages et la reprise des échecs.</span><span class="t-en">Designed and built the SMS confirmation with the squad; on the card side, the messaging integration and failure recovery.</span></dd>
+          <dt><span class="t-fr">Résultat</span><span class="t-en">Outcome</span></dt><dd><span class="t-fr">Livré, puis étendu à la nouvelle offre de contestation de fraude par le client.</span><span class="t-en">Delivered, then extended to the new customer fraud-dispute offer.</span></dd>
+        </dl>
+        <p class="stack"><span class="t-fr">Pour vos équipes : </span><span class="t-en">For your teams: </span>Java 21, Spring Boot 3, Kafka, Avro, mainframe CICS</p>
+      </article>
+      <article class="cs card">
+        <header><p class="org">BforBank</p><p class="meta"><span class="t-fr">2023 – 2025 · lead dev, plateforme cartes</span><span class="t-en">2023 – 2025 · lead developer, card platform</span></p></header>
+        <dl>
+          <dt><span class="t-fr">Contexte</span><span class="t-en">Context</span></dt><dd><span class="t-fr">Une néobanque : cycle de vie de la carte, paiement par téléphone Apple Pay et Google Pay, un processeur carte et VISA dans la boucle.</span><span class="t-en">A neobank: card lifecycle, Apple Pay and Google Pay phone payments, a card processor and VISA in the loop.</span></dd>
+          <dt><span class="t-fr">Enjeu</span><span class="t-en">Stakes</span></dt><dd><span class="t-fr">Répondre dans les délais imposés par VISA, sans faire attendre le client.</span><span class="t-en">Answer within the deadlines VISA imposes, without keeping the customer waiting.</span></dd>
+          <dt><span class="t-fr">Décision</span><span class="t-en">Decision</span></dt><dd><span class="t-fr">Réponse immédiate là où le réseau l’exige, tout le reste en différé.</span><span class="t-en">Immediate response where the network demands it, everything else deferred.</span></dd>
+          <dt><span class="t-fr">Ma part</span><span class="t-en">My part</span></dt><dd><span class="t-fr">Lead dev : architecture applicative et des flux de la plateforme, performances du paiement par téléphone, diagnostic du contrôle de solde, incident de latence.</span><span class="t-en">Lead developer: application and flow architecture of the platform, phone payment performance, balance-check diagnosis, the latency incident.</span></dd>
+          <dt><span class="t-fr">Résultat</span><span class="t-en">Outcome</span></dt><dd><span class="t-fr">Performances du paiement par téléphone améliorées, contrôle de solde diagnostiqué entre la banque, le processeur et VISA, un incident de latence en production résolu.</span><span class="t-en">Phone payment performance improved, balance check between bank, processor and VISA diagnosed, a production latency incident resolved.</span></dd>
+        </dl>
+        <p class="stack"><span class="t-fr">Pour vos équipes : </span><span class="t-en">For your teams: </span>Java 21, Spring Boot 3, Kafka Confluent, GCP et on-prem, Monext, Temenos T24</p>
+      </article>
+      <article class="cs card">
+        <header><p class="org">BPCE-IT</p><p class="meta"><span class="t-fr">2019 – 2021 · tech lead, aux côtés de l’architecte</span><span class="t-en">2019 – 2021 · tech lead, alongside the architect</span></p></header>
+        <dl>
+          <dt><span class="t-fr">Contexte</span><span class="t-en">Context</span></dt><dd><span class="t-fr">Le portail de cloud privé d’un grand groupe bancaire, branché sur plusieurs fournisseurs dont AWS et Azure.</span><span class="t-en">The private cloud portal of a major banking group, connected to several providers including AWS and Azure.</span></dd>
+          <dt><span class="t-fr">Enjeu</span><span class="t-en">Stakes</span></dt><dd><span class="t-fr">Savoir à tout moment qui a commandé quoi, et refacturer juste.</span><span class="t-en">Know at any time who ordered what, and charge back correctly.</span></dd>
+          <dt><span class="t-fr">Décision</span><span class="t-en">Decision</span></dt><dd><span class="t-fr">Chaque changement enregistré comme un événement, qui peut être rejoué.</span><span class="t-en">Every change recorded as an event that can be replayed.</span></dd>
+          <dt><span class="t-fr">Ma part</span><span class="t-en">My part</span></dt><dd><span class="t-fr">L’architecture applicative en événements et la machine à états du portail, aux côtés de l’architecte.</span><span class="t-en">The portal’s event-based application architecture and state machine, alongside the architect.</span></dd>
+          <dt><span class="t-fr">Résultat</span><span class="t-en">Outcome</span></dt><dd><span class="t-fr">Commande, livraison et refacturation automatisées, droits d’accès par attributs.</span><span class="t-en">Ordering, delivery and chargeback automated, attribute-based access rights.</span></dd>
+        </dl>
+        <p class="stack"><span class="t-fr">Pour vos équipes : </span><span class="t-en">For your teams: </span>Event Sourcing, CQRS, RabbitMQ, MongoDB</p>
+      </article>
+      <article class="cs card">
+        <header><p class="org">Natixis Wealth Management</p><p class="meta"><span class="t-fr">2015 – 2018 · développeur et team lead</span><span class="t-en">2015 – 2018 · developer and team lead</span></p></header>
+        <dl>
+          <dt><span class="t-fr">Contexte</span><span class="t-en">Context</span></dt><dd><span class="t-fr">Une banque privée doit connaître ses clients et noter leur risque pour le régulateur.</span><span class="t-en">A private bank must know its clients and score their risk for the regulator.</span></dd>
+          <dt><span class="t-fr">Enjeu</span><span class="t-en">Stakes</span></dt><dd><span class="t-fr">Des règles réglementaires qui changent, sans casser le reste.</span><span class="t-en">Regulatory rules that change, without breaking everything else.</span></dd>
+          <dt><span class="t-fr">Décision</span><span class="t-en">Decision</span></dt><dd><span class="t-fr">Isoler les règles du régulateur du reste du code, testables seules.</span><span class="t-en">Isolate the regulator’s rules from the rest of the code, testable on their own.</span></dd>
+          <dt><span class="t-fr">Ma part</span><span class="t-en">My part</span></dt><dd><span class="t-fr">L’architecture applicative des règles et des flux de fédération d’identité, comme team lead d’une équipe de quatre.</span><span class="t-en">The application architecture of the rules and the identity-federation flows, as team lead of four.</span></dd>
+          <dt><span class="t-fr">Résultat</span><span class="t-en">Outcome</span></dt><dd><span class="t-fr">Connaissance client (KYC) et notation réglementaire en production, avec une équipe de quatre.</span><span class="t-en">Know-your-customer (KYC) and regulatory scoring in production, with a team of four.</span></dd>
+        </dl>
+        <p class="stack"><span class="t-fr">Pour vos équipes : </span><span class="t-en">For your teams: </span><span class="t-fr">Java, architecture hexagonale, fédération d’identité SAML</span><span class="t-en">Java, hexagonal architecture, SAML identity federation</span></p>
+      </article>
+      <article class="cs card wide" id="cas-ia">
+        <header><p class="org"><span class="t-fr">LCL · IA appliquée</span><span class="t-en">LCL · applied AI</span></p><p class="meta"><span class="t-fr">2026 · ingénieur Java senior, communauté IA de la tribu</span><span class="t-en">2026 · senior Java engineer, the tribe’s AI community</span></p></header>
+        <dl>
+          <dt><span class="t-fr">Contexte</span><span class="t-en">Context</span></dt><dd><span class="t-fr">Pour comprendre un incident en recette ou en production, il faut croiser journaux, tickets et supervision.</span><span class="t-en">Understanding an incident in testing or production means cross-checking logs, tickets and monitoring.</span></dd>
+          <dt><span class="t-fr">Enjeu</span><span class="t-en">Stakes</span></dt><dd><span class="t-fr">Arriver plus vite au diagnostic, sans retirer la décision aux équipes.</span><span class="t-en">Reach the diagnosis faster, without taking the decision away from the teams.</span></dd>
+          <dt><span class="t-fr">Décision</span><span class="t-en">Decision</span></dt><dd><span class="t-fr">Un agent lancé à la demande par un analyste ou un développeur : il lit les journaux, les tickets, la supervision et le registre des images déployées, et s’appuie sur les règles métier documentées quand elles existent.</span><span class="t-en">An agent run on demand by an analyst or a developer: it reads logs, tickets, monitoring and the registry of deployed images, and relies on documented business rules where they exist.</span></dd>
+          <dt><span class="t-fr">Ma part</span><span class="t-en">My part</span></dt><dd><span class="t-fr">Conçu et mis en place ; prochaine étape, le rendre automatisable au-delà du lancement manuel.</span><span class="t-en">Designed and set up; next step, making it automatable beyond manual runs.</span></dd>
+        </dl>
+        <p class="stack"><span class="t-fr">Pour vos équipes : </span><span class="t-en">For your teams: </span><span class="t-fr">agents IA, serveurs MCP</span><span class="t-en">AI agents, MCP servers</span></p>
+      </article>
     </div>
+  </section>
+
+  <section class="block" id="convictions" aria-labelledby="pov-t">
+    <h2 class="h" id="pov-t"><span class="t-fr">Un système critique se juge à ce qui n’arrive pas.</span><span class="t-en">Critical systems are judged by what doesn’t happen.</span></h2>
+    <p class="intro"><span class="t-fr">Trois convictions, chacune tirée d’une décision prise sur le terrain.</span><span class="t-en">Three convictions, each drawn from a decision made in the field.</span></p>
+    <ol class="pov">
+      <li>
+        <h3><span class="t-fr">Le bon outil est parfois de ne pas en ajouter.</span><span class="t-en">Sometimes the right tool is not adding one.</span></h3>
+        <p><span class="t-fr">Chez BforBank, réponse en direct là où VISA l’exige, différé pour tout le reste. Je défends la solution la plus simple qui tient le délai, même quand une autre est plus élégante.</span><span class="t-en">At BforBank, a direct response where VISA requires it, deferred processing for everything else. I argue for the simplest solution that meets the deadline, even when another one is more elegant.</span></p>
+        <small>BforBank</small>
+      </li>
+      <li>
+        <h3><span class="t-fr">L’IA propose, une personne décide.</span><span class="t-en">AI proposes, a person decides.</span></h3>
+        <p><span class="t-fr">Mon agent d’analyse d’incidents rend un diagnostic, mais c’est l’analyste ou le développeur qui le lance et qui tranche. C’est à cette condition que l’IA entre dans un système qui ne pardonne pas.</span><span class="t-en">My incident-analysis agent returns a diagnosis, but it is the analyst or the developer who runs it and makes the call. That is the condition for AI to enter a system that does not forgive.</span></p>
+        <small>LCL</small>
+      </li>
+      <li>
+        <h3><span class="t-fr">On construit le neuf avec l’existant, pas contre lui.</span><span class="t-en">You build the new with what exists, not against it.</span></h3>
+        <p><span class="t-fr">Le mainframe d’une banque, le logiciel de 26 ans d’un cabinet médical : on les branche, on reprend leur historique, on ne les jette pas. Et quand les données sont sensibles, le modèle d’IA tourne en local, pas chez un fournisseur.</span><span class="t-en">A bank’s mainframe, a medical practice’s 26-year-old software: you connect them, you migrate their history, you do not throw them away. And when the data is sensitive, the AI model runs locally, not at a provider.</span></p>
+        <small>LCL · Liam Medical</small>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block" id="produits" aria-labelledby="prod-t">
+    <h2 class="h" id="prod-t"><span class="t-fr">Deux logiciels construits seul, de bout en bout</span><span class="t-en">Two products built alone, end to end</span></h2>
+    <p class="intro"><span class="t-fr">La preuve que je sais porter seul un logiciel, de la conception au pilote, dans des domaines où l’erreur ne pardonne pas.</span><span class="t-en">Proof that I can carry software on my own, from design to pilot, in fields where errors are unforgiving.</span></p>
+    <div class="side">
+      <div class="card ex">
+        <h3><span class="t-fr">Liam Medical, la gestion d’un cabinet médical</span><span class="t-en">Liam Medical, running a medical practice</span></h3>
+        <p class="meta"><span class="t-fr">2025 – 2026 · en pilote dans un cabinet</span><span class="t-en">2025 – 2026 · piloting in a practice</span></p>
+        <p><span class="t-fr">Patients, consultations et ordonnances. Les 26 ans d’historique de l’ancien logiciel repris. Une assistance par IA exécutée en local : aucune donnée patient n’est envoyée à un service d’IA en ligne.</span><span class="t-en">Patients, consultations and prescriptions. The previous software’s 26 years of history migrated. AI assistance that runs locally: no patient data is sent to an online AI service.</span></p>
+      </div>
+      <div class="card ex">
+        <h3><span class="t-fr">IAMINE Compta, une comptabilité branchée sur la banque</span><span class="t-en">IAMINE Compta, accounting connected to the bank</span></h3>
+        <p class="meta"><span class="t-fr">2026 · produit personnel</span><span class="t-en">2026 · own product</span></p>
+        <p><span class="t-fr">Les opérations bancaires arrivent seules, chaque écriture est enchaînée à la précédente et ne peut plus être modifiée en douce. Un exercice complet rejoué : compte de résultat identique au centime à celui du cabinet comptable.</span><span class="t-en">Bank transactions come in on their own, every entry is chained to the previous one and can no longer be quietly altered. A full financial year replayed: income statement identical to the cent to the accounting firm’s.</span></p>
+      </div>
     </div>
   </section>
 
   <section class="block" id="parcours" aria-labelledby="par-t">
-    <h2 class="h" id="par-t"><span class="t-fr">Mon parcours</span><span class="t-en">Background</span></h2>
-    <p class="intro"><span class="t-fr">Banque (cartes, fraude, KYC, garanties de prêts, gestion documentaire, cloud privé), santé et transport.</span><span class="t-en">Banking (cards, fraud, KYC, loan guarantees, document management, private cloud), healthcare and transport.</span></p>
+    <h2 class="h" id="par-t"><span class="t-fr">Parcours</span><span class="t-en">Background</span></h2>
+    <p class="intro"><span class="t-fr">Mes intitulés ont été développeur, team lead, tech lead, lead dev et ingénieur senior. Sur chaque mission, j’ai porté des choix d’architecture applicative et de flux, seul ou aux côtés de l’architecte en place.</span><span class="t-en">My titles have been developer, team lead, tech lead, lead developer and senior engineer. On each assignment, I made application and flow architecture decisions, alone or alongside the architect in place.</span></p>
     <div class="tl-wrap">
       <ul class="tl" id="tl" role="list" aria-hidden="true">
         <li class="s" style="flex:3;--k:0"><span>RATP</span></li>
@@ -803,27 +735,25 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
       <p class="tl-leg"><i class="bank"></i><span class="t-fr">banque</span><span class="t-en">banking</span> <i class="other"></i><span class="t-fr">transport</span><span class="t-en">transport</span> <i class="now"></i><span class="t-fr">mission en cours</span><span class="t-en">current assignment</span></p>
     </div>
     <ol class="path" reversed>
-      <li class="now"><span class="yr"><span class="t-fr">2025 – aujourd’hui</span><span class="t-en">2025 – present</span></span><div><b>LCL</b><span class="d"><span class="t-fr">Ingénieur Java senior, architecture applicative et des flux, squad fraude : SMS interactif carte, virement et chèque, puis sa mise en place pour la nouvelle offre de contestation de fraude par le client. Kafka et Avro, échanges mainframe.</span><span class="t-en">Senior Java engineer, application architecture and integration flows, fraud squad: interactive SMS for card, transfer and cheque, then its roll-out for the new customer fraud-dispute offer. Kafka and Avro, mainframe exchanges.</span></span></div></li>
-      <li><span class="yr">2025 – 2026</span><div><b>Liam Medical</b><span class="d"><span class="t-fr">Architecte et développeur unique, logiciel de cabinet médical, en test</span><span class="t-en">Architect and sole developer, medical practice software, in pilot</span></span></div></li>
-      <li><span class="yr">2023 – 2025</span><div><b>BforBank</b><span class="d"><span class="t-fr">Lead dev, architecture applicative et événementielle de la plateforme cartes ; tokenisation Apple Pay et Google Pay, contrôle de solde avec Monext et VISA</span><span class="t-en">Lead developer, application and event-driven architecture of the card platform; Apple Pay and Google Pay tokenisation, balance check with Monext and VISA</span></span></div></li>
-      <li><span class="yr">2021 – 2022</span><div><b>Société Générale</b><span class="d"><span class="t-fr">Team lead et développeur Java, API de gestion documentaire et traitements par lots</span><span class="t-en">Team lead and Java developer, document management APIs and batch jobs</span></span></div></li>
-      <li><span class="yr">2019 – 2021</span><div><b>BPCE-IT</b><span class="d"><span class="t-fr">Tech lead aux côtés de l’architecte, cloud privé du groupe : Event Sourcing / CQRS, provisionnement multi-fournisseurs</span><span class="t-en">Tech lead alongside the architect, group private cloud: Event Sourcing / CQRS, multi-provider provisioning</span></span></div></li>
-      <li><span class="yr">2018 – 2019</span><div><b>Bpifrance</b><span class="d"><span class="t-fr">Team lead dans une équipe de 13, extranet de garantie de prêts et ses flux d’échange</span><span class="t-en">Team lead in a team of 13, loan guarantee extranet and its exchange flows</span></span></div></li>
-      <li><span class="yr">2015 – 2018</span><div><b>Natixis Wealth Management</b><span class="d"><span class="t-fr">Développeur Java et team lead d’une équipe de 4, KYC et scoring réglementaire, architecture hexagonale</span><span class="t-en">Java developer and team lead of 4, KYC and regulatory scoring, hexagonal architecture</span></span></div></li>
-      <li><span class="yr">2012 – 2015</span><div><b>RATP, Île-de-France Mobilités</b><span class="d"><span class="t-fr">Développeur Java, flux d’information voyageurs en temps réel (Camel, ActiveMQ)</span><span class="t-en">Java developer, real-time passenger information flows (Camel, ActiveMQ)</span></span></div></li>
+      <li class="now"><span class="yr"><span class="t-fr">2025 – aujourd’hui</span><span class="t-en">2025 – present</span></span><div><b>LCL</b><span class="d"><span class="t-fr">Ingénieur Java senior, squad fraude : confirmation par SMS des opérations suspectes, contestation de fraude par le client, un agent IA d’analyse d’incidents</span><span class="t-en">Senior Java engineer, fraud squad: text confirmation of suspicious transactions, customer fraud disputes, an AI agent for incident analysis</span></span></div></li>
+      <li><span class="yr">2023 – 2025</span><div><b>BforBank</b><span class="d"><span class="t-fr">Lead dev, plateforme cartes, Apple Pay et Google Pay</span><span class="t-en">Lead developer, card platform, Apple Pay and Google Pay</span></span></div></li>
+      <li><span class="yr">2021 – 2022</span><div><b>Société Générale</b><span class="d"><span class="t-fr">Team lead et développeur Java, gestion documentaire de la banque de détail</span><span class="t-en">Team lead and Java developer, retail banking document management</span></span></div></li>
+      <li><span class="yr">2019 – 2021</span><div><b>BPCE-IT</b><span class="d"><span class="t-fr">Tech lead aux côtés de l’architecte, cloud privé du groupe</span><span class="t-en">Tech lead alongside the architect, group private cloud</span></span></div></li>
+      <li><span class="yr">2018 – 2019</span><div><b>Bpifrance</b><span class="d"><span class="t-fr">Team lead dans une équipe de 13, garantie de prêts</span><span class="t-en">Team lead in a team of 13, loan guarantees</span></span></div></li>
+      <li><span class="yr">2015 – 2018</span><div><b>Natixis Wealth Management</b><span class="d"><span class="t-fr">Développeur et team lead, KYC et notation réglementaire</span><span class="t-en">Developer and team lead, KYC and regulatory scoring</span></span></div></li>
+      <li><span class="yr">2012 – 2015</span><div><b>RATP, Île-de-France Mobilités</b><span class="d"><span class="t-fr">Développeur Java, information voyageurs en temps réel</span><span class="t-en">Java developer, real-time passenger information</span></span></div></li>
       <li><span class="yr">2012</span><div><b>Master MIAGE</b><span class="d">Université Nice Sophia Antipolis</span></div></li>
     </ol>
-    <p class="tools"><span class="t-fr"><b>Cadre réglementaire rencontré en mission :</b> KYC et scoring réglementaire, PCI DSS, DORA, exigences ACPR. <b>IA appliquée :</b> agents de code, serveurs MCP, API Anthropic, OpenAI et Vertex AI.</span><span class="t-en"><b>Regulation met on assignment:</b> KYC and regulatory scoring, PCI DSS, DORA, ACPR requirements. <b>Applied AI:</b> coding agents, MCP servers, Anthropic, OpenAI and Vertex AI APIs.</span></p>
+    <p class="tools"><span class="t-fr"><b>Cadre réglementaire rencontré en mission :</b> KYC, PCI DSS, DORA, exigences ACPR.</span><span class="t-en"><b>Regulation met on assignment:</b> KYC, PCI DSS, DORA, ACPR requirements.</span></p>
   </section>
 </div>
 
 <section class="contact" id="contact" aria-labelledby="contact-t">
   <div class="wrap">
-    <h2 id="contact-t"><span class="t-fr">Parlons de votre projet.</span><span class="t-en">Let’s talk about your project.</span></h2>
-    <p class="intro"><span class="t-fr">Un premier message suffit pour savoir si je peux vous aider. Indiquez votre organisation, votre échéance et votre système actuel. Je réponds moi-même.</span><span class="t-en">One message is enough to find out whether I can help. Tell me your organisation, your deadline and your current system. I answer personally.</span></p>
+    <h2 id="contact-t"><span class="t-fr">Discutons de votre projet.</span><span class="t-en">Let’s talk about your project.</span></h2>
+    <p class="intro"><span class="t-fr">Dites-moi où vous en êtes et pour quand. Je réponds moi-même, et je vous dis en un échange si je suis la bonne personne. Vous recevez ensuite une proposition écrite : périmètre, livrables, critères d’acceptation, date et prix.</span><span class="t-en">Tell me where you stand and by when. I answer personally and tell you in one exchange whether I am the right person. You then get a written proposal: scope, deliverables, acceptance criteria, date and price.</span></p>
     <div class="ctas">
-      <a class="btn primary mailto" data-subject-fr="Votre projet" data-subject-en="Your project" href="mailto:contact@iaminetech.com"><span class="t-fr">Décrivez-moi votre projet</span><span class="t-en">Describe your project</span></a>
-      <a class="btn ghost t-fr" href="cv-amine-benmansour-fr.pdf">Télécharger mon CV</a><a class="btn ghost t-en" href="cv-amine-benmansour-en.pdf">Download my CV</a>
+      <a class="btn primary mailto" data-subject-fr="Votre projet" data-subject-en="Your project" href="mailto:contact@iaminetech.com"><span class="t-fr">Discutons de votre projet</span><span class="t-en">Let’s talk about your project</span></a>
     </div>
     <div class="mail">
       <a class="addr" id="addr" href="mailto:contact@iaminetech.com">contact@iaminetech.com</a>
@@ -831,16 +761,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
       <span class="copied" id="copied" role="status"></span>
     </div>
     <p class="tel"><a href="tel:+33651585928">+33 6 51 58 59 28</a><span class="t-fr"> · appel ou message</span><span class="t-en"> · call or text</span></p>
-    <ol class="process">
-      <li><div><b><span class="t-fr">Vous m’écrivez</span><span class="t-en">You write to me</span></b><span><span class="t-fr">Contexte, contraintes, échéance.</span><span class="t-en">Context, constraints, deadline.</span></span></div></li>
-      <li><div><b><span class="t-fr">Proposition écrite</span><span class="t-en">Written proposal</span></b><span><span class="t-fr">Périmètre, livrables, critères d’acceptation, date et prix.</span><span class="t-en">Scope, deliverables, acceptance criteria, date and price.</span></span></div></li>
-      <li><div><b><span class="t-fr">Points réguliers</span><span class="t-en">Regular check-ins</span></b><span><span class="t-fr">Par écrit et en visio, jusqu’à la restitution.</span><span class="t-en">In writing and by video, through to the debrief.</span></span></div></li>
-    </ol>
     <div class="practical">
-      <div><b><span class="t-fr">Où</span><span class="t-en">Where</span></b><span><span class="t-fr">Île-de-France. Sur site ou à distance selon la mission, fuseau de Paris.</span><span class="t-en">Paris region. On site or remote depending on the assignment, Paris time zone.</span></span></div>
+      <div><b><span class="t-fr">Où</span><span class="t-en">Where</span></b><span><span class="t-fr">Île-de-France. Sur site ou à distance selon la mission.</span><span class="t-en">Paris region. On site or remote depending on the assignment.</span></span></div>
       <div><b><span class="t-fr">Langues</span><span class="t-en">Languages</span></b><span><span class="t-fr">Français, anglais, arabe.</span><span class="t-en">French, English, Arabic.</span></span></div>
-      <div><b><span class="t-fr">Confidentialité</span><span class="t-en">Confidentiality</span></b><span><span class="t-fr">Accord signé sur demande, avant tout échange de documents.</span><span class="t-en">NDA signed on request, before any documents are exchanged.</span></span></div>
-      <div><b><span class="t-fr">Facturation</span><span class="t-en">Invoicing</span></b><span><span class="t-fr">Par IAMINE TECH, société française, sans portage.</span><span class="t-en">By IAMINE TECH, a French company, no umbrella company.</span></span></div>
+      <div><b><span class="t-fr">Pour vos achats</span><span class="t-en">For procurement</span></b><span><span class="t-fr">IAMINE TECH, SIREN 953 165 784, sans portage. Contrat direct ou via votre ESN référencée. Kbis et attestations sur demande.</span><span class="t-en">IAMINE TECH, SIREN 953 165 784, no umbrella company. Direct contract or through your approved consultancy. Registration extract and certificates on request.</span></span></div>
+      <div><b><span class="t-fr">ESN et cabinets</span><span class="t-en">Consultancies</span></b><span><span class="t-fr">Envoyez la fiche de mission ; <a href="cv-amine-benmansour-fr.pdf">dossier de compétences (PDF)</a>, version Word sur demande.</span><span class="t-en">Send the assignment brief; <a href="cv-amine-benmansour-en.pdf">skills file (PDF)</a>, Word version on request.</span></span></div>
     </div>
   </div>
 </section>
@@ -848,7 +773,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 
 <footer>
   <div class="wrap">
-    <span>IAMINE TECH, <span class="t-fr">SARL à associé unique, SIREN 953 165 784, France</span><span class="t-en">single-member limited company, SIREN 953 165 784, France</span></span>
+    <span>IAMINE TECH, <span class="t-fr">SARL à associé unique, SIREN 953 165 784, France · accord de confidentialité signé sur demande</span><span class="t-en">single-member limited company, SIREN 953 165 784, France · NDA signed on request</span></span>
     <span>© 2026 Amine Benmansour</span>
   </div>
 </footer>
@@ -868,9 +793,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
     var t = TXT[l];
     document.title = t.title;
     var md = document.getElementById('meta-desc'); if (md) md.setAttribute('content', t.desc);
-    document.getElementById('svg-t').textContent = t.svgT;
-    document.getElementById('svg-d').textContent = t.svgD;
-    document.getElementById('bfb-t').textContent = t.bfb;
     document.querySelectorAll('a.mailto').forEach(function(a){
       var s = a.getAttribute('data-subject-' + l) || '';
       a.setAttribute('href', 'mailto:contact@iaminetech.com?subject=' + encodeURIComponent(s) + '&body=' + t.body);
@@ -955,7 +877,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
 
   /* scroll reveal, light */
   if (hasIO && !reduce) {
-    var REVEAL = ['.worked li','section.block h2.h','section.block > .intro','.strata .lab','.strata .lay','.strata .legend p','.ctx tbody tr','.after','.case','.side-t','.side > div','.explain .diagram','.steps-plain li','.when','.pay > div:first-child','.lead-offer','.diag > div','.custom > div','.tl-wrap','.path li','.tools','.contact h2','.contact .intro','.contact .ctas','.contact .mail','.process li','.practical > div'];
+    var REVEAL = ['.worked li','section.block h2.h','section.block > .intro','.door','.diag > div','.cs','.pov li','.side > div','.tl-wrap','.path li','.contact h2','.contact .intro','.contact .ctas','.contact .mail','.practical > div'];
     var rio = new IntersectionObserver(function(es){
       var k = 0;
       es.filter(function(e){ return e.isIntersecting; }).forEach(function(e){ e.target.style.setProperty('--i', Math.min(k++, 5)); e.target.classList.add('in'); rio.unobserve(e.target); });
@@ -965,62 +887,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
   }
 
   /* timeline bar and instant-transfer trace play once when visible */
-  var tl = document.getElementById('tl'), trace = document.querySelector('.trace');
-  if (hasIO && !reduce) {
-    tl.classList.add('armed'); trace.classList.add('armed');
+  var tl = document.getElementById('tl');
+  if (hasIO && !reduce && tl) {
+    tl.classList.add('armed');
     var pio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('play'); pio.unobserve(e.target); } }); }, {threshold: .4});
-    pio.observe(tl); pio.observe(trace);
+    pio.observe(tl);
   }
 
-  /* event diagram: 3 events published, stored in the topic, read by 3 consumers at their own pace (about 4 s) */
-  var NS = 'http://www.w3.org/2000/svg';
-  var LAY = {
-    evsvg: {prod:[170,150], slots:[[261,151],[299,151],[337,151]], cons:[[470,55],[470,150],[470,245]]},
-    evsvgm:{prod:[170,76],  slots:[[111,183],[149,183],[187,183]], cons:[[60,300],[170,300],[280,300]]}
-  };
-  var timers = [], mq = RM;
-  function activeSvg(){ var m = document.getElementById('evsvgm'); return (m.getClientRects().length ? m : document.getElementById('evsvg')); }
-  function els(svg){ return {dots: svg.querySelector('.dots'), slots: [0,1,2].map(function(i){ return svg.querySelector('[data-s="' + i + '"]'); }), counts: [0,1,2].map(function(i){ return svg.querySelector('[data-c="' + i + '"]'); })}; }
-  function finalState(){ [].forEach.call(document.querySelectorAll('#evsvg,#evsvgm'), function(svg){ var e = els(svg); e.slots.forEach(function(s){ s.classList.add('on'); }); e.counts.forEach(function(c){ c.textContent = '3 / 3'; }); }); }
-  function reset(svg){
-    timers.forEach(clearTimeout); timers = [];
-    [].forEach.call(document.querySelectorAll('#evsvg,#evsvgm'), function(s){ s.classList.remove('playing'); });
-    var e = els(svg);
-    while (e.dots.firstChild) e.dots.removeChild(e.dots.firstChild);
-    e.slots.forEach(function(s){ s.classList.remove('on'); });
-    e.counts.forEach(function(c){ c.textContent = '0 / 3'; });
-  }
-  function move(dots, x0, y0, x1, y1, dur, delay, after){
-    timers.push(setTimeout(function(){
-      var c = document.createElementNS(NS, 'circle');
-      c.setAttribute('r', '7'); c.setAttribute('class', 'ev'); c.setAttribute('cx', x0); c.setAttribute('cy', y0);
-      dots.appendChild(c);
-      var a = c.animate([{transform:'translate(0px,0px)'},{transform:'translate(' + (x1 - x0) + 'px,' + (y1 - y0) + 'px)'}], {duration: dur, easing: 'ease-in-out', fill: 'forwards'});
-      a.onfinish = function(){ if (c.parentNode) c.parentNode.removeChild(c); if (after) after(); };
-    }, delay));
-  }
-  function play(){
-    var svg = activeSvg(), L = LAY[svg.id], e = els(svg);
-    reset(svg);
-    if (mq.matches || !Element.prototype.animate) { finalState(); return; }
-    svg.classList.add('playing'); timers.push(setTimeout(function(){ svg.classList.remove('playing'); }, 4700));
-    var done = [0,0,0], lag = [0, 300, 600];
-    [0,1,2].forEach(function(i){
-      var start = 300 + i * 900;
-      move(e.dots, L.prod[0], L.prod[1], L.slots[i][0], L.slots[i][1], 600, start, function(){
-        e.slots[i].classList.add('on');
-        [0,1,2].forEach(function(k){
-          move(e.dots, L.slots[i][0], L.slots[i][1], L.cons[k][0], L.cons[k][1], 650, lag[k], function(){ done[k]++; e.counts[k].textContent = done[k] + ' / 3'; });
-        });
-      });
-    });
-  }
-  document.getElementById('replay').addEventListener('click', play);
-  finalState();
-  if (hasIO && !mq.matches) {
-    var seen = false;
-    new IntersectionObserver(function(es, ob){ es.forEach(function(e){ if (e.isIntersecting && !seen) { seen = true; play(); ob.disconnect(); } }); }, {threshold: .5}).observe(document.querySelector('.diagram'));
-  }
 })();
 </script>
 </body>
