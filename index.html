@@ -856,7 +856,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
   /* scroll-spy shared by desktop links, rail and sheet */
   var navA = [].slice.call(document.querySelectorAll('a[data-sec]'));
   var secs = []; navA.forEach(function(a){ var id = a.getAttribute('data-sec'); if (secs.indexOf(id) < 0 && document.getElementById(id)) secs.push(id); });
-  secs.splice(secs.indexOf('paiement'), 0, 'evenementiel');
   var current = null;
   function spy(){
     var line = Math.min(innerHeight * .38, 300), cur = '';
