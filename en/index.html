@@ -140,6 +140,8 @@ footer{padding:28px 0 40px;color:var(--ink-3);font-size:14px}
 .hl-card .tag{font-size:12px;font-weight:500;color:var(--accent);margin:0 0 10px;letter-spacing:.08em;text-transform:uppercase}
 .hl-card h3{font:600 18px/1.3 var(--sans);margin:0 0 8px}
 .hl-card p{margin:0;color:var(--ink-2);font-size:15.5px}
+.hl-card{display:flex;flex-direction:column}.hl-card p.ex{margin-top:auto;padding-top:14px;font-size:14px;color:var(--ink-3)}.hl-card p.ex::before{content:"";display:block;border-top:1px solid var(--line);margin-bottom:10px}
+.hl .earlier{margin-top:18px}
 @media (max-width:860px){.hl-grid{grid-template-columns:1fr}}
 /* legal */
 .legal summary{cursor:pointer;color:var(--ink-2);margin-top:10px;display:inline-block}
@@ -195,24 +197,25 @@ footer{padding:28px 0 40px;color:var(--ink-3);font-size:14px}
 </div>
 <section aria-labelledby="hl-title" class="hl">
 <div class="wrap">
-<h2 id="hl-title">At a glance: three problems I solved</h2>
+<h2 id="hl-title">How I can help your team</h2>
 <div class="hl-grid">
 <article class="hl-card">
-<p class="tag">Payment fraud · retail bank</p>
-<h3>Replaying events without duplicate side effects</h3>
-<p>Kafka retries, a replayable dead-letter topic and a step-tracking table: each successful step is recorded and never replayed, so a replay never blocks a card twice.</p>
+<h3>Design a critical flow, or take over the one that worries you</h3>
+<p>Cards, payments, fraud, exchanges with core banking or the mainframe: service boundaries, interface contracts, error recovery without duplicates.</p>
+<p class="ex">Recently: a customer fraud-confirmation journey that can be replayed without ever blocking a card twice.</p>
 </article>
 <article class="hl-card">
-<p class="tag">Mobile payments · online bank</p>
-<h3>Meeting Visa response-time limits</h3>
-<p>Apple Pay and Google Pay tokenisation: a synchronous answer where the network sets a response-time limit, Kafka for the rest; tokenisation response times reduced.</p>
+<h3>Fix a production system that is slow or fragile</h3>
+<p>Measure before touching anything: end-to-end traces, load tests, then targeted fixes to the architecture, the network or the database.</p>
+<p class="ex">Recently: tokenisation response times reduced, on a journey where Visa sets the deadlines.</p>
 </article>
 <article class="hl-card">
-<p class="tag">Applied AI · dev team</p>
-<h3>An incident agent in the hands of business analysts and developers</h3>
-<p>Logs, tickets, monitoring and deployed images cross-checked through MCP servers: a first diagnosis before any fix.</p>
+<h3>Bring AI into a team’s daily work, without taking risks</h3>
+<p>Tools that prepare the work and a person who decides; a local model as soon as the data is sensitive.</p>
+<p class="ex">Recently: an incident-analysis agent used by business analysts and developers.</p>
 </article>
 </div>
+<p class="earlier">As a contractor, on my own or within your team, or at a fixed price on a defined scope.</p>
 </div>
 </section>
 <section id="expertise">
@@ -354,7 +357,7 @@ footer{padding:28px 0 40px;color:var(--ink-3);font-size:14px}
 <section id="projets">
 <div class="wrap">
 <h2>Personal projects</h2>
-<p class="intro">Two products I designed on my own, one delivered to a medical practice and one that runs my company’s accounting, and an open-source reference.</p>
+<p class="intro">Two products I designed on my own, one delivered to a medical practice and one that runs my company’s accounting, and two open-source components.</p>
 <div class="proj">
 <div class="card">
 <h3>Liam Medical</h3>
@@ -366,11 +369,17 @@ footer{padding:28px 0 40px;color:var(--ink-3);font-size:14px}
 <p class="sub">My company’s accounting · in use</p>
 <p>Bank transactions imported automatically, chained entries that cannot be altered after the fact. A full financial year replayed: profit and loss account matching the accounting firm’s to the cent.</p>
 </div>
-<div class="card wide">
+<div class="card">
 <h3>kafka-safe-replay</h3>
 <p class="sub">Open source · Java 21, Spring Boot 3, Kafka</p>
 <p>Replaying Kafka messages without repeating their side effect: retries, a replayable dead-letter topic and idempotency, covered by 56 tests. Fictitious card-blocking scenario.</p>
 <p class="more"><a href="https://github.com/iamine-tech/kafka-safe-replay">View the code on GitHub</a></p>
+</div>
+<div class="card">
+<h3>pdf-letterhead</h3>
+<p class="sub">Open source · Java, Apache PDFBox</p>
+<p>Print a quote, a certificate or a letter on the letterhead a business already has: the text flows on, moves to the next page with the letterhead, and the footer repeats. Born from Liam Medical, rewritten without any health data.</p>
+<p class="more"><a href="https://github.com/iamine-tech/pdf-letterhead">View the code on GitHub</a></p>
 </div>
 </div>
 <p class="earlier">For custom software: on delivery, the source code and data belong to the client, with the documentation another provider would need to take it over. Bug fixes and enhancements on request.</p>

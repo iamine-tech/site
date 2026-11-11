@@ -140,6 +140,8 @@ footer{padding:28px 0 40px;color:var(--ink-3);font-size:14px}
 .hl-card .tag{font-size:12px;font-weight:500;color:var(--accent);margin:0 0 10px;letter-spacing:.08em;text-transform:uppercase}
 .hl-card h3{font:600 18px/1.3 var(--sans);margin:0 0 8px}
 .hl-card p{margin:0;color:var(--ink-2);font-size:15.5px}
+.hl-card{display:flex;flex-direction:column}.hl-card p.ex{margin-top:auto;padding-top:14px;font-size:14px;color:var(--ink-3)}.hl-card p.ex::before{content:"";display:block;border-top:1px solid var(--line);margin-bottom:10px}
+.hl .earlier{margin-top:18px}
 @media (max-width:860px){.hl-grid{grid-template-columns:1fr}}
 /* legal */
 .legal summary{cursor:pointer;color:var(--ink-2);margin-top:10px;display:inline-block}
@@ -195,24 +197,25 @@ footer{padding:28px 0 40px;color:var(--ink-3);font-size:14px}
 </div>
 <section aria-labelledby="hl-title" class="hl">
 <div class="wrap">
-<h2 id="hl-title">En bref : trois problèmes que j’ai résolus</h2>
+<h2 id="hl-title">Ce que je peux faire pour votre équipe</h2>
 <div class="hl-grid">
 <article class="hl-card">
-<p class="tag">Fraude aux paiements · banque de détail</p>
-<h3>Rejouer un flux sans effet en double</h3>
-<p>Retry Kafka, dead-letter rejouable et registre d’avancement : chaque étape réussie est enregistrée et jamais rejouée, donc un rejeu ne déclenche pas une seconde opposition de carte.</p>
+<h3>Concevoir un flux critique, ou reprendre celui qui inquiète</h3>
+<p>Carte, paiement, fraude, échanges avec le core banking ou le mainframe : découpage, contrats d’interface, reprise sur erreur sans doublon.</p>
+<p class="ex">Récemment : un parcours de confirmation de fraude par le client, rejouable sans jamais bloquer deux fois une carte.</p>
 </article>
 <article class="hl-card">
-<p class="tag">Paiement mobile · banque en ligne</p>
-<h3>Tenir les délais imposés par Visa</h3>
-<p>Tokenisation Apple Pay et Google Pay : réponse synchrone là où le réseau impose un délai, Kafka pour le reste ; temps de réponse de la tokenisation réduits.</p>
+<h3>Remettre d’aplomb une production lente ou fragile</h3>
+<p>Mesurer avant de toucher : traces de bout en bout, tests de charge, puis des corrections ciblées sur l’architecture, le réseau ou la base.</p>
+<p class="ex">Récemment : les temps de réponse de la tokenisation réduits, sur un parcours où Visa impose ses délais.</p>
 </article>
 <article class="hl-card">
-<p class="tag">IA appliquée · équipe tech</p>
-<h3>Un agent d’incidents à la main des BA et des développeurs</h3>
-<p>Journaux, tickets, supervision et images déployées croisés via des serveurs MCP : un premier diagnostic avant toute correction.</p>
+<h3>Faire entrer l’IA dans le quotidien d’une équipe, sans prendre de risque</h3>
+<p>Des outils qui préparent le travail et une personne qui décide ; un modèle local dès que les données sont sensibles.</p>
+<p class="ex">Récemment : un agent d’analyse d’incidents utilisé par les BA et les développeurs.</p>
 </article>
 </div>
+<p class="earlier">En assistance technique, seul ou au sein de votre équipe, ou au forfait sur un périmètre défini.</p>
 </div>
 </section>
 <section id="expertise">
@@ -354,7 +357,7 @@ footer{padding:28px 0 40px;color:var(--ink-3);font-size:14px}
 <section id="projets">
 <div class="wrap">
 <h2>Projets personnels</h2>
-<p class="intro">Deux logiciels que j’ai conçus seul, l’un livré à un cabinet médical, l’autre qui tient la comptabilité de ma société, et une référence open source.</p>
+<p class="intro">Deux logiciels que j’ai conçus seul, l’un livré à un cabinet médical, l’autre qui tient la comptabilité de ma société, et deux briques open source.</p>
 <div class="proj">
 <div class="card">
 <h3>Liam Medical</h3>
@@ -366,11 +369,17 @@ footer{padding:28px 0 40px;color:var(--ink-3);font-size:14px}
 <p class="sub">Comptabilité de ma société · en usage</p>
 <p>Opérations bancaires importées automatiquement, écritures chaînées qui ne peuvent plus être modifiées a posteriori. Un exercice complet rejoué : compte de résultat identique, au centime près, à celui du cabinet comptable.</p>
 </div>
-<div class="card wide">
+<div class="card">
 <h3>kafka-safe-replay</h3>
 <p class="sub">Open source · Java 21, Spring Boot 3, Kafka</p>
 <p>Rejouer des messages Kafka sans répéter leur effet : retry, dead-letter rejouable et idempotence, couverts par 56 tests. Scénario fictif d’opposition de carte.</p>
 <p class="more"><a href="https://github.com/iamine-tech/kafka-safe-replay">Voir le code sur GitHub</a></p>
+</div>
+<div class="card">
+<h3>pdf-letterhead</h3>
+<p class="sub">Open source · Java, Apache PDFBox</p>
+<p>Imprimer un devis, une attestation ou un courrier sur le papier à en-tête qu’une entreprise possède déjà : le texte s’écoule, passe à la page suivante avec l’en-tête, et le pied de page se répète. Issu de Liam Medical, réécrit sans aucune donnée de santé.</p>
+<p class="more"><a href="https://github.com/iamine-tech/pdf-letterhead">Voir le code sur GitHub</a></p>
 </div>
 </div>
 <p class="earlier">Pour un logiciel sur mesure : à la livraison, le code source et les données appartiennent au client, avec la documentation nécessaire pour qu’un autre prestataire puisse le reprendre. Maintenance corrective et évolutive sur demande.</p>
