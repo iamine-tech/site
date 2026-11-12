@@ -244,13 +244,13 @@ footer a{color:var(--d-text-2)}
 <span class="n">02</span>
 <h3>A slow or fragile production system to turn around</h3>
 <p>Measure before changing anything: end-to-end traces, load tests, then targeted fixes to the architecture, the network or the database.</p>
-<div class="proof"><span class="k">Done at BforBank</span><p>Faster Apple Pay and Google Pay tokenisation: microservices merged, Kafka request-reply replaced by direct HTTP calls, PostgreSQL indexes reworked.</p></div>
+<div class="proof"><span class="k">Done at BforBank</span><p>Apple Pay and Google Pay tokenisation: response time roughly halved. Microservices merged, Kafka request-reply replaced by direct HTTP calls, PostgreSQL indexes reworked.</p></div>
 </article>
 <article class="card">
 <span class="n">03</span>
 <h3>AI to bring into a team’s daily work, under human control</h3>
 <p>Tools that prepare the work and a person who decides; a local model as soon as the data is sensitive.</p>
-<div class="proof"><span class="k">Done on a banking assignment</span><p>An incident-analysis agent, run on demand by a business analyst or a developer.</p></div>
+<div class="proof"><span class="k">Done on a banking assignment</span><p>An incident-analysis agent, run on demand by a business analyst or a developer: a first diagnosis in minutes instead of several hours by hand.</p></div>
 </article>
 </div>
 <p class="note after">On a time-and-materials basis, on my own or embedded in your team, or at a fixed price on a defined scope.</p>
@@ -271,47 +271,47 @@ footer a{color:var(--d-text-2)}
 </nav>
 <article class="panel" id="m-lcl">
 <div class="panel-top"><h3>LCL <small>· Crédit Agricole group</small></h3><p class="dates">Dec 2025 – present</p></div>
-<p class="role">Senior Java engineer, application and data-flow architecture</p>
+<p class="role">Senior Java engineer and the team’s AI champion, application and data-flow architecture</p>
 <div class="panel-grid">
 <div class="stackcol">
 <div class="kv"><span class="k">Context</span><p>A card, transfer or cheque transaction flagged as suspicious must be confirmed by the customer on their phone, then processed without delay.</p></div>
-<div class="kv"><span class="k">My role</span><p>Design and development, with the team, of the Java microservices behind this confirmation journey: Kafka flows with Avro contracts, REST APIs and mainframe exchanges.</p></div>
+<div class="kv"><span class="k">My role</span><p>Design and development, in a team of 4, of the Java microservices behind this confirmation journey: Kafka flows with Avro contracts, REST APIs and mainframe exchanges.</p></div>
 </div>
-<div class="kv"><span class="k">Technical choices</span><p>Error recovery without duplicate effects: a Kafka retry strategy, a replayable dead-letter topic and a step-tracking table. Every successful step is recorded and never replayed.</p><p>A resilience pattern, documented and then presented to other teams, for Kafka consumers that chain several external calls.</p><p>A secure file-transfer component: Spring Batch, encryption, CFT.</p></div>
+<div class="kv"><span class="k">Technical choices</span><p>Error recovery without duplicate effects: a Kafka retry strategy, a replayable dead-letter topic and a step-tracking table. Every successful step is recorded and never replayed. Since go-live: no duplicate observed, and failed messages are replayed without manual database fixes.</p><p>A resilience pattern, documented and then presented to other teams, for Kafka consumers that chain several external calls.</p><p>A secure file-transfer component: Spring Batch, encryption, CFT.</p></div>
 </div>
 <p class="stack">Java 21 · Spring Boot 3 · Kafka · Avro · REST · CICS / CTG · PostgreSQL · Kubernetes · ArgoCD · GitLab CI · Dynatrace</p>
 </article>
 <article class="panel" id="m-bforbank">
 <div class="panel-top"><h3>BforBank <small>· Crédit Agricole group</small></h3><p class="dates">Jan 2023 – Sep 2025</p></div>
-<p class="role">Tech lead, card and tokenisation platform</p>
+<p class="role">Tech lead (team of 2 to 3 developers), card and tokenisation platform</p>
 <div class="panel-grid">
 <div class="stackcol">
 <div class="kv"><span class="k">Context</span><p>An online bank: card lifecycle and mobile payments, with the card processor and Visa in the loop, and response-time limits set by the network.</p></div>
 <div class="kv"><span class="k">My role</span><p>Application architecture and development of the card lifecycle microservices (issuing, activation, blocking, PIN) and of Apple Pay and Google Pay tokenisation, using hexagonal architecture. Spring Boot 2 to 3 migration and GraalVM Native Image.</p></div>
 </div>
-<div class="kv"><span class="k">Technical choices</span><p>Tokenisation performance: network latency traced end to end in Dynatrace, microservices merged to remove intermediate calls, request-reply over Kafka replaced by direct HTTP calls, PostgreSQL indexes reworked.</p><p>Synchronous calls versus Kafka: an immediate response where Visa requires one, deferred processing for everything else.</p><p>Balance check between the bank, the card processor and Visa: investigation of response times and of the use of stand-in authorisation.</p></div>
+<div class="kv"><span class="k">Technical choices</span><p>Tokenisation performance: response time roughly halved. Network latency traced end to end in Dynatrace, microservices merged to remove intermediate calls, request-reply over Kafka replaced by direct HTTP calls, PostgreSQL indexes reworked.</p><p>Synchronous calls versus Kafka: an immediate response where Visa requires one, deferred processing for everything else.</p><p>Balance check between the bank, the card processor and Visa: investigation of response times and of the use of stand-in authorisation.</p></div>
 </div>
 <p class="stack">Java 21 · Spring Boot 3 · Kafka Confluent · Schema Registry · REST / OpenAPI · GCP / GKE and on-premises · ArgoCD · GitLab CI/CD · PostgreSQL · GraalVM · Datadog · Dynatrace</p>
 </article>
 <article class="panel" id="m-sg">
 <div class="panel-top"><h3>Société Générale</h3><p class="dates">Jul 2021 – Dec 2022</p></div>
-<p class="role">Team lead and Java developer, document-management APIs</p>
+<p class="role">Team lead and Java developer (team of 4 to 6 developers), document-management APIs</p>
 <div class="panel-grid">
 <div class="stackcol">
 <div class="kv"><span class="k">Context</span><p>The APIs giving access to the retail bank’s document management, within a SAFe train.</p></div>
 <div class="kv"><span class="k">My role</span><p>Architecture of the Spring Boot APIs and Spring Batch jobs; deployment automation, code review and onboarding of new team members.</p></div>
 </div>
-<div class="kv"><span class="k">Technical choices</span><p>Gatling load tests: bottlenecks found and fixed (a saturated connection pool, slow queries), and response times reduced.</p></div>
+<div class="kv"><span class="k">Technical choices</span><p>Gatling load tests: bottlenecks found and fixed (a saturated connection pool, slow queries), and response times cut by about 30%.</p></div>
 </div>
 <p class="stack">Java · Spring Boot · Spring Batch · MongoDB · S3-compatible object storage · Gatling · Jenkins</p>
 </article>
 <article class="panel" id="m-bpce">
 <div class="panel-top"><h3>BPCE-IT</h3><p class="dates">Oct 2019 – Jul 2021</p></div>
-<p class="role">Tech lead, group private cloud portal</p>
+<p class="role">Tech lead (team of 4 to 6 developers), group private cloud portal</p>
 <div class="panel-grid">
 <div class="stackcol">
 <div class="kv"><span class="k">Context</span><p>A portal connected to several public cloud providers, built to track who ordered what and charge it back at actual cost.</p></div>
-<div class="kv"><span class="k">My role</span><p>Stateless, test-driven Spring Boot microservices; automated provisioning and multi-provider flows over RabbitMQ.</p></div>
+<div class="kv"><span class="k">My role</span><p>Stateless, test-driven Spring Boot microservices; automated provisioning and multi-provider flows over RabbitMQ: time to obtain a machine cut from several days to a few minutes.</p></div>
 </div>
 <div class="kv"><span class="k">Technical choices</span><p>An Event Sourcing / CQRS architecture and a state machine for the portal.</p><p>Attribute-based access control (ABAC).</p></div>
 </div>
@@ -319,11 +319,11 @@ footer a{color:var(--d-text-2)}
 </article>
 <article class="panel" id="m-bpifrance">
 <div class="panel-top"><h3>Bpifrance</h3><p class="dates">Feb 2018 – Sep 2019</p></div>
-<p class="role">Team lead, customer portal for financing products</p>
+<p class="role">Team lead (team of 2 to 3 developers), customer portal for financing products</p>
 <div class="panel-grid">
 <div class="stackcol">
 <div class="kv"><span class="k">Context</span><p>A new portal through which customers apply for financing products.</p></div>
-<div class="kv"><span class="k">My role</span><p>Technical leadership and code review; test-driven REST services; Jenkins continuous integration and OpenShift deployment.</p></div>
+<div class="kv"><span class="k">My role</span><p>Technical leadership and code review; test-driven REST services; Jenkins continuous integration and OpenShift deployment. The portal went live during the assignment.</p></div>
 </div>
 <div class="kv"><span class="k">Technical choices</span><p>The new portal designed in Clean Architecture, REST exchanges included.</p></div>
 </div>
@@ -331,7 +331,7 @@ footer a{color:var(--d-text-2)}
 </article>
 <article class="panel" id="m-natixis">
 <div class="panel-top"><h3>Natixis Wealth Management</h3><p class="dates">Sep 2015 – Feb 2018</p></div>
-<p class="role">Java developer and team lead, KYC, customer risk rating and identity federation</p>
+<p class="role">Java developer and team lead (team of 2 to 3 developers), KYC, customer risk rating and identity federation</p>
 <div class="panel-grid">
 <div class="stackcol">
 <div class="kv"><span class="k">Context</span><p>A private bank: know-your-customer (KYC), customer risk rating (AML, ACPR requirements) and SAML identity federation.</p></div>
@@ -366,7 +366,7 @@ footer a{color:var(--d-text-2)}
 <article class="case">
 <span class="tag">Incident-analysis agent · on a banking assignment</span>
 <h3>A first incident diagnosis without pulling in a developer</h3>
-<p class="txt">Built on my own initiative, with the AI tool approved by the client. A business analyst or a developer runs it on demand: the agent cross-checks logs, tickets, monitoring and the registry of deployed images, relies on the functional documentation, then returns a diagnosis. AI proposes, a person decides.</p>
+<p class="txt">Built on my own initiative, with the AI tool approved by the client. A business analyst or a developer runs it on demand: the agent cross-checks logs, tickets, monitoring and the registry of deployed images, relies on the functional documentation, then returns a first diagnosis in minutes instead of several hours by hand. Used regularly by the team. AI proposes, a person decides.</p>
 <p class="tech">Coding assistant in agent mode · MCP servers</p>
 </article>
 </div>
