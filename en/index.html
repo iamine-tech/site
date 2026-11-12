@@ -75,7 +75,7 @@ nav.menu a:hover{color:var(--white)}
 .sec.tight{padding:72px 0}
 .white{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .dark{background:var(--ink);color:var(--d-text)}
-.label{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.label{font:500 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
 .dark .label{color:var(--signal)}
 h2{font:600 clamp(28px,3vw,38px)/1.15 var(--head);letter-spacing:-.015em;text-wrap:balance}
 h3{font:600 22px/1.25 var(--head)}
@@ -126,8 +126,7 @@ h1{font:600 clamp(40px,5.4vw,68px)/1.05 var(--head);letter-spacing:-.02em}
 .tab:hover{border-color:var(--ink);color:var(--ink)}
 .tab strong{font:600 16px/1.2 var(--head)}
 .tab span.y{font:400 12px var(--mono)}
-.tab[aria-current=true]{background:var(--ink);border-color:var(--ink);color:var(--white)}
-.panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:40px;display:flex;flex-direction:column;gap:24px;margin-bottom:16px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:40px;display:flex;flex-direction:column;gap:24px;margin-bottom:16px;scroll-margin-top:84px}
 @media (max-width:560px){.panel,.card,.case{padding:24px}}
 .panel-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px}
 .panel h3{font-size:26px;line-height:1.2}
@@ -137,12 +136,12 @@ h1{font:600 clamp(40px,5.4vw,68px)/1.05 var(--head);letter-spacing:-.02em}
 .panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:28px 48px}
 .stackcol{display:flex;flex-direction:column;gap:24px}
 .kv{display:flex;flex-direction:column;gap:8px}
-.kv .k{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--label)}
+.kv .k{font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .stack{padding-top:20px;border-top:1px solid var(--line);font:400 13px/1.7 var(--mono);color:var(--muted)}
 
 /* études de cas */
 .case{background:var(--white);border:1px solid var(--line);border-top:3px solid var(--ink);border-radius:4px 4px 10px 10px;padding:32px;display:flex;flex-direction:column;gap:16px}
-.case .tag{font:400 12px var(--mono);letter-spacing:.04em;color:var(--label)}
+.case .tag{font:400 12.5px var(--mono);letter-spacing:.04em;color:var(--muted)}
 .case p.txt{color:var(--text-2)}
 .case .tech{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font:400 13px var(--mono);color:var(--muted)}
 
@@ -185,7 +184,7 @@ footer a{color:var(--d-text-2)}
 <div class="wrap">
 <a class="brand" href="#main">Amine Benmansour<small>IAMINE TECH</small></a>
 <nav aria-label="Navigation" class="menu">
-<a href="#references">References</a>
+<a href="#references">Clients</a>
 <a href="#interventions">Services</a>
 <a href="#parcours">Track record</a>
 <a href="#etudes">Case studies</a>
@@ -203,7 +202,7 @@ footer a{color:var(--d-text-2)}
 <div class="pitch">
 <h1>Amine Benmansour</h1>
 <p class="title">Application architect · Java, Kafka, applied AI</p>
-<p class="lede">14 years of Java, 11 of them inside the IT systems of major French banks. I design the architecture of critical systems and lead their delivery: cards and mobile payments, fraud prevention, real-time flows with Kafka. I also apply generative AI to the work of engineering teams.</p>
+<p class="lede">14 years of Java, 11 of them inside the IT systems of major French banks. There I designed the application and data-flow architecture of card, mobile-payment and fraud-prevention systems, and led their delivery. I also apply generative AI to the day-to-day work of delivery teams.</p>
 <div class="ctas">
 <a class="btn" href="#contact">Get in touch</a>
 <a class="btn ghost" href="../cv-amine-benmansour-en.pdf">Download my CV (PDF)</a>
@@ -215,8 +214,8 @@ footer a{color:var(--d-text-2)}
 </section>
 <section class="sec tight white" id="references" style="border-top:0">
 <div class="wrap">
-<p class="label">References</p>
-<h2>Six banking institutions in eleven years</h2>
+<p class="label">Clients</p>
+<h2>Six banking clients in eleven years</h2>
 <ul class="refs" role="list">
 <li><strong>LCL</strong><span class="d">Fraud prevention</span></li>
 <li><strong>BforBank</strong><span class="d">Cards and mobile payments</span></li>
@@ -239,29 +238,29 @@ footer a{color:var(--d-text-2)}
 <span class="n">01</span>
 <h3>A critical flow to design, or to take over</h3>
 <p>Cards, payments, fraud, exchanges with core banking or the mainframe: service boundaries, interface contracts, and error recovery without duplicates.</p>
-<div class="proof"><span class="k">Done at LCL</span><p>A customer fraud-confirmation journey in which a replay never blocks a card a second time.</p></div>
+<div class="proof"><span class="k">Done at LCL</span><p>A customer fraud-confirmation journey, designed so that a replay does not block a card a second time.</p></div>
 </article>
 <article class="card">
 <span class="n">02</span>
 <h3>A slow or fragile production system to turn around</h3>
 <p>Measure before changing anything: end-to-end traces, load tests, then targeted fixes to the architecture, the network or the database.</p>
-<div class="proof"><span class="k">Done at BforBank</span><p>Shorter response times for Apple Pay and Google Pay tokenisation, on a journey where Visa sets the time limits.</p></div>
+<div class="proof"><span class="k">Done at BforBank</span><p>Faster Apple Pay and Google Pay tokenisation: microservices merged, Kafka request-reply replaced by direct HTTP calls, PostgreSQL indexes reworked.</p></div>
 </article>
 <article class="card">
 <span class="n">03</span>
-<h3>AI to bring into a team’s daily work, without the risk</h3>
+<h3>AI to bring into a team’s daily work, under human control</h3>
 <p>Tools that prepare the work and a person who decides; a local model as soon as the data is sensitive.</p>
-<div class="proof"><span class="k">Done on a banking assignment</span><p>An incident-analysis agent used by business analysts and developers.</p></div>
+<div class="proof"><span class="k">Done on a banking assignment</span><p>An incident-analysis agent, run on demand by a business analyst or a developer.</p></div>
 </article>
 </div>
-<p class="note after">As a contractor, on my own or embedded in your team, or at a fixed price on a defined scope.</p>
+<p class="note after">On a time-and-materials basis, on my own or embedded in your team, or at a fixed price on a defined scope.</p>
 </div>
 </section>
 <section class="sec white" id="parcours">
 <div class="wrap">
 <p class="label">Track record</p>
 <h2>Six assignments, and the technical choices behind each</h2>
-<p class="intro">Pick an institution to see the context, my part and the technical choices. No internal data is published.</p>
+<p class="intro">For each assignment: the context, my role and the technical choices.</p>
 <nav aria-label="Missions" class="tabs">
 <a class="tab" href="#m-lcl"><strong>LCL</strong><span class="y">2025 – present</span></a>
 <a class="tab" href="#m-bforbank"><strong>BforBank</strong><span class="y">2023 – 2025</span></a>
@@ -276,7 +275,7 @@ footer a{color:var(--d-text-2)}
 <div class="panel-grid">
 <div class="stackcol">
 <div class="kv"><span class="k">Context</span><p>A card, transfer or cheque transaction flagged as suspicious must be confirmed by the customer on their phone, then processed without delay.</p></div>
-<div class="kv"><span class="k">My part</span><p>Design and development, with the team, of the Java microservices behind this confirmation journey: Kafka flows with Avro contracts, REST APIs and mainframe exchanges.</p></div>
+<div class="kv"><span class="k">My role</span><p>Design and development, with the team, of the Java microservices behind this confirmation journey: Kafka flows with Avro contracts, REST APIs and mainframe exchanges.</p></div>
 </div>
 <div class="kv"><span class="k">Technical choices</span><p>Error recovery without duplicate effects: a Kafka retry strategy, a replayable dead-letter topic and a step-tracking table. Every successful step is recorded and never replayed.</p><p>A resilience pattern, documented and then presented to other teams, for Kafka consumers that chain several external calls.</p><p>A secure file-transfer component: Spring Batch, encryption, CFT.</p></div>
 </div>
@@ -287,8 +286,8 @@ footer a{color:var(--d-text-2)}
 <p class="role">Tech lead, card and tokenisation platform</p>
 <div class="panel-grid">
 <div class="stackcol">
-<div class="kv"><span class="k">Context</span><p>An online bank: card lifecycle and mobile payments, with the card processor and Visa in the loop, and response times imposed by the network.</p></div>
-<div class="kv"><span class="k">My part</span><p>Application architecture and development of the card lifecycle microservices (issuing, activation, blocking, PIN) and of Apple Pay and Google Pay tokenisation, using hexagonal architecture. Spring Boot 2 to 3 migration and GraalVM Native Image.</p></div>
+<div class="kv"><span class="k">Context</span><p>An online bank: card lifecycle and mobile payments, with the card processor and Visa in the loop, and response-time limits set by the network.</p></div>
+<div class="kv"><span class="k">My role</span><p>Application architecture and development of the card lifecycle microservices (issuing, activation, blocking, PIN) and of Apple Pay and Google Pay tokenisation, using hexagonal architecture. Spring Boot 2 to 3 migration and GraalVM Native Image.</p></div>
 </div>
 <div class="kv"><span class="k">Technical choices</span><p>Tokenisation performance: network latency traced end to end in Dynatrace, microservices merged to remove intermediate calls, request-reply over Kafka replaced by direct HTTP calls, PostgreSQL indexes reworked.</p><p>Synchronous calls versus Kafka: an immediate response where Visa requires one, deferred processing for everything else.</p><p>Balance check between the bank, the card processor and Visa: investigation of response times and of the use of stand-in authorisation.</p></div>
 </div>
@@ -300,7 +299,7 @@ footer a{color:var(--d-text-2)}
 <div class="panel-grid">
 <div class="stackcol">
 <div class="kv"><span class="k">Context</span><p>The APIs giving access to the retail bank’s document management, within a SAFe train.</p></div>
-<div class="kv"><span class="k">My part</span><p>Architecture of the Spring Boot APIs and Spring Batch jobs; deployment automation, code review and onboarding of new team members.</p></div>
+<div class="kv"><span class="k">My role</span><p>Architecture of the Spring Boot APIs and Spring Batch jobs; deployment automation, code review and onboarding of new team members.</p></div>
 </div>
 <div class="kv"><span class="k">Technical choices</span><p>Gatling load tests: bottlenecks found and fixed (a saturated connection pool, slow queries), and response times reduced.</p></div>
 </div>
@@ -311,8 +310,8 @@ footer a{color:var(--d-text-2)}
 <p class="role">Tech lead, group private cloud portal</p>
 <div class="panel-grid">
 <div class="stackcol">
-<div class="kv"><span class="k">Context</span><p>The group’s private cloud portal, connected to several public cloud providers, built to track who ordered what and charge it back at actual cost.</p></div>
-<div class="kv"><span class="k">My part</span><p>Stateless, test-driven Spring Boot microservices; automated provisioning and multi-provider flows over RabbitMQ.</p></div>
+<div class="kv"><span class="k">Context</span><p>A portal connected to several public cloud providers, built to track who ordered what and charge it back at actual cost.</p></div>
+<div class="kv"><span class="k">My role</span><p>Stateless, test-driven Spring Boot microservices; automated provisioning and multi-provider flows over RabbitMQ.</p></div>
 </div>
 <div class="kv"><span class="k">Technical choices</span><p>An Event Sourcing / CQRS architecture and a state machine for the portal.</p><p>Attribute-based access control (ABAC).</p></div>
 </div>
@@ -323,8 +322,8 @@ footer a{color:var(--d-text-2)}
 <p class="role">Team lead, customer portal for financing products</p>
 <div class="panel-grid">
 <div class="stackcol">
-<div class="kv"><span class="k">Context</span><p>The new customer portal for subscribing to financing products.</p></div>
-<div class="kv"><span class="k">My part</span><p>Technical leadership and code review; test-driven REST services; Jenkins continuous integration and OpenShift deployment.</p></div>
+<div class="kv"><span class="k">Context</span><p>A new portal through which customers apply for financing products.</p></div>
+<div class="kv"><span class="k">My role</span><p>Technical leadership and code review; test-driven REST services; Jenkins continuous integration and OpenShift deployment.</p></div>
 </div>
 <div class="kv"><span class="k">Technical choices</span><p>The new portal designed in Clean Architecture, REST exchanges included.</p></div>
 </div>
@@ -336,13 +335,13 @@ footer a{color:var(--d-text-2)}
 <div class="panel-grid">
 <div class="stackcol">
 <div class="kv"><span class="k">Context</span><p>A private bank: know-your-customer (KYC), customer risk rating (AML, ACPR requirements) and SAML identity federation.</p></div>
-<div class="kv"><span class="k">My part</span><p>Private-banking applications (customer risk rating, KYC completeness, mobile customer area); identity federation with a SAML identity provider (OpenSAML); life-insurance subscription services.</p></div>
+<div class="kv"><span class="k">My role</span><p>Private-banking applications (customer risk rating, KYC completeness, mobile customer area); identity federation with a SAML identity provider (OpenSAML); life-insurance application services.</p></div>
 </div>
 <div class="kv"><span class="k">Technical choices</span><p>Compliance rules isolated from the rest of the code using hexagonal architecture, so they can be tested on their own.</p></div>
 </div>
 <p class="stack">Java · Spring · JBoss · SQL Server · OpenSAML</p>
 </article>
-<p class="note">Earlier (2012 – 2015): Java developer at Sopra Steria, for RATP and Île-de-France Mobilités, on real-time passenger information (Apache Camel, ActiveMQ). Master’s degree in business IT (MIAGE), Université Nice Sophia Antipolis.</p>
+<p class="note">Earlier (2012 – 2015): Java developer at Sopra Steria, for RATP and Île-de-France Mobilités, on real-time passenger information (Apache Camel, ActiveMQ). Master’s degree in Information Systems (MIAGE), Université Nice Sophia Antipolis.</p>
 </div>
 </section>
 <section class="sec" id="etudes">
@@ -417,7 +416,7 @@ footer a{color:var(--d-text-2)}
 <dl class="facts">
 <div><dt>Where</dt><dd>Paris region; remote depending on the assignment.</dd></div>
 <div><dt>Languages</dt><dd>French, English (professional working proficiency), Arabic.</dd></div>
-<div><dt>For procurement</dt><dd>IAMINE TECH, SIREN 953 165 784, no umbrella company. Direct contract or through your approved consultancy. Kbis (company registration certificate), URSSAF compliance and professional liability insurance certificates on request.</dd></div>
+<div><dt>For procurement</dt><dd>IAMINE TECH, SIREN 953 165 784, no umbrella company. Direct contract or through your approved consultancy. Kbis (company registration certificate), URSSAF compliance and professional indemnity insurance certificates on request.</dd></div>
 <div><dt>For consulting firms</dt><dd>Send the assignment brief; skills profile in Word format on request. NDA signed on request.</dd></div>
 </dl>
 </div>
@@ -431,20 +430,5 @@ footer a{color:var(--d-text-2)}
 </details>
 </div>
 </footer>
-<script>(function(){
-  var tabs=[].slice.call(document.querySelectorAll('.tab'));
-  var panels=[].slice.call(document.querySelectorAll('.panel'));
-  if(!tabs.length)return;
-  function show(id,focus){
-    panels.forEach(function(p){p.hidden=p.id!==id});
-    tabs.forEach(function(t){
-      var on=t.getAttribute('href')==='#'+id;
-      if(on){t.setAttribute('aria-current','true')}else{t.removeAttribute('aria-current')}
-    });
-  }
-  tabs.forEach(function(t){t.addEventListener('click',function(e){e.preventDefault();show(t.getAttribute('href').slice(1))})});
-  var h=(location.hash||'').slice(1);
-  show(panels.some(function(p){return p.id===h})?h:panels[0].id);
-})();</script>
 </body>
 </html>
