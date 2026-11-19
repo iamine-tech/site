@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Case study: medical practice software with AI kept under control · Amine Benmansour</title>
+<meta content="Medical practice software designed on my own and delivered to a practice: records, consultations, prescriptions, full history migration, and AI assistance on masked notes." name="description"/>
+<link href="https://www.iaminetech.com/en/case-studies/medical-practice-software/" rel="canonical"/>
+<link href="https://www.iaminetech.com/etudes-de-cas/logiciel-cabinet-medical/" hreflang="fr" rel="alternate"/>
+<link href="https://www.iaminetech.com/en/case-studies/medical-practice-software/" hreflang="en" rel="alternate"/>
+<link href="https://www.iaminetech.com/etudes-de-cas/logiciel-cabinet-medical/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="https://www.iaminetech.com/en/case-studies/medical-practice-software/" property="og:url"/>
+<meta content="Medical practice software where AI proposes and the doctor approves" property="og:title"/>
+<meta content="Medical practice software designed on my own and delivered to a practice: records, consultations, prescriptions, full history migration, and AI assistance on masked notes." property="og:description"/>
+<meta content="https://www.iaminetech.com/photo.jpg" property="og:image"/>
+<meta content="Amine Benmansour · IAMINE TECH" property="og:site_name"/>
+<meta content="en_GB" property="og:locale"/>
+<meta content="Amine Benmansour" name="author"/>
+<meta content="summary" name="twitter:card"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1624'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' fill='%23FFFFFF' text-anchor='middle'%3EAB%3C/text%3E%3C/svg%3E" rel="icon"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://www.iaminetech.com/en/case-studies/medical-practice-software/#article","headline":"Medical practice software where AI proposes and the doctor approves","description":"Medical practice software designed on my own and delivered to a practice: records, consultations, prescriptions, full history migration, and AI assistance on masked notes.","inLanguage":"en","datePublished":"2026-11-19","dateModified":"2026-11-19","image":"https://www.iaminetech.com/photo.jpg","mainEntityOfPage":"https://www.iaminetech.com/en/case-studies/medical-practice-software/","author":{"@type":"Person","@id":"https://www.iaminetech.com/#amine","name":"Amine Benmansour","url":"https://www.iaminetech.com/"},"publisher":{"@type":"Organization","@id":"https://www.iaminetech.com/#iaminetech","name":"IAMINE TECH","url":"https://www.iaminetech.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.iaminetech.com/en/"},{"@type":"ListItem","position":2,"name":"Case studies","item":"https://www.iaminetech.com/en/#etudes"},{"@type":"ListItem","position":3,"name":"Medical practice software where AI proposes and the doctor approves","item":"https://www.iaminetech.com/en/case-studies/medical-practice-software/"}]}]}</script>
+<link as="font" crossorigin="" href="/fonts/inter-latin-wght-normal.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="/fonts/space-grotesk-latin-wght-normal.woff2" rel="preload" type="font/woff2"/>
+<style>
+@font-face{font-family:"Inter";src:url(/fonts/inter-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Space Grotesk";src:url(/fonts/space-grotesk-latin-wght-normal.woff2) format("woff2");font-weight:300 700;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(/fonts/jetbrains-mono-latin-wght-normal.woff2) format("woff2");font-weight:100 800;font-display:swap}
+:root{
+  color-scheme:light;
+  --ink:#0B1624;--ink-2:#101F33;--paper:#F5F7FA;--white:#FFFFFF;
+  --text-2:#2B3A4D;--muted:#46566A;--label:#5A6B80;--line:#D8DEE6;--line-2:#C5CEDA;
+  --accent:#B8430A;--accent-h:#8F3307;--signal:#FF9A52;
+  --d-line:#223247;--d-text:#EEF2F7;--d-text-2:#C9D3DF;--d-muted:#A9B7C8;
+  --head:"Space Grotesk","Inter",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --w:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:76px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--body)}
+a{color:var(--accent)}
+a:hover{color:var(--accent-h)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.dark a:focus-visible,header.top a:focus-visible,footer a:focus-visible,footer summary:focus-visible{outline-color:var(--signal)}
+[hidden]{display:none!important}
+h1,h2,h3,p,ul,ol,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;background:var(--white);color:var(--ink);padding:8px 12px;z-index:20}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 32px}
+@media (max-width:560px){.wrap{padding:0 20px}}
+
+/* en-tête */
+header.top{position:sticky;top:0;z-index:10;background:var(--ink);border-bottom:1px solid var(--d-line)}
+header.top .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px;min-height:64px;padding-top:8px;padding-bottom:8px}
+.brand{display:flex;align-items:baseline;gap:10px;color:var(--d-text);text-decoration:none;font:600 17px var(--head);white-space:nowrap}
+.brand:hover{color:var(--white)}
+.brand small{font:400 12px var(--mono);color:var(--d-muted)}
+nav.menu{display:flex;gap:4px 24px;margin-left:auto}
+nav.menu a{color:var(--d-muted);text-decoration:none;font-size:15px;padding:10px 0;white-space:nowrap}
+nav.menu a:hover{color:var(--white)}
+.lang{display:flex;gap:4px}
+.lang a{font:500 13px var(--mono);padding:9px 12px;color:var(--d-muted);text-decoration:none;border:1px solid var(--d-line);border-radius:4px}
+.lang a:hover{color:var(--white)}
+.lang [aria-current=page]{background:var(--d-text);color:var(--ink);border-color:var(--d-text)}
+@media (max-width:900px){
+  .lang{margin-left:auto}
+  nav.menu{order:3;width:100%;margin:0;overflow-x:auto;gap:22px;padding-bottom:2px}
+}
+
+/* éléments communs */
+.sec{padding:88px 0}
+.sec.tight{padding:72px 0}
+.white{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.dark{background:var(--ink);color:var(--d-text)}
+.label{font:500 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.dark .label{color:var(--signal)}
+h2{font:600 clamp(28px,3vw,38px)/1.15 var(--head);letter-spacing:-.015em;text-wrap:balance}
+h3{font:600 22px/1.25 var(--head)}
+.intro{color:var(--muted);max-width:640px;margin-top:12px}
+.note{font-size:15px;color:var(--muted)}
+.head{margin-bottom:40px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:24px}
+
+/* accroche */
+.hero .wrap{display:flex;align-items:center;justify-content:space-between;gap:56px 64px;padding-top:88px;padding-bottom:96px}
+.hero .pitch{flex:1 1 auto;min-width:0;max-width:640px;display:flex;flex-direction:column;gap:28px}
+.eyebrow{font:500 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--signal)}
+h1{font:600 clamp(40px,5.4vw,68px)/1.05 var(--head);letter-spacing:-.02em}
+.hero .title{font:500 clamp(20px,2.2vw,26px)/1.3 var(--head);color:var(--signal);margin-top:-12px}
+.lede{font-size:18px;color:var(--d-text-2);max-width:560px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;border-radius:6px;font-weight:600;text-decoration:none;background:var(--signal);color:var(--ink);border:1px solid var(--signal)}
+.btn:hover{background:#FFB27A;border-color:#FFB27A;color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--d-text);border-color:var(--muted);font-weight:500}
+.btn.ghost:hover{border-color:var(--d-text);color:var(--white);background:transparent}
+.where{font-size:14px;color:var(--d-muted)}
+.log{flex:1 1 400px;min-width:0;background:var(--ink-2);border:1px solid var(--d-line);border-radius:10px;padding:24px 28px 28px;font:400 13px/1.5 var(--mono)}
+.log-title{color:var(--d-muted);letter-spacing:.04em;margin-bottom:12px}
+.log li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:12px;padding:11px 0;border-top:1px solid var(--d-line)}
+.log li:last-child{border-bottom:1px solid var(--d-line)}
+.log .n{color:#7C8DA3}
+.log .ok{color:#7FD1A8}.log .ko{color:var(--signal)}.log .dup{color:var(--d-muted)}
+.log-note{font:400 14px/1.55 var(--body);color:var(--d-text-2);margin-top:18px}
+
+/* références */
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));border-top:2px solid var(--ink);margin:36px 0}
+.refs li{display:flex;flex-direction:column;gap:6px;padding:20px 16px 20px 0}
+.refs strong{font:600 21px/1.2 var(--head)}
+.refs span.d{font-size:13px;line-height:1.4;color:var(--muted)}
+
+/* interventions */
+.card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:32px;display:flex;flex-direction:column;gap:16px}
+.card .n{font:400 13px var(--mono);color:var(--label)}
+.card p{color:var(--text-2)}
+.proof{margin-top:auto;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.proof .k{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.proof p{font-size:15px;color:var(--ink)}
+.after{margin-top:32px}
+
+/* parcours */
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:8px;margin:32px 0 24px}
+.tab{display:flex;flex-direction:column;gap:4px;min-height:72px;padding:12px 16px;border:1px solid #8C9AAB;border-radius:8px;background:var(--white);color:var(--ink);text-decoration:none}
+.tab:hover{border-color:var(--ink);color:var(--ink)}
+.tab strong{font:600 16px/1.2 var(--head)}
+.tab span.y{font:400 12px var(--mono)}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:40px;display:flex;flex-direction:column;gap:24px;margin-bottom:16px;scroll-margin-top:84px}
+@media (max-width:560px){.panel,.card,.case{padding:24px}}
+.panel-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px}
+.panel h3{font-size:26px;line-height:1.2}
+.panel h3 small{font:500 17px var(--head);color:var(--muted)}
+.dates{font:400 13px var(--mono);color:var(--muted)}
+.role{font-weight:600;font-size:17px;color:var(--accent)}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:28px 48px}
+.stackcol{display:flex;flex-direction:column;gap:24px}
+.kv{display:flex;flex-direction:column;gap:8px}
+.kv .k{font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stack{padding-top:20px;border-top:1px solid var(--line);font:400 13px/1.7 var(--mono);color:var(--muted)}
+
+/* études de cas */
+.case{background:var(--white);border:1px solid var(--line);border-top:3px solid var(--ink);border-radius:4px 4px 10px 10px;padding:32px;display:flex;flex-direction:column;gap:16px}
+.case .tag{font:400 12.5px var(--mono);letter-spacing:.04em;color:var(--muted)}
+.case p.txt{color:var(--text-2)}
+.case .more{font-weight:600;font-size:15px}
+.case .tech{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font:400 13px var(--mono);color:var(--muted)}
+
+/* méthode et compétences */
+.method .cols{gap:32px 40px}
+.method .item{display:flex;flex-direction:column;gap:10px;padding-top:20px;border-top:1px solid var(--muted)}
+.method h3{font-size:20px;line-height:1.3}
+.method p{color:var(--d-text-2)}
+.skills .cols{gap:32px 40px;margin-bottom:36px}
+.skills h3{font-size:19px;line-height:1.3;margin-bottom:14px}
+.skills li{padding:10px 0;border-top:1px solid var(--line);font-size:15px;color:var(--text-2)}
+
+/* contact */
+.contact .wrap{display:flex;flex-wrap:wrap;gap:48px 64px}
+.contact .main{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:20px}
+.contact .main>p.txt{color:var(--text-2);max-width:520px}
+.who{display:flex;align-items:center;gap:20px;margin-top:8px}
+.photo{width:300px;height:375px;object-fit:cover;border-radius:12px;flex:0 0 auto;max-width:100%}
+@media (max-width:760px){.hero .wrap{flex-direction:column-reverse;align-items:flex-start;gap:32px;padding-top:48px;padding-bottom:64px}.photo{width:132px;height:165px;border-radius:10px}}
+.who div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.mail{font:600 22px var(--head);overflow-wrap:anywhere}
+.tel{color:var(--ink);text-decoration:none}
+.profiles{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:15px}
+dl.facts{flex:1 1 400px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:0 32px;align-content:start}
+dl.facts div{display:flex;flex-direction:column;gap:6px;padding:18px 0;border-top:1px solid var(--line-2)}
+dl.facts dt{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--label)}
+dl.facts dd{font-size:15px}
+
+/* pied de page */
+footer{background:var(--ink);color:var(--d-muted);font-size:13px;line-height:1.6;padding:28px 0 36px}
+footer a{color:var(--d-text-2)}
+.legal{margin-top:10px}
+.legal summary{cursor:pointer;color:var(--d-text-2);width:max-content}
+.legal p{margin-top:10px;max-width:820px}
+
+/* pages d'étude de cas */
+.case-hero{padding:72px 0 76px}
+.case-hero h1{font-size:clamp(32px,4.2vw,52px);line-height:1.1;max-width:900px;text-wrap:balance}
+.crumb{font:400 13px var(--mono);color:var(--d-muted);margin-bottom:22px}
+.crumb a{color:var(--d-text-2)}
+.case-hero .tagline{font:400 13px var(--mono);letter-spacing:.04em;color:var(--signal);margin-bottom:14px}
+.case-hero .lede{margin-top:24px;max-width:720px}
+.case-hero .by{margin-top:22px;font-size:14px;color:var(--d-muted)}
+.case-hero .by a{color:var(--d-text-2)}
+.prose{max-width:760px}
+.prose h2{font-size:clamp(22px,2.2vw,28px);margin:44px 0 14px}
+.prose h2:first-child{margin-top:0}
+.prose p{color:var(--text-2);font-size:17px;margin-bottom:14px}
+.prose ul,.prose ol{margin-bottom:14px}
+.prose li{padding:12px 0;border-top:1px solid var(--line);color:var(--text-2);font-size:17px}
+.prose ol{counter-reset:n}
+.prose ol li{counter-increment:n;padding-left:40px;position:relative}
+.prose ol li::before{content:counter(n,decimal-leading-zero);position:absolute;left:0;top:15px;font:400 13px var(--mono);color:var(--label)}
+.prose li strong{color:var(--ink)}
+.prose .stack{margin-top:36px}
+.prose p.note{margin-top:16px;font-size:15px;color:var(--muted)}
+.case h3 a{color:var(--ink);text-decoration:none}
+.case h3 a:hover{color:var(--accent)}
+.cta .lede{margin:16px 0 28px}
+.cta .lede a{color:var(--d-text);white-space:nowrap}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+<div class="wrap">
+<a class="brand" href="/en/">Amine Benmansour<small>IAMINE TECH</small></a>
+<nav aria-label="Navigation" class="menu">
+<a href="/en/#references">Clients</a>
+<a href="/en/#interventions">Services</a>
+<a href="/en/#parcours">Track record</a>
+<a href="/en/#etudes">Case studies</a>
+<a href="/en/#contact">Contact</a>
+</nav>
+<div aria-label="Langue / Language" class="lang" role="group">
+<a aria-label="Français" data-set="fr" href="/etudes-de-cas/logiciel-cabinet-medical/" hreflang="fr">FR</a>
+<a aria-current="page" aria-label="English" data-set="en" href="/en/case-studies/medical-practice-software/" hreflang="en">EN</a>
+</div>
+</div>
+</header>
+
+<main id="main">
+<article>
+<section class="dark case-hero">
+  <div class="wrap">
+    <p class="crumb"><a href="/en/">Home</a> / <a href="/en/#etudes">Case studies</a></p>
+    <p class="tagline">Liam Medical · delivered in March 2026</p>
+    <h1>Medical practice software where AI proposes and the doctor approves</h1>
+    <p class="lede">Designed on my own and delivered to a medical practice: patients, consultations and prescriptions, with the full history migrated from the previous software. AI assistance ships switched off, and the doctor reviews every suggestion.</p>
+    <p class="by">By <a href="/en/">Amine Benmansour</a>, application architect</p>
+  </div>
+</section>
+<section class="sec white" style="border-top:0">
+  <div class="wrap">
+    <div class="prose">
+<h2>The starting point</h2>
+<p>A medical practice wanted to replace its previous software without losing its patients’ history. The new software runs on a small server installed in the practice.</p>
+<h2>What the software does</h2>
+<ul>
+  <li>The patient record: identity, medical history, allergies and vital signs.</li>
+  <li>The consultation: reason, examination, coded diagnosis (ICD-11) and conclusion.</li>
+  <li>The prescription, as structured lines or free text, printed as a PDF.</li>
+  <li>Tests (lab work, imaging) with their attachments, and the appointment calendar.</li>
+  <li>Role-based access and an audit log.</li>
+</ul>
+<h2>Migrating the history</h2>
+<p>The full history of the previous software was migrated into the new database: patients, consultations and prescriptions.</p>
+<h2>AI, kept under control</h2>
+<ul>
+  <li>AI assistance ships switched off. It is turned on in the administration screen, and that switch is recorded in the audit log.</li>
+  <li>Before any call to a language model, the patient’s name, contact details, dates and identification numbers are masked. Age and sex replace the date of birth.</li>
+  <li>Every call is logged (model, duration, success), with no text from the record.</li>
+  <li>From the doctor’s note, the assistant structures the consultation and proposes prescription lines, using the wording and dosages the doctor already uses. It invents nothing and computes no dose.</li>
+  <li>The doctor reviews and approves every suggestion. If the model does not answer, the screen remains usable without AI.</li>
+</ul>
+<p>A known limit: masking is not anonymising. A rare detail written in a note can get through, so masking is deliberately broad.</p>
+<h2>Delivery</h2>
+<p>Each release is a numbered Docker image, tried on a test environment before it is installed at the practice.</p>
+      <p class="stack">Java 21 · Spring Boot 3 · PostgreSQL · Flyway · Spring Security · Docker · Playwright</p>
+      <p class="note">The software has not undergone any clinical validation: AI helps with writing, the doctor decides.</p>
+    </div>
+  </div>
+</section>
+</article>
+<section class="sec">
+  <div class="wrap">
+    <div class="head"><p class="label">Case studies</p><h2>The other case studies</h2></div>
+    <div class="cols">
+      <article class="case">
+        <span class="tag">IAMINE Compta · in use</span>
+        <h3><a href="/en/case-studies/accounting-year-replayed/">A full financial year replayed, to the cent</a></h3>
+        <p class="more"><a href="/en/case-studies/accounting-year-replayed/">Read the case study</a></p>
+      </article>
+      <article class="case">
+        <span class="tag">Incident-analysis agent · on a banking assignment</span>
+        <h3><a href="/en/case-studies/incident-analysis-agent/">A first incident diagnosis without pulling in a developer</a></h3>
+        <p class="more"><a href="/en/case-studies/incident-analysis-agent/">Read the case study</a></p>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="sec tight dark cta">
+  <div class="wrap">
+    <p class="label">Contact</p>
+    <h2>Get in touch</h2>
+    <p class="lede">For a time-and-materials assignment or a fixed-price project: <a href="mailto:contact@iaminetech.com">contact@iaminetech.com</a> · <a href="tel:+33651585928">+33 6 51 58 59 28</a></p>
+    <div class="ctas"><a class="btn" href="/en/#contact">Get in touch</a><a class="btn ghost" href="/cv-amine-benmansour-en.pdf">Download the CV (PDF)</a></div>
+  </div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">IAMINE TECH, single-member limited company, SIREN 953 165 784, France · © 2026 Amine Benmansour
+<details class="legal"><summary>Legal notice</summary>
+<p>Publisher: IAMINE TECH, French single-member limited company with a share capital of €1,000, SIREN 953 165 784, registered with the RCS of Créteil. Registered office: 2A allée des Grandes Maisons, 94110 Arcueil, France. Publication director: Amine Benmansour. Contact: contact@iaminetech.com, +33 6 51 58 59 28.</p>
+<p>Host: GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, United States, +1 877 448 4820. This site uses no cookies and no analytics.</p>
+</details>
+</div>
+</footer>
+</body>
+</html>
